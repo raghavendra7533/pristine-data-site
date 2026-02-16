@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pristine Data AI - The All-in-One GTM Platform</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body {
+font-family: 'Manrope', sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* Minimal custom scrollbar */
+::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+}
+::-webkit-scrollbar-track {
+background: transparent;
+}
+::-webkit-scrollbar-thumb {
+background: #E2E8F0;
+border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+background: #334155;
+}
+.glass-nav {
+backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+.dark .glass-nav {
+border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+}
+.grid-bg {
+background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+background-size: 24px 24px;
+}
+.dark .grid-bg {
+background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+}
+/* Always dark grid for specific sections */
+.grid-bg-dark {
+background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+background-size: 24px 24px;
+}
+textarea {
+field-sizing: content;
+min-height: 1.5lh;
+}
+textarea:focus, input:focus {
+outline: none;
+}
+.playbook-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1px;
+background: #e2e8f0;
+border-radius: 0.5rem;
+overflow: hidden;
+}
+.dark .playbook-grid {
+background: #334155;
+}
+.playbook-cell {
+background: white;
+padding: 1rem;
+}
+.dark .playbook-cell {
+background: #0f172a;
+}
+/* Smooth theme transition */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+transition-property: background-color, border-color, color, fill, stroke;
+transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+transition-duration: 300ms;
+}
+</style>
+<script>
+tailwind.config = {
+darkMode: 'class',
+theme: {
+extend: {
+colors: {
+slate: {
+850: '#152033',
+950: '#020617', // Deeper black for dark mode
+},
+brand: {
+red: '#F43F5E',
+}
+},
+fontFamily: {
+sans: ['Manrope', 'sans-serif'],
+},
+letterSpacing: {
+tightest: '-.075em',
+tighter: '-.05em',
+tight: '-.025em',
+},
+boxShadow: {
+'glow': '0 0 40px -10px rgba(37, 99, 235, 0.1)',
+'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+},
+animation: {
+'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+}
+}
+}
+}
+</script>
+<style>
+/* 3D Transform utilities */
+.rotate-x-5 { --tw-rotate-x: 5deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+.rotate-y-5 { --tw-rotate-y: 5deg; transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0)) rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) rotateZ(var(--tw-rotate-z, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)) !important; }
+.perspective-midrange { perspective: 800px !important; }
+.transform-style-preserve-3d { transform-style: preserve-3d !important; }
+</style></head>
+<body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-400 overflow-x-hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-indigo-900 dark:selection:text-white">
+
+    <!-- Compact Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 top-0 glass-nav bg-white/80 dark:bg-slate-950/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center group">
+                    <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-8">
+                </a>
+                <!-- UX: Navigation Links -->
+                <div class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-600 dark:text-slate-400">
+                    <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Product</a>
+                    <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Data Scale</a>
+                    <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Resources</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
+                    <iconify-icon icon="solar:sun-2-linear" class="hidden dark:block" width="16"></iconify-icon>
+                    <iconify-icon icon="solar:moon-linear" class="block dark:hidden" width="16"></iconify-icon>
+                </button>
+
+                <a href="#" class="hidden md:block hover:text-slate-900 dark:hover:text-white transition-colors text-xs font-semibold text-slate-600 dark:text-slate-400">Log in</a>
+                <a href="#" class="px-3.5 py-1.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-semibold rounded-lg transition-all shadow-sm">
+                    Book a Demo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 80vh Minimal Hero Section -->
+    <section class="min-h-[600px] flex overflow-hidden h-[80vh] pt-16 relative items-center justify-center">
+        <!-- Subtler Background Decor -->
+        <div class="absolute inset-0 grid-bg opacity-40 dark:opacity-10 pointer-events-none -z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-slate-950/50 dark:to-slate-950 pointer-events-none -z-10"></div>
+        <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-rose-50/50 dark:bg-rose-900/10 rounded-full blur-[80px] -z-10 opacity-60"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-50/50 dark:bg-blue-900/10 rounded-full blur-[80px] -z-10 opacity-60"></div>
+
+        <div class="z-10 flex flex-col text-center w-full max-w-4xl mr-auto ml-auto pr-6 pl-6 relative items-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex gap-1.5 dark:bg-slate-900 dark:border-slate-800 transition-transform hover:scale-105 cursor-default bg-white border-slate-200 border rounded-full mb-6 pt-1 pr-3 pb-1 pl-3 shadow-sm gap-x-1.5 gap-y-1.5 items-center">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-red"></span>
+                </span>
+                <!-- UX: Meta text -->
+                <span class="text-[10px] uppercase dark:text-slate-300 font-semibold text-slate-600 tracking-wider">largest coverage in the category - 700M+ Contacts</span>
+            </div>
+
+            <!-- Tighter Headline -->
+            <h1 class="md:text-6xl leading-[1.15] dark:text-white text-4xl font-semibold text-slate-950 tracking-tighter mb-4">Your Entire Revenue Stack. <br class="hidden md:block"> One AI-Powered Platform.</h1>
+            
+            <!-- Smaller Subheadline -->
+            <p class="leading-relaxed dark:text-slate-400 text-base font-medium text-slate-700 max-w-lg mr-auto mb-10 ml-auto">Find prospects, enrich data, and run outreach — all in one place. Stop paying for ZoomInfo, Amplemarket, and OpenAI separately.</p>
+
+            <!-- Functional Search Interface -->
+            <div class="relative w-full max-w-2xl mx-auto group">
+                <!-- Search Card -->
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:border-slate-300 dark:hover:border-slate-700 ring-4 ring-slate-50/50 dark:ring-slate-800/20">
+                    <form class="flex flex-col">
+                        <!-- Input Area -->
+                        <div class="pt-4 pr-4 pb-2 pl-4">
+                            <label for="prompt" class="sr-only">Search</label>
+                            <div class="relative flex items-start gap-3">
+                                <div class="mt-1 text-slate-400 dark:text-slate-500">
+                                    <iconify-icon icon="solar:magic-stick-3-linear" width="20"></iconify-icon>
+                                </div>
+                                <!-- UX: Input text -->
+                                <textarea class="placeholder:text-slate-400 dark:placeholder:text-slate-600 border-none resize-none leading-relaxed text-lg font-medium text-slate-600 dark:text-slate-200 bg-transparent w-full pt-0 pr-0 pb-0 pl-0" rows="2" placeholder="F" id="prompt"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Controls & CTA -->
+                        <div class="px-4 pb-4 pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-transparent sm:border-slate-50 dark:sm:border-slate-800">
+                            <!-- Custom Toggle -->
+                            <div class="flex items-center gap-1 p-0.5 bg-slate-100/80 dark:bg-slate-800 rounded-lg self-start sm:self-center">
+                                <label class="cursor-pointer relative">
+                                    <input type="radio" name="search_type" id="tab-people" class="peer sr-only" checked="">
+                                    <div class="px-3 py-1.5 rounded-md text-xs font-semibold text-slate-500 dark:text-slate-400 peer-checked:bg-white dark:peer-checked:bg-slate-700 peer-checked:text-slate-800 dark:peer-checked:text-white peer-checked:shadow-sm transition-all flex items-center gap-1.5">
+                                        <iconify-icon icon="solar:user-circle-linear" width="14"></iconify-icon> People
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer relative">
+                                    <input type="radio" name="search_type" id="tab-company" class="peer sr-only">
+                                    <div class="peer-checked:bg-white dark:peer-checked:bg-slate-700 peer-checked:text-slate-800 dark:peer-checked:text-white peer-checked:shadow-sm transition-all flex gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 rounded-md pt-1.5 pr-3 pb-1.5 pl-3 gap-x-1.5 gap-y-1.5 items-center">
+                                        <iconify-icon icon="solar:buildings-2-linear" width="14"></iconify-icon> Company
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <!-- Action Button -->
+                            <button type="button" onclick="window.location.href='contact-us.html'" class="sm:w-auto hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 shadow-slate-900/10 dark:shadow-none transition-all hover:translate-y-px active:translate-y-0.5 flex gap-2 text-xs font-semibold text-white bg-slate-900 w-full rounded-lg pt-2 pr-5 pb-2 pl-5 shadow-lg gap-x-2 gap-y-2 items-center justify-center">
+    Generate Leads
+    <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Minimal Social Proof -->
+            <div class="mt-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- UX: Meta label -->
+                <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-4 text-center">Trusted by</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                    <span class="text-sm font-bold font-sans text-slate-600 dark:text-slate-400 flex items-center gap-1.5"><iconify-icon icon="solar:bolt-bold" width="16" class=""></iconify-icon> Acme</span>
+                    <span class="text-sm font-bold font-sans text-slate-600 dark:text-slate-400 flex items-center gap-1.5"><iconify-icon icon="solar:layers-minimalistic-bold" width="16"></iconify-icon> Stack</span>
+                    <span class="text-sm font-bold font-sans text-slate-600 dark:text-slate-400 flex items-center gap-1.5"><iconify-icon icon="solar:atom-bold" width="16" class=""></iconify-icon> Nucleus</span>
+                    <span class="text-sm font-bold font-sans text-slate-600 dark:text-slate-400 flex items-center gap-1.5"><iconify-icon icon="solar:infinity-bold" width="16" class=""></iconify-icon> Vaudit</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- NEW: High Impact Scale & Accuracy Section (Always Dark/Distinct) -->
+    <section class="overflow-hidden text-white bg-slate-900 dark:bg-slate-900/50 pt-24 pb-24 relative border-t border-b border-transparent dark:border-slate-800">
+        <div class="absolute inset-0 grid-bg-dark opacity-20 pointer-events-none"></div>
+        <div class="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-x-16 gap-y-16 items-center">
+                <!-- Left Content: High Impact Numbers -->
+                <div class="flex flex-col justify-center">
+                    <div class="flex items-center gap-2 mb-8 text-indigo-400">
+                        <iconify-icon icon="solar:global-circle-bold" width="20"></iconify-icon>
+                        <span class="text-xs font-semibold uppercase tracking-widest">Unrivaled Scale</span>
+                    </div>
+                    
+                    <!-- Side-by-side Stats Grid -->
+                    <div class="grid grid-cols-2 gap-8 mb-10">
+                        <div class="relative group">
+                            <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter leading-[0.9] mb-2">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-300">700M+</span>
+                            </h2>
+                            <p class="text-white text-xl md:text-2xl font-medium tracking-tight group-hover:text-indigo-200 transition-colors">Contacts.</p>
+                        </div>
+                        
+                        <div class="relative group">
+                            <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter leading-[0.9] mb-2">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">90%</span>
+                            </h2>
+                            <p class="md:text-2xl group-hover:text-emerald-200 transition-colors text-xl font-medium text-white tracking-tight">Accuracy.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- UX: Dark Mode Body Text - Slate-400 for contrast -->
+                    <p class="text-slate-400 text-lg leading-relaxed mb-10 max-w-md border-l-2 border-slate-800 pl-6">
+                        The world's largest database meets the highest accuracy standards. While others offer stale data, we offer verified reality at scale.
+                    </p>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-4 text-sm font-medium text-slate-300">
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-indigo-400 border border-slate-700 shadow-sm shadow-indigo-500/10">
+                                <iconify-icon icon="solar:users-group-rounded-bold"></iconify-icon>
+                            </div>
+                            <span class="">Global Coverage (700M+)</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-sm font-medium text-slate-300">
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-emerald-400 border border-slate-700 shadow-sm shadow-emerald-500/10">
+                                <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+                            </div>
+                            <span class="">Real-time Verification Engine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="relative perspective-midrange group">
+                    <!-- Background Glow -->
+                    <div class="absolute inset-0 bg-indigo-500/20 blur-[100px] rounded-full translate-x-10 translate-y-10 group-hover:bg-indigo-500/30 transition-all duration-700"></div>
+                    
+                    <!-- Card Stack -->
+                    <div class="relative bg-slate-900/60 backdrop-blur-xl border border-slate-700/60 rounded-2xl p-8 shadow-2xl ring-1 ring-white/10 transition-transform duration-500 hover:rotate-y-5 hover:rotate-x-5 transform-style-preserve-3d">
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-8 border-b border-slate-700/50 pb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+                                <span class="text-sm font-semibold text-slate-200">Validation Log</span>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wide shadow-[0_0_10px_rgba(99,102,241,0.2)]">Scanning Live</span>
+                        </div>
+
+                        <!-- Rows -->
+                        <div class="space-y-3">
+                            <!-- Row 1 -->
+                            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/40 border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                                    <div class="text-sm text-slate-200 font-mono">alex.m@stripe.com</div>
+                                </div>
+                                <div class="text-[10px] font-bold text-emerald-400 font-mono flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:check-read-linear" width="12"></iconify-icon> VALID
+                                </div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/30 border border-slate-700/30 opacity-80">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                                    <div class="text-sm text-slate-200 font-mono">j.doe@uber.com</div>
+                                </div>
+                                <div class="text-[10px] font-bold text-emerald-400 font-mono flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:check-read-linear" width="12"></iconify-icon> VALID
+                                </div>
+                            </div>
+                            <!-- Row 3 -->
+                            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/20 border border-slate-700/20 opacity-50">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-brand-red"></div>
+                                    <div class="text-sm text-slate-400 font-mono line-through">sarah@deadstartup.io</div>
+                                </div>
+                                <div class="text-[10px] font-bold text-brand-red font-mono flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:close-circle-linear" width="12"></iconify-icon> BOUNCE
+                                </div>
+                            </div>
+                            <!-- Row 4 -->
+                            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/10 border border-slate-700/10 opacity-30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                                    <div class="text-sm text-slate-200 font-mono">mike@vercel.com</div>
+                                </div>
+                                <div class="text-[10px] font-bold text-emerald-400 font-mono flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:check-read-linear" width="12"></iconify-icon> VERIFYING...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats Box -->
+                        <div class="mt-8 pt-6 border-t border-slate-700/50 grid grid-cols-2 gap-4">
+                            <div class="text-center md:text-left">
+                                <div class="text-2xl font-bold text-white mb-1 tracking-tight">712M</div>
+                                <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Total Records</div>
+                            </div>
+                            <div class="text-center md:text-right">
+                                <div class="text-2xl font-bold text-emerald-400 mb-1 tracking-tight">98.2%</div>
+                                <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Deliverability</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKFLOW COMPARISON SECTION -->
+    <section class="overflow-hidden bg-white dark:bg-slate-950 border-slate-100 dark:border-slate-800 border-b pt-24 pb-24 relative">
+        <div class="absolute inset-0 grid-bg opacity-30 dark:opacity-10 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <!-- UX: Section Header -->
+                <h2 class="md:text-4xl text-3xl font-semibold text-slate-900 dark:text-white tracking-tight mb-4">
+                    Stop building "Franken-stacks"
+                </h2>
+                <!-- UX: Section Description -->
+                <p class="leading-relaxed md:text-lg text-base text-slate-700 dark:text-slate-400">
+                    Connecting disparate tools like ZoomInfo, Clay, Amplemarket, and Smartlead is expensive and brittle. Reduce or eliminate GTM engineering.
+                </p>
+            </div>
+
+            <!-- COMPARISON CONTAINER -->
+            <div class="flex flex-col gap-12">
+                
+                <!-- 1. THE OLD WAY (Scrollable Canvas) -->
+                <div class="relative bg-slate-50 dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 md:p-12 overflow-hidden shadow-sm">
+                    <div class="dark:bg-slate-800 dark:border-slate-800 text-[10px] dark:text-slate-400 uppercase font-bold text-slate-500 tracking-widest bg-slate-200/50 border-slate-200/50 rounded-br-2xl border-r border-b pt-2 pr-4 pb-2 pl-4 absolute top-0 left-0">
+                        The "Modern" Stack (Fragmented)
+                    </div>
+
+                    <div class="w-full py-6 px-4">
+                        <div class="flex flex-col xl:flex-row items-stretch justify-center gap-6 w-full max-w-7xl mx-auto px-4 py-2">
+                        
+                        <!-- INPUTS COLUMN (Amber) -->
+                        <div class="flex flex-col gap-3 w-full xl:w-64 shrink-0">
+                            <div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500 mb-1 text-center xl:text-left">Input Sources</div>
+                            
+                            <!-- Input 1 -->
+                            <div class="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200/60 dark:border-amber-900/40 hover:border-amber-300 rounded-xl p-3 flex items-center justify-between shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 group cursor-default">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-200 leading-tight">Event Data</span>
+                                    <span class="text-[10px] dark:text-amber-400 font-medium text-amber-600/80">Conference &amp; Webinar</span>
+                                </div>
+                                <div class="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0 ml-2 group-hover:bg-amber-200 dark:group-hover:bg-amber-900/60 transition-colors">
+                                    <iconify-icon icon="solar:ticket-bold" width="14"></iconify-icon>
+                                </div>
+                            </div>
+
+                            <!-- Input 2 -->
+                            <div class="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200/60 dark:border-amber-900/40 hover:border-amber-300 rounded-xl p-3 flex items-center justify-between shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 group cursor-default">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-200 leading-tight">Competitor Customers</span>
+                                    <span class="text-[10px] dark:text-amber-400 font-medium text-amber-600/80">Technographics</span>
+                                </div>
+                                <div class="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0 ml-2 group-hover:bg-amber-200 dark:group-hover:bg-amber-900/60 transition-colors">
+                                    <iconify-icon icon="solar:shield-warning-bold" width="14"></iconify-icon>
+                                </div>
+                            </div>
+
+                            <!-- Input 3 -->
+                            <div class="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200/60 dark:border-amber-900/40 hover:border-amber-300 rounded-xl p-3 flex items-center justify-between shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 group cursor-default">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-200 leading-tight">Intent Signals</span>
+                                    <span class="text-[10px] dark:text-amber-400 font-medium text-amber-600/80">ZoomInfo / LinkedIn</span>
+                                </div>
+                                <div class="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0 ml-2 group-hover:bg-amber-200 dark:group-hover:bg-amber-900/60 transition-colors">
+                                    <iconify-icon icon="solar:users-group-rounded-bold" width="14"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CONNECTOR 1 -->
+                        <div class="flex items-center justify-center text-slate-300 dark:text-slate-600 xl:self-center py-2 xl:py-0">
+                            <iconify-icon icon="solar:arrow-right-linear" class="hidden xl:block text-2xl"></iconify-icon>
+                            <iconify-icon icon="solar:arrow-down-linear" class="xl:hidden text-2xl"></iconify-icon>
+                        </div>
+
+                        <!-- PROCESS GRID (The "Messy" Middle) -->
+                        <div class="flex-1 w-full bg-slate-50/80 dark:bg-slate-800/20 rounded-2xl border border-slate-200 dark:border-slate-800 border-dashed p-4 md:p-5 relative group">
+                            <div class="absolute -top-2.5 left-4 bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-400 text-[9px] font-bold px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 uppercase tracking-widest shadow-sm">Expensive Engineering</div>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 h-full">
+                                
+                                <!-- Step 1 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">Data Normalisation</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:database-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Clay</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">ICP Qualification</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:stars-minimalistic-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">OpenAI</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">Deep Research</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:magnifer-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Perplexity</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 4 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">Buying Committee</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:users-group-rounded-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">ZoomInfo</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 5 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">Verify Contact</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:shield-check-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Amplemarket</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 6 -->
+                                <div class="bg-white dark:bg-slate-800/80 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:shadow-md transition-all flex flex-col justify-between gap-2 h-24">
+                                    <span class="text-[10px] font-semibold text-slate-700 dark:text-slate-200 leading-tight text-center">Account Journey</span>
+                                    <div class="flex items-center justify-center gap-1.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-md py-1 px-2 w-full mt-auto">
+                                        <iconify-icon icon="solar:graph-new-bold" class="text-indigo-500" width="12"></iconify-icon>
+                                        <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Gemini</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- CONNECTOR 2 -->
+                        <div class="flex items-center justify-center text-slate-300 dark:text-slate-600 xl:self-center py-2 xl:py-0">
+                            <iconify-icon icon="solar:arrow-right-linear" class="hidden xl:block text-2xl"></iconify-icon>
+                            <iconify-icon icon="solar:arrow-down-linear" class="xl:hidden text-2xl"></iconify-icon>
+                        </div>
+
+                        <!-- OUTPUTS COLUMN (Blue) -->
+                        <div class="flex flex-col gap-3 w-full xl:w-64 shrink-0">
+                            <div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500 mb-1 text-center xl:text-left">Destinations</div>
+
+                            <!-- Competitor Takeout -->
+                            <div class="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-200/60 dark:border-blue-900/40 hover:border-blue-300 rounded-xl p-3 shadow-sm flex flex-col gap-2 hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                                        <iconify-icon icon="solar:flag-bold" width="14"></iconify-icon>
+                                    </div>
+                                    <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wide">Competitor Takeout</span>
+                                </div>
+                                <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400 leading-tight">Steal revenue from competitors</span>
+                            </div>
+
+                            <!-- Event Outreach -->
+                            <div class="bg-blue-50/50 dark:bg-blue-900/10 border border-blue-200/60 dark:border-blue-900/40 hover:border-blue-300 rounded-xl p-3 shadow-sm flex flex-col gap-2 hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                                        <iconify-icon icon="solar:plain-bold" width="14"></iconify-icon>
+                                    </div>
+                                    <span class="text-[11px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wide">Event Outreach</span>
+                                </div>
+                                <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400 leading-tight">Engage event attendees instantly</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+                <!-- 2. THE NEW WAY (Simplified) -->
+                <div class="relative bg-slate-900 rounded-3xl p-1 md:p-1 overflow-hidden shadow-2xl ring-1 ring-slate-900/5 group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-1000"></div>
+                    
+                    <div class="md:p-12 flex flex-col md:flex-row gap-8 md:gap-16 bg-slate-900 rounded-[22px] pt-8 pr-8 pb-8 pl-8 relative gap-x-8 gap-y-8 items-center justify-between">
+                        
+                        <!-- Header / Tag -->
+                        <div class="absolute top-0 left-0 px-6 py-2 bg-slate-800 rounded-br-2xl text-[10px] font-bold text-indigo-400 uppercase tracking-widest border-r border-b border-slate-700">
+                            The Pristine Way
+                        </div>
+
+                        <!-- INPUTS (Simplified Group) -->
+                        <div class="flex flex-col gap-3 w-full md:w-auto relative z-10">
+                            <div class="bg-slate-800/50 backdrop-blur border border-slate-700 text-slate-300 rounded-xl p-4 flex items-center gap-4">
+                                <div class="flex -space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-amber-100 border-2 border-slate-800 flex items-center justify-center text-amber-600 text-[10px]"><iconify-icon icon="solar:ticket-bold"></iconify-icon></div>
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 border-2 border-slate-800 flex items-center justify-center text-blue-600 text-[10px]"><iconify-icon icon="solar:shield-warning-bold"></iconify-icon></div>
+                                    <div class="w-8 h-8 rounded-full bg-indigo-100 border-2 border-slate-800 flex items-center justify-center text-indigo-600 text-[10px]"><iconify-icon icon="solar:global-bold"></iconify-icon></div>
+                                </div>
+                                <span class="text-sm font-semibold">Events &amp; Competitors</span>
+                            </div>
+                        </div>
+
+                        <!-- MAGIC ARROW -->
+                        <div class="hidden md:flex flex-1 items-center justify-center relative">
+                            <div class="h-0.5 w-full bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
+                            <div class="animate-pulse-slow text-indigo-400 bg-slate-900 border-slate-700 border rounded-full pt-2 pr-2 pb-2 pl-2 absolute shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="" style="color: rgb(129, 140, 248);" data-icon-set="solar" data-solar="magic-stick-3-bold"><path fill="currentColor" d="M3.845 3.845a2.883 2.883 0 0 0 0 4.077L5.432 9.51l.038-.04l4-4l.04-.038l-1.588-1.587a2.883 2.883 0 0 0-4.077 0m6.723 2.645l-.038.04l-4 4l-.04.038l9.588 9.588a2.884 2.884 0 0 0 4.078-4.078zM16.1 2.307a.483.483 0 0 1 .9 0l.43 1.095a.48.48 0 0 0 .272.274l1.091.432a.486.486 0 0 1 0 .903l-1.09.432a.5.5 0 0 0-.273.273L17 6.81a.483.483 0 0 1-.9 0l-.43-1.095a.5.5 0 0 0-.273-.273l-1.09-.432a.486.486 0 0 1 0-.903l1.09-.432a.5.5 0 0 0 .273-.274zm3.867 6.823a.483.483 0 0 1 .9 0l.156.399c.05.125.148.224.273.273l.398.158a.486.486 0 0 1 0 .902l-.398.158a.5.5 0 0 0-.273.273l-.156.4a.483.483 0 0 1-.9 0l-.157-.4a.5.5 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.902l.398-.158a.5.5 0 0 0 .272-.273zM5.133 15.307a.483.483 0 0 1 .9 0l.157.4a.48.48 0 0 0 .272.273l.398.157a.486.486 0 0 1 0 .903l-.398.158a.48.48 0 0 0-.272.273l-.157.4a.483.483 0 0 1-.9 0l-.157-.4a.48.48 0 0 0-.272-.273l-.398-.158a.486.486 0 0 1 0-.903l.398-.157a.48.48 0 0 0 .272-.274z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="md:hidden flex flex-col items-center gap-2 text-indigo-500 opacity-50">
+                            <iconify-icon icon="solar:arrow-down-linear" width="24"></iconify-icon>
+                        </div>
+
+                        <!-- CENTRAL BRAIN -->
+                        <div class="flex-1 text-center relative w-full md:w-auto">
+                            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 rounded-2xl shadow-2xl relative overflow-hidden group-hover:border-indigo-500/50 transition-colors">
+                                <div class="absolute inset-0 bg-indigo-500/5 animate-pulse"></div>
+                                <div class="flex items-center justify-center mb-2">
+                                    <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-10">
+                                </div>
+                                <p class="text-xs text-slate-400">Zero GTM Engineering Required</p>
+                            </div>
+                        </div>
+
+                        <!-- MAGIC ARROW -->
+                        <div class="hidden md:flex flex-1 items-center justify-center relative">
+                            <div class="h-0.5 w-full bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50"></div>
+                            <div class="text-emerald-400 bg-slate-900 border-slate-700 border rounded-full pt-2 pr-2 pb-2 pl-2 absolute shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="" style="color: rgb(52, 211, 153)" data-icon-set="solar" data-solar="check-circle-bold"><path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path></svg>
+                            </div>
+                        </div>
+                        <div class="md:hidden flex flex-col items-center gap-2 text-emerald-500 opacity-50">
+                            <iconify-icon icon="solar:arrow-down-linear" width="24"></iconify-icon>
+                        </div>
+
+                        <!-- OUTPUT -->
+                        <div class="w-full md:w-auto relative z-10">
+                            <div class="bg-emerald-500/10 backdrop-blur border border-emerald-500/30 text-emerald-300 rounded-xl p-4 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-lg">
+                                    <iconify-icon icon="solar:rocket-2-bold" width="20"></iconify-icon>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-white">Event Outreach</span>
+                                    <span class="text-[10px] text-emerald-400/80">Automated &amp; Personalized</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Features Section -->
+    <section class="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <!-- UX: H2 -->
+                <h2 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-4">
+                    The Intelligence Engine
+                </h2>
+                <!-- UX: P -->
+                <p class="text-base text-slate-700 dark:text-slate-400 max-w-xl mx-auto">
+                    From raw search to closed deal, powered by granular data and deep AI agents.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Feature 1: AI Search (Filled Whitespace) -->
+                <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
+                    <div class="mb-8 flex-1">
+                        <div class="relative bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 p-4 shadow-inner h-full flex flex-col">
+                            <!-- Prompt -->
+                            <div class="relative bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 px-3 py-3 rounded-lg text-sm text-slate-700 dark:text-slate-300 shadow-sm mb-4">
+                                <span class="absolute -top-2 left-2 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border border-indigo-100 dark:border-indigo-800">Prompt</span>
+                                "Find me CMOs at SaaS companies with $10M+ ARR"
+                            </div>
+                            
+                            <!-- Simulated Results -->
+                            <div class="flex-1 space-y-2">
+                                <div class="flex justify-between items-center px-1 mb-2">
+                                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase">Found: 712,405 matches</span>
+                                    <span class="text-[10px] text-indigo-600 dark:text-indigo-400 font-medium cursor-pointer">View All</span>
+                                </div>
+                                <!-- Mock Result Card 1 -->
+                                <div class="bg-white dark:bg-slate-800 p-2 rounded border border-slate-100 dark:border-slate-700 flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-slate-100 dark:bg-slate-700 flex-shrink-0"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="h-2 bg-slate-200 dark:bg-slate-600 rounded w-24 mb-1.5"></div>
+                                        <div class="h-1.5 bg-slate-100 dark:bg-slate-700 rounded w-16"></div>
+                                    </div>
+                                    <div class="w-4 h-4 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-[10px] text-emerald-600 dark:text-emerald-400">
+                                        <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+                                    </div>
+                                </div>
+                                <!-- Mock Result Card 2 -->
+                                <div class="bg-white dark:bg-slate-800 p-2 rounded border border-slate-100 dark:border-slate-700 flex items-center gap-3 opacity-60">
+                                    <div class="w-8 h-8 rounded bg-slate-100 dark:bg-slate-700 flex-shrink-0"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="h-2 bg-slate-200 dark:bg-slate-600 rounded w-20 mb-1.5"></div>
+                                        <div class="h-1.5 bg-slate-100 dark:bg-slate-700 rounded w-12"></div>
+                                    </div>
+                                    <div class="w-4 h-4 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-[10px] text-emerald-600 dark:text-emerald-400">
+                                        <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:magnifer-linear" width="20"></iconify-icon>
+                        </div>
+                        <!-- UX: Card Title -->
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-2">Natural Language Search</h3>
+                        <!-- UX: Card Description -->
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Stop filtering columns. Just ask. Our AI parses complex queries to find people, companies, and revenue data instantly.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Verified Lists -->
+                <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
+                    <div class="mb-8 flex-1 flex flex-col justify-center">
+                        <div class="space-y-2">
+                            <!-- List Item 1 -->
+                            <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-subtle">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-400">JM</div>
+                                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">john@acme.com</div>
+                                </div>
+                                <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded">
+                                    <iconify-icon icon="solar:check-circle-bold"></iconify-icon> SMTP OK
+                                </div>
+                            </div>
+                            <!-- List Item 2 -->
+                            <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-subtle opacity-70">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-400">SD</div>
+                                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">sarah@corp.io</div>
+                                </div>
+                                <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded">
+                                    <iconify-icon icon="solar:check-circle-bold"></iconify-icon> SMTP OK
+                                </div>
+                            </div>
+                            <!-- List Item 3 -->
+                            <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-subtle opacity-40">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-400">MK</div>
+                                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">mike@krea.ai</div>
+                                </div>
+                                <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded">
+                                    <iconify-icon icon="solar:check-circle-bold"></iconify-icon> SMTP OK
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:shield-check-linear" width="20" class=""></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-2">Verified SMTP Lists</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Create lists that actually land in the inbox. We perform real-time SMTP pings to verify validity before you export.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Strategy-Aware Email -->
+                <div class="flex flex-col hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 bg-white dark:bg-slate-950 h-full border-slate-200 dark:border-slate-800 border rounded-2xl pt-8 pr-8 pb-8 pl-8 shadow-sm">
+                    <div class="flex-1 mb-8">
+                        <div class="text-[11px] leading-loose text-slate-600 dark:text-slate-400 font-mono bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800 border rounded-xl pt-4 pr-4 pb-4 pl-4">
+                            <span class="text-indigo-500 dark:text-indigo-400">Subject:</span> Solving the {{strategic_challenge}}<br>
+                            Hi {{first_name}},<br>
+                            <span class="bg-yellow-100/50 dark:bg-yellow-900/20 text-slate-700 dark:text-slate-300 px-1 rounded">Noticed in your Q3 report that reducing CAC is a priority.</span> 
+                            Given your goal to <span class="bg-yellow-100/50 dark:bg-yellow-900/20 text-slate-700 dark:text-slate-300 px-1 rounded">expand into EMEA</span>...
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:target-bold" width="20"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-2">Strategy-Led Outreach</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Generate emails based on the strategic objectives and challenges of the company. We analyze reports to find their pain points.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Opportunity Playbook -->
+                <div class="flex flex-col hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300 bg-white dark:bg-slate-950 h-full border-slate-200 dark:border-slate-800 border rounded-2xl pt-8 pr-8 pb-8 pl-8 shadow-sm">
+                    <div class="mb-8 flex-1">
+                        <!-- Playbook Grid Mockup -->
+                        <div class="playbook-grid bg-slate-100 dark:bg-slate-800 border-slate-100 dark:border-slate-800 border rounded-xl">
+                            <!-- Q1 -->
+                            <div class="playbook-cell hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
+                                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1">
+                                    <iconify-icon icon="solar:key-minimalistic-square-linear"></iconify-icon> Openers
+                                </div>
+                                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">"Saw your talk at SaaStr..."</div>
+                            </div>
+                            <!-- Q2 -->
+                            <div class="playbook-cell hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
+                                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1">
+                                    <iconify-icon icon="solar:target-linear"></iconify-icon> Objectives
+                                </div>
+                                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">Reduce CAC by 20%</div>
+                            </div>
+                            <!-- Q3 -->
+                            <div class="playbook-cell hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
+                                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1">
+                                    <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> Social
+                                </div>
+                                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">Active on LinkedIn (Daily)</div>
+                            </div>
+                            <!-- Q4 -->
+                            <div class="playbook-cell hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
+                                <div class="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1">
+                                    <iconify-icon icon="solar:case-minimalistic-linear"></iconify-icon> Experience
+                                </div>
+                                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300">Ex-Salesforce VP</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="w-10 h-10 rounded-lg bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:book-2-linear" width="20"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 dark:text-white mb-2">Opportunity Playbook</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Deep intelligence on every prospect. Get instant access to Sales Openers, Strategic Objectives, Social Summaries, and Experience data.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table Section -->
+    <section class="bg-white dark:bg-slate-950 pt-24 pb-24 relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <!-- UX: H2 -->
+                <h2 class="text-3xl font-semibold text-slate-900 dark:text-white mb-4">Why the top 1% choose Pristine</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Don't settle for stale databases or fragmented tools.</p>
+            </div>
+
+            <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-slate-950">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="">
+                            <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
+                                <th class="p-6 w-1/3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Feature</th>
+                                <th class="p-6 w-1/3 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded bg-slate-800 dark:bg-slate-700 text-white flex items-center justify-center text-[10px]">
+                                            <iconify-icon icon="solar:database-bold"></iconify-icon>
+                                        </div>
+                                        <span class="font-bold text-slate-800 dark:text-white">PristineData</span>
+                                    </div>
+                                </th>
+                                <th class="p-6 w-1/3 text-sm font-semibold text-slate-400 dark:text-slate-500">Traditional Stack</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                            <!-- New Row: Scale -->
+                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Database Size</td>
+                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
+                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                        700M+ Contacts
+                                    </div>
+                                </td>
+                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
+                                    <div class="flex gap-2 items-center">
+                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18" height="18"></iconify-icon>
+                                        ~250M Contacts
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 1 -->
+                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Data Accuracy</td>
+                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                        90% Verified
+                                    </div>
+                                </td>
+                                <td class="text-sm text-slate-500 dark:text-slate-500 pt-6 pr-6 pb-6 pl-6">
+                                    <div class="flex gap-2 items-center">
+                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
+                                        ~70% Verified
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Search Engine</td>
+                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                        Natural Language AI
+                                    </div>
+                                </td>
+                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
+                                    <div class="flex items-center gap-2">
+                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
+                                        Filter Columns
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Enrichment Cost</td>
+                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
+                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                        All-in-one Platform
+                                    </div>
+                                </td>
+                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
+                                    <div class="flex items-center gap-2">
+                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
+                                        ZoomInfo + Clay + OpenAI
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-12 flex justify-center">
+                 <button class="px-8 py-3 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold rounded-xl shadow-lg shadow-slate-900/20 dark:shadow-none transition-all hover:scale-[1.02] flex items-center gap-2">
+                    Book a Custom Demo
+                    <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Minimal) -->
+    <footer class="bg-white dark:bg-slate-950 py-12 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center">
+                <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-7">
+            </div>
+            
+            <div class="flex gap-8 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <a href="#" class="hover:text-slate-700 dark:hover:text-slate-200">Product</a>
+                <a href="#" class="hover:text-slate-700 dark:hover:text-slate-200">Scale</a>
+                <a href="#" class="hover:text-slate-700 dark:hover:text-slate-200">Login</a>
+                <a href="#" class="hover:text-slate-700 dark:hover:text-slate-200">Privacy</a>
+            </div>
+
+            <div class="text-xs text-slate-400 dark:text-slate-500">
+                © 2024 Pristine Inc.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // THEME TOGGLE LOGIC
+            const toggleButton = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            // Check system preference on load
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+
+            toggleButton.addEventListener('click', () => {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    html.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+
+            // TYPEWRITER EFFECT
+            const el = document.getElementById('prompt');
+            const tabPeople = document.getElementById('tab-people');
+            const tabCompany = document.getElementById('tab-company');
+
+            const peoplePhrases = [
+                "Find CMOs at Series A companies with $10M+ ARR...",
+                "Search for VPs of Sales in London...",
+                "Find React Engineers with 5+ years experience...",
+                "Show me Founders who recently raised funds...",
+                "Find Marketing Directors using HubSpot..."
+            ];
+
+            const companyPhrases = [
+                "Show me SaaS startups in San Francisco...",
+                "List e-commerce brands using Shopify Plus...",
+                "Find B2B fintech companies with $50M+ funding...",
+                "Show me companies hiring for Enterprise Sales...",
+                "List healthcare companies in New York..."
+            ];
+
+            let activePhrases = peoplePhrases;
+            let i = 0;
+            let j = 0;
+            let currentPhrase = [];
+            let isDeleting = false;
+            let isEnd = false;
+            let timeoutId = null;
+
+            function loop() {
+                isEnd = false;
+                
+                if (i < activePhrases.length) {
+                    if (!isDeleting && j <= activePhrases[i].length) {
+                        currentPhrase.push(activePhrases[i][j]);
+                        j++;
+                        el.setAttribute('placeholder', currentPhrase.join(''));
+                    }
+
+                    if(isDeleting && j <= activePhrases[i].length) {
+                        currentPhrase.pop(activePhrases[i][j]);
+                        j--;
+                        el.setAttribute('placeholder', currentPhrase.join(''));
+                    }
+
+                    if (j == activePhrases[i].length) {
+                        isEnd = true;
+                        isDeleting = true;
+                    }
+
+                    if (isDeleting && j === 0) {
+                        currentPhrase = [];
+                        isDeleting = false;
+                        i++;
+                        if (i === activePhrases.length) {
+                            i = 0;
+                        }
+                    }
+                }
+                const speed = isEnd ? 2000 : isDeleting ? 30 : 50;
+                timeoutId = setTimeout(loop, speed);
+            }
+
+            function resetLoop(newPhrases) {
+                clearTimeout(timeoutId);
+                activePhrases = newPhrases;
+                i = 0;
+                j = 0;
+                currentPhrase = [];
+                isDeleting = false;
+                isEnd = false;
+                el.setAttribute('placeholder', '');
+                loop();
+            }
+
+            // Event Listeners for Toggles
+            tabPeople.addEventListener('change', () => {
+                if(tabPeople.checked) resetLoop(peoplePhrases);
+            });
+
+            tabCompany.addEventListener('change', () => {
+                if(tabCompany.checked) resetLoop(companyPhrases);
+            });
+
+            // Start loop
+            loop();
+        });
+    </script>
+
+
+</body></html>
