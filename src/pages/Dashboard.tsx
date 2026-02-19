@@ -1,176 +1,187 @@
-import { TrendingUp, Bot, Target, Users, Building2, Upload, Mail, Workflow, Lightbulb, Zap, FileSpreadsheet, ArrowRight, BarChart3, Layers, Radio } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Target, Bot, Lightbulb, Mail, ArrowRight, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
-import CampaignMetrics from "@/components/dashboard/CampaignMetrics";
-const dashboardTiles = [{
-  category: "Prospecting and Lead Enrichment",
-  description: "Discover and enrich the right leads for your pipeline",
-  icon: Target,
-  color: "from-purple-500 to-purple-600",
-  actions: [{
-    title: "Lead Search/Insights",
-    route: "/search",
-    icon: Building2
-  }, {
-    title: "Lists/Saved Searches",
-    route: "/lists",
-    icon: FileSpreadsheet
-  }, {
-    title: "Enrich Leads",
-    route: "/upload",
-    icon: Upload
-  }]
-}, {
-  category: "Personalization Agent",
-  description: "Generate personalized outreach and campaigns at scale",
-  icon: Bot,
-  color: "from-violet-500 to-violet-600",
-  actions: [{
-    title: "Campaign/Sequence Builder",
-    route: "/campaigns/create",
-    icon: Workflow
-  }, {
-    title: "Campaign Analytics",
-    route: "/campaigns",
-    icon: BarChart3
-  }, {
-    title: "Content HQ",
-    route: "/personalization",
-    icon: Layers
-  }]
-}, {
-  category: "Sales Intelligence",
-  description: "Account research, intent signals, and opportunity playbooks",
-  icon: Lightbulb,
-  color: "from-pink-500 to-pink-600",
-  actions: [{
-    title: "Opportunity Playbook & Deal Story",
-    route: "/opportunities",
-    icon: Zap
-  }, {
-    title: "Account Intelligence",
-    route: "/search",
-    icon: TrendingUp
-  }, {
-    title: "Buying Signals",
-    route: "/signals",
-    icon: Radio
-  }]
-}];
-const recentSearches = [{
-  query: "RevOps in fintech",
-  results: 1284,
-  type: "Mixed"
-}, {
-  query: "Healthcare SaaS CMOs",
-  results: 432,
-  type: "Contacts"
-}, {
-  query: "Snowflake users US",
-  results: 2156,
-  type: "Accounts"
-}];
+
+const featureCards = [
+  {
+    title: "Prospecting and Lead Enrichment",
+    description: "Discover and enrich the right leads for your pipeline",
+    icon: Target,
+    iconBg: "bg-indigo-600",
+    actions: [
+      { label: "Lead Search/Insights", route: "/search" },
+      { label: "Lists/Saved Searches", route: "/lists" },
+    ],
+  },
+  {
+    title: "AI Relevance Engine",
+    description: "Generate personalized outreach and campaigns at scale",
+    icon: Bot,
+    iconBg: "bg-violet-600",
+    actions: [
+      { label: "Campaign/Sequence Builder", route: "/campaigns/create" },
+      { label: "Campaign Analytics", route: "/campaigns" },
+    ],
+  },
+  {
+    title: "Sales Intelligence",
+    description: "Account research, intent signals, and opportunity playbooks",
+    icon: Lightbulb,
+    iconBg: "bg-amber-600",
+    actions: [
+      { label: "Opportunity Playbook & Deal Story", route: "/opportunities" },
+      { label: "Account Intelligence", route: "/search" },
+    ],
+  },
+];
+
+const activeCampaigns = [
+  {
+    id: 1,
+    name: "Single Grain Campaign 3 2Feb26",
+    type: "Static Theme",
+    totalLeads: 9234,
+    contacted: 3963,
+    openRate: 31.4,
+    clickRate: 0,
+  },
+  {
+    id: 2,
+    name: "Campaign 2 29Jan26",
+    type: "Static Theme",
+    totalLeads: 9008,
+    contacted: 9008,
+    openRate: 28.3,
+    clickRate: 0,
+  },
+];
+
+type Tab = "active" | "recent" | "performance";
+
 export default function Dashboard() {
   const navigate = useNavigate();
-  return <div className="min-h-full">
-      {/* Campaign Dashboard */}
-      <section className="px-6 pt-8 pb-6 max-w-7xl mx-auto">
-        <div className="animate-fade-in">
-          <div className="flex items-center justify-between mb-4">
-            <button 
+  const [tab, setTab] = useState<Tab>("active");
+
+  return (
+    <div className="p-6 space-y-5">
+      {/* Feature Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {featureCards.map((card) => (
+          <div
+            key={card.title}
+            className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col hover:border-slate-700 transition-all duration-200"
+          >
+            {/* Icon */}
+            <div className={`w-8 h-8 rounded-lg ${card.iconBg} flex items-center justify-center mb-3 flex-shrink-0`}>
+              <card.icon className="h-4 w-4 text-white" />
+            </div>
+
+            {/* Title + Description */}
+            <h3 className="text-sm font-semibold text-white mb-1">{card.title}</h3>
+            <p className="text-xs text-slate-500 mb-4 leading-relaxed">{card.description}</p>
+
+            {/* Actions */}
+            <div className="space-y-0 mt-auto border-t border-slate-800 -mx-5 px-5 pt-3">
+              {card.actions.map((action) => (
+                <button
+                  key={action.label}
+                  onClick={() => navigate(action.route)}
+                  className="w-full flex items-center justify-between py-2 text-xs text-slate-400 hover:text-white transition-colors group"
+                >
+                  <span>{action.label}</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-slate-600 group-hover:text-slate-400 transition-colors" />
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Campaigns Section */}
+      <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        {/* Section header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+          <div className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-indigo-400" />
+            <span className="text-sm font-semibold text-white">Campaigns</span>
+            <button
               onClick={() => navigate("/campaigns")}
-              className="hover:opacity-80 transition-opacity"
-            >
-              <h2 className="text-2xl font-bold">Campaigns</h2>
-            </button>
-            <Button 
-              variant="outline" 
-              onClick={() => navigate("/campaigns")}
-              className="gap-2"
+              className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300 transition-colors"
             >
               View All
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+              <ArrowRight className="h-3 w-3" />
+            </button>
           </div>
-          <CampaignMetrics />
-        </div>
-      </section>
 
-      {/* Main Dashboard Tiles */}
-      <section className="px-6 py-16 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {dashboardTiles.map(tile => <Card key={tile.category} className="group hover:shadow-primary transition-all duration-300">
-              <CardHeader>
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${tile.color} flex items-center justify-center mb-4`}>
-                  <tile.icon className="h-7 w-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-2">{tile.category}</CardTitle>
-                <CardDescription className="text-base">{tile.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {tile.actions.map(action => <Button key={action.title} variant="ghost" className="w-full justify-between hover:bg-muted" onClick={() => navigate(action.route)}>
-                      <span className="flex items-center gap-2">
-                        <action.icon className="h-4 w-4" />
-                        {action.title}
-                      </span>
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>)}
-                </div>
-              </CardContent>
-            </Card>)}
+          {/* Tabs */}
+          <div className="flex items-center bg-slate-800 rounded-lg p-0.5 gap-0.5">
+            {(["active", "recent", "performance"] as Tab[]).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`px-3 py-1.5 text-[11px] font-semibold rounded-md transition-all capitalize ${
+                  tab === t
+                    ? "bg-slate-700 text-white shadow-sm"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                {t === "active" ? "Active Campaigns" : t.charAt(0).toUpperCase() + t.slice(1)}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Recent Activity */}
-        <div>
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Recent Searches</h2>
-              <p className="text-muted-foreground">Pick up where you left off</p>
+        {/* Active badge row */}
+        <div className="px-5 py-3 border-b border-slate-800/60">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-2.5 py-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Active
+          </span>
+        </div>
+
+        {/* Campaign rows */}
+        <div className="divide-y divide-slate-800/60">
+          {activeCampaigns.map((campaign) => (
+            <div
+              key={campaign.id}
+              onClick={() => navigate(`/campaigns/${campaign.id}/analytics`)}
+              className="flex items-center justify-between px-5 py-4 hover:bg-slate-800/40 cursor-pointer transition-colors group"
+            >
+              {/* Left */}
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                  <Mail className="h-4 w-4 text-white" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-white truncate">{campaign.name}</p>
+                  <p className="text-xs text-slate-500">{campaign.type}</p>
+                </div>
+              </div>
+
+              {/* Metrics */}
+              <div className="flex items-center gap-8 flex-shrink-0">
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">{campaign.totalLeads.toLocaleString()}</p>
+                  <p className="text-[11px] text-slate-500">Total Leads</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">{campaign.contacted.toLocaleString()}</p>
+                  <p className="text-[11px] text-slate-500">Contacted</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">{campaign.openRate}%</p>
+                  <p className="text-[11px] text-slate-500">Open Rate</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-white">{campaign.clickRate}</p>
+                  <p className="text-[11px] text-slate-500">Click Rate</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-slate-600 group-hover:text-slate-400 group-hover:translate-x-0.5 transition-all" />
+              </div>
             </div>
-            <Button variant="outline" onClick={() => navigate("/search")} className="gap-2">
-              New Search
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentSearches.map((search, idx) => <Card key={idx} className="group cursor-pointer hover:shadow-primary transition-all duration-300 hover:-translate-y-1" onClick={() => navigate(`/insights?q=${encodeURIComponent(search.query)}`)}>
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <Badge variant="outline" className="text-xs">
-                      {search.type}
-                    </Badge>
-                    <div className="text-2xl font-bold text-primary">
-                      {search.results.toLocaleString()}
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg">{search.query}</CardTitle>
-                  <CardDescription>results found</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="ghost" className="w-full justify-between group-hover:bg-muted">
-                    View Results
-                    <TrendingUp className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>)}
-          </div>
+          ))}
         </div>
-      </section>
-
-      {/* Value Props */}
-      <section className="px-6 py-16 bg-gradient-subtle">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            
-            
-          </div>
-
-          
-        </div>
-      </section>
-    </div>;
+      </div>
+    </div>
+  );
 }
