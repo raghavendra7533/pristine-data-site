@@ -79,7 +79,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-full grid-bg-dark">
+    <div className="min-h-full">
       {/* Campaigns Section */}
       <section className="px-6 pt-8 pb-6 max-w-7xl mx-auto">
         <div className="animate-fade-in">
