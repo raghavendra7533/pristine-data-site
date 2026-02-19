@@ -8,163 +8,106 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pristine Data AI — Slate + Indigo Design System */
-    --background: 210 40% 98%;
-    --foreground: 222 47% 5%;
+    /* Pristine Data AI Brand Colors */
+    --background: 250 20% 96%;
+    --foreground: 270 50% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 5%;
+    --card-foreground: 270 50% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 5%;
+    --popover-foreground: 270 50% 10%;
 
-    /* Indigo primary */
-    --primary: 239 84% 67%;
+    /* Purple brand primary */
+    --primary: 263 70% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 239 84% 75%;
-    --primary-dark: 239 84% 55%;
+    --primary-light: 270 70% 60%;
+    --primary-dark: 263 80% 40%;
 
-    /* Rose brand accent */
-    --secondary: 350 89% 60%;
+    /* Magenta accent */
+    --secondary: 320 70% 55%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Slate muted */
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 270 30% 96%;
+    --muted-foreground: 270 10% 45%;
 
-    /* Emerald accent */
-    --accent: 160 84% 39%;
+    --accent: 285 75% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 96%;
-    --ring: 239 84% 67%;
+    --border: 270 15% 88%;
+    --input: 270 20% 94%;
+    --ring: 263 70% 50%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Sidebar — dark slate */
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 215 20% 75%;
-    --sidebar-primary: 239 84% 67%;
+    /* Sidebar - Deep purple */
+    --sidebar-background: 263 70% 25%;
+    --sidebar-foreground: 270 30% 95%;
+    --sidebar-primary: 263 75% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 15%;
-    --sidebar-accent-foreground: 215 20% 90%;
-    --sidebar-border: 222 47% 14%;
-    --sidebar-ring: 239 84% 67%;
+    --sidebar-accent: 263 60% 35%;
+    --sidebar-accent-foreground: 270 30% 95%;
+    --sidebar-border: 263 50% 20%;
+    --sidebar-ring: 285 75% 60%;
 
     /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(239 84% 67%), hsl(271 91% 65%));
-    --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%), hsl(214 32% 95%));
-    --gradient-impact: linear-gradient(to right, hsl(239 84% 67%), hsl(189 94% 66%));
-
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 50%), hsl(320 70% 55%));
+    --gradient-subtle: linear-gradient(180deg, hsl(270 40% 98%), hsl(320 30% 96%));
+    
     /* Shadows */
-    --shadow-primary: 0 10px 40px -10px hsl(239 84% 67% / 0.3);
-    --shadow-card: 0 4px 20px -4px hsl(215 16% 47% / 0.12);
+    --shadow-primary: 0 10px 40px -10px hsl(263 70% 50% / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(270 20% 60% / 0.15);
   }
 
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 210 40% 96%;
+    --background: 263 50% 8%;
+    --foreground: 270 30% 95%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 96%;
+    --card: 263 45% 12%;
+    --card-foreground: 270 30% 95%;
 
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 263 50% 10%;
+    --popover-foreground: 270 30% 95%;
 
-    --primary: 239 84% 67%;
+    --primary: 263 70% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 89% 60%;
+    --secondary: 320 70% 60%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 222 47% 13%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 263 35% 18%;
+    --muted-foreground: 270 20% 65%;
 
-    --accent: 160 84% 39%;
+    --accent: 285 70% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 16%;
-    --input: 222 47% 13%;
-    --ring: 239 84% 67%;
+    --border: 263 30% 22%;
+    --input: 263 35% 18%;
+    --ring: 263 70% 55%;
 
-    --sidebar-background: 222 47% 5%;
-    --sidebar-foreground: 215 20% 70%;
-    --sidebar-primary: 239 84% 67%;
+    --sidebar-background: 263 60% 15%;
+    --sidebar-foreground: 270 30% 90%;
+    --sidebar-primary: 263 75% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 12%;
-    --sidebar-accent-foreground: 215 20% 85%;
-    --sidebar-border: 222 47% 10%;
-    --sidebar-ring: 239 84% 67%;
+    --sidebar-accent: 263 50% 25%;
+    --sidebar-accent-foreground: 270 30% 90%;
+    --sidebar-border: 263 50% 12%;
+    --sidebar-ring: 285 75% 60%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Manrope', sans-serif;
-  }
-
-  ::selection {
-    background-color: hsl(350 89% 60% / 0.2);
-    color: hsl(350 89% 30%);
-  }
-
-  .dark ::selection {
-    background-color: hsl(239 84% 67% / 0.3);
-    color: hsl(0 0% 100%);
-  }
-}
-
-@layer utilities {
-  /* Subtle 24px grid background */
-  .grid-bg {
-    background-image:
-      linear-gradient(to right, hsl(214 32% 91%) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(214 32% 91%) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  .dark .grid-bg {
-    background-image:
-      linear-gradient(to right, hsl(222 47% 14%) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(222 47% 14%) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  .grid-bg-dark {
-    background-image:
-      linear-gradient(to right, hsl(222 47% 14%) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(222 47% 14%) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  /* Glass nav */
-  .glass-nav {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  /* Animate fade in */
-  .animate-fade-in {
-    animation: fadeIn 0.4s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 }
