@@ -158,4 +158,33 @@ All colors MUST be HSL.
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
+
+  /* Minimal scrollbar - hidden until hover/scroll */
+  .scrollbar-minimal {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .scrollbar-minimal:hover {
+    scrollbar-color: hsl(215 16% 47% / 0.3) transparent;
+  }
+
+  /* Webkit browsers */
+  .scrollbar-minimal::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .scrollbar-minimal:hover::-webkit-scrollbar-thumb {
+    background: hsl(215 16% 47% / 0.3);
+  }
 }

@@ -42,8 +42,8 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/talent" element={<TalentDashboard />} />
-            <Route path="/search" element={<SearchLanding />} />
-            <Route path="/search-old" element={<Search />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/search-old" element={<SearchLanding />} />
             <Route path="/unified-filters" element={<UnifiedFilters />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/account-search" element={<AccountSearch />} />
