@@ -54,12 +54,12 @@ export default function Search() {
       const hasFirmographic = firmographicKeywords.some(keyword => lowerQuery.includes(keyword));
 
       setTimeout(() => {
-        if (hasContact && (hasFirmographic || hasTech)) {
-          navigate(`/icp-funnel?q=${encodeURIComponent(queryText)}`);
-        } else if (hasContact) {
-          navigate(`/account-search?q=${encodeURIComponent(queryText)}`);
-        } else if (hasTech) {
-          navigate(`/account-search?q=${encodeURIComponent(queryText)}`);
+        if (hasContact) {
+          // Contact-based searches go to results page with contacts
+          navigate(`/results/contacts?q=${encodeURIComponent(queryText)}`);
+        } else if (hasTech || hasFirmographic) {
+          // Tech or firmographic searches go to account results
+          navigate(`/results/accounts?q=${encodeURIComponent(queryText)}&type=firmographic`);
         } else {
           navigate(`/results/accounts?q=${encodeURIComponent(queryText)}&type=firmographic`);
         }
