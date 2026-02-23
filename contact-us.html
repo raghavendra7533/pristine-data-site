@@ -318,24 +318,17 @@ boxShadow: {
                     submittedAt: new Date().toISOString()
                 };
 
-                // Add API key to form data
-                formData.apiKey = 'hello@pristine';
-
                 try {
-                    // Use URLSearchParams for form-urlencoded format (avoids CORS preflight)
-                    const params = new URLSearchParams();
-                    for (const key in formData) {
-                        params.append(key, formData[key]);
-                    }
-
-                    await fetch('https://hook.eu1.make.com/n9z7i3qymf4ppuriqo4ieoqdj3fqgmqj', {
+                    const response = await fetch('https://hook.eu1.make.com/n9z7i3qymf4ppuriqo4ieoqdj3fqgmqj', {
                         method: 'POST',
-                        mode: 'no-cors',
-                        body: params
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-make-apikey': 'hello@pristine'
+                        },
+                        body: JSON.stringify(formData)
                     });
 
-                    // With no-cors mode, we can't check response status but request is sent
-                    if (true) {
+                    if (response.ok) {
                         // Success state
                         submitBtn.innerHTML = `
                             <iconify-icon icon="solar:check-circle-bold" width="16"></iconify-icon>
