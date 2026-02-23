@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pristine Data AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .glass-nav {
+            border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+        }
+        html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, section, footer, header, nav {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#152033',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-400 overflow-x-hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-indigo-900 dark:selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 top-0 glass-nav bg-white/80 dark:bg-slate-950/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="flex items-center group">
+                    <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-8 dark:hidden">
+                    <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-8 hidden dark:block">
+                </a>
+                <div class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-600 dark:text-slate-400">
+                    <a href="index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Product</a>
+                    <a href="integrations.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Integrations</a>
+                    <a href="about-us.html" class="text-slate-900 dark:text-white transition-colors">About</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
+                    <iconify-icon icon="solar:sun-2-linear" class="hidden dark:block" width="16"></iconify-icon>
+                    <iconify-icon icon="solar:moon-linear" class="block dark:hidden" width="16"></iconify-icon>
+                </button>
+                <a href="#" class="hidden md:block hover:text-slate-900 dark:hover:text-white transition-colors text-xs font-semibold text-slate-600 dark:text-slate-400">Log in</a>
+                <a href="contact-us.html" class="px-3.5 py-1.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-semibold rounded-lg transition-all shadow-sm">
+                    Book a Demo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-widest mb-6">
+                    <iconify-icon icon="solar:users-group-rounded-bold" width="14"></iconify-icon>
+                    About Us
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+                    GTM Expertise, <span class="text-indigo-600 dark:text-indigo-400">Embedded in the AI</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                    Real-world go-to-market experience powers our platform. It's like having a bench of GTM consultants building your outreach, enablement, and insights—at scale.
+                </p>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="py-16 bg-slate-50 dark:bg-slate-900/50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-white mb-4">Our Values</h2>
+                    <p class="text-slate-600 dark:text-slate-400">The principles that guide everything we do</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Value 1 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:shield-star-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Confidence without Attitude</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">We know the difference between confidence and arrogance. We lead with humility while standing firm in our expertise.</p>
+                    </div>
+                    <!-- Value 2 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:graph-up-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Opportunities, not Guarantees</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">We focus on possibilities without complacency. Every challenge is an opportunity to grow and deliver more value.</p>
+                    </div>
+                    <!-- Value 3 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:heart-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Authenticity and Integrity</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Honesty is our foundation. We believe in transparency with our team, customers, and partners at every turn.</p>
+                    </div>
+                    <!-- Value 4 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:users-group-two-rounded-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Collaboration over Competition</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">We win together. A team-oriented approach means lifting each other up and celebrating collective success.</p>
+                    </div>
+                    <!-- Value 5 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:target-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Purpose over Meaning</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">We focus on contribution and impact. Every action is driven by the purpose it serves and the value it creates.</p>
+                    </div>
+                    <!-- Value 6 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+                            <iconify-icon icon="solar:flame-bold" width="24"></iconify-icon>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Deshi Basara (Rise)</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Resilience and perseverance define us. We rise from challenges stronger, embracing the journey as much as the destination.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founders Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-white mb-4">Leadership</h2>
+                    <p class="text-slate-600 dark:text-slate-400">The visionaries driving Pristine Data AI forward</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Founder 1 -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/ashok.png" alt="Ashok R" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Ashok R</h3>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">CEO</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500">San Francisco</p>
+                    </div>
+                    <!-- Founder 2 -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/richard.png" alt="Richard HB" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Richard HB</h3>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">SVP</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500">San Francisco</p>
+                    </div>
+                    <!-- Founder 3 -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/ranga.png" alt="Ranga K" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Ranga K</h3>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">India Head</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500">Chennai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="py-16 bg-slate-50 dark:bg-slate-900/50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-white mb-4">Our Team</h2>
+                    <p class="text-slate-600 dark:text-slate-400">The talented people behind the platform</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <!-- Team Member 1 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/gobi.webp" alt="Gobinath Rajendiran" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Gobinath R</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Head of Engineering</p>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/min.webp" alt="Min Ihm" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Min Ihm</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Data Science</p>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/ryan.webp" alt="Ryan Chin" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Ryan Chin</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Sales and CS</p>
+                    </div>
+                    <!-- Team Member 4 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/arvind.webp" alt="Arvind Gopalan" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Arvind Gopalan</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Prompt Engineering</p>
+                    </div>
+                    <!-- Team Member 5 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/nirupama.webp" alt="Nirupama Gopalan" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Nirupama Gopalan</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Project Management</p>
+                    </div>
+                    <!-- Team Member 6 -->
+                    <div class="text-center group">
+                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                            <img src="assets/team/angelo.webp" alt="Angelo Mandarano" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Angelo Mandarano</h4>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-500">Strategic Data</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-2xl md:text-3xl font-semibold text-slate-900 dark:text-white mb-4">Ready to transform your GTM strategy?</h2>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">Join the companies already using Pristine Data AI to scale their outreach.</p>
+                <a href="contact-us.html" class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.02]">
+                    Get in Touch
+                    <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-950 py-12 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center">
+                <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-7 dark:hidden">
+                <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-7 hidden dark:block">
+            </div>
+            <div class="flex gap-8 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <a href="index.html" class="hover:text-slate-700 dark:hover:text-slate-200">Product</a>
+                <a href="integrations.html" class="hover:text-slate-700 dark:hover:text-slate-200">Integrations</a>
+                <a href="about-us.html" class="hover:text-slate-700 dark:hover:text-slate-200">About</a>
+                <a href="#" class="hover:text-slate-700 dark:hover:text-slate-200">Login</a>
+            </div>
+            <div class="text-xs text-slate-400 dark:text-slate-500">
+                © 2024 Pristine Inc.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            // Default to light mode
+            if (localStorage.theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+
+            toggleButton.addEventListener('click', () => {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    html.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
