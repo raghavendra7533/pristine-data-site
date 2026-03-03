@@ -59,10 +59,16 @@
         .reveal-delay-2 { transition-delay: 0.3s; }
         .reveal-delay-3 { transition-delay: 0.45s; }
         .reveal-delay-4 { transition-delay: 0.6s; }
-        /* Wave card crossfade */
+        /* Wave card crossfade + slide */
         #wave-card-display { position: relative; min-height: 320px; }
-        .wave-card { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-        .wave-card.wave-active { opacity: 1; pointer-events: auto; }
+        .wave-card { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.45s ease, transform 0.45s ease; transform: translateY(10px); }
+        .wave-card.wave-active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        /* Scroll hint bounce */
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+        #scroll-hint { animation: scrollBounce 1.8s ease-in-out infinite; transition: opacity 0.4s ease; }
     </style>
     <script>
         tailwind.config = {
@@ -233,51 +239,51 @@
 
                     <!-- Top: Horizontal wave progress nav — full width -->
                     <div class="max-w-6xl mx-auto px-6 w-full mb-6">
-                    <div class="bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
-                        <div class="grid grid-cols-5 gap-2 md:gap-8" id="wave-nav">
+                    <div class="bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 md:p-6">
+                        <div class="grid grid-cols-5 gap-2 md:gap-6" id="wave-nav">
                             <div class="wave-nav-item" data-wave="0">
-                                <div class="flex items-center gap-1 mb-1.5">
+                                <div class="flex items-center gap-1.5 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500">01</span>
-                                    <span class="wave-nav-label hidden sm:block text-[9px] md:text-sm font-medium text-slate-900 dark:text-white truncate">Spray &amp; pray</span>
+                                    <span class="wave-nav-label text-[10px] md:text-sm font-medium text-slate-900 dark:text-white truncate">Spray &amp; pray</span>
                                 </div>
-                                <div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                                    <div class="wave-progress h-full rounded-full bg-rose-500 dark:bg-rose-400 w-0"></div>
+                                <div class="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div class="wave-progress h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0" style="transition: width 0.1s linear;"></div>
                                 </div>
                             </div>
                             <div class="wave-nav-item" data-wave="1">
-                                <div class="flex items-center gap-1 mb-1.5">
+                                <div class="flex items-center gap-1.5 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500">02</span>
-                                    <span class="wave-nav-label hidden sm:block text-[9px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Sequencing</span>
+                                    <span class="wave-nav-label text-[10px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Sequencing</span>
                                 </div>
-                                <div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                                    <div class="wave-progress h-full rounded-full bg-rose-500 dark:bg-rose-400 w-0"></div>
+                                <div class="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div class="wave-progress h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0" style="transition: width 0.1s linear;"></div>
                                 </div>
                             </div>
                             <div class="wave-nav-item" data-wave="2">
-                                <div class="flex items-center gap-1 mb-1.5">
+                                <div class="flex items-center gap-1.5 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500">03</span>
-                                    <span class="wave-nav-label hidden sm:block text-[9px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Personalization</span>
+                                    <span class="wave-nav-label text-[10px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Personalization</span>
                                 </div>
-                                <div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                                    <div class="wave-progress h-full rounded-full bg-rose-500 dark:bg-rose-400 w-0"></div>
+                                <div class="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div class="wave-progress h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0" style="transition: width 0.1s linear;"></div>
                                 </div>
                             </div>
                             <div class="wave-nav-item" data-wave="3">
-                                <div class="flex items-center gap-1 mb-1.5">
+                                <div class="flex items-center gap-1.5 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500">04</span>
-                                    <span class="wave-nav-label hidden sm:block text-[9px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Intent data</span>
+                                    <span class="wave-nav-label text-[10px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Intent data</span>
                                 </div>
-                                <div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                                    <div class="wave-progress h-full rounded-full bg-rose-500 dark:bg-rose-400 w-0"></div>
+                                <div class="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div class="wave-progress h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0" style="transition: width 0.1s linear;"></div>
                                 </div>
                             </div>
                             <div class="wave-nav-item" data-wave="4">
-                                <div class="flex items-center gap-1 mb-1.5">
+                                <div class="flex items-center gap-1.5 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500">05</span>
-                                    <span class="wave-nav-label hidden sm:block text-[9px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Account-based</span>
+                                    <span class="wave-nav-label text-[10px] md:text-sm font-medium text-slate-500 dark:text-slate-400 truncate">Account-based</span>
                                 </div>
-                                <div class="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                                    <div class="wave-progress h-full rounded-full bg-rose-500 dark:bg-rose-400 w-0"></div>
+                                <div class="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div class="wave-progress h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0" style="transition: width 0.1s linear;"></div>
                                 </div>
                             </div>
                         </div>
@@ -400,6 +406,16 @@
 
                     </div><!-- /wave-card-display -->
                     </div><!-- /max-w-3xl card wrapper -->
+
+                    <!-- Scroll affordance hint -->
+                    <div id="scroll-hint" class="flex flex-col items-center gap-2 mt-8 select-none pointer-events-none">
+                        <span class="text-xs font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest">Scroll to explore</span>
+                        <div class="flex flex-col items-center gap-0.5">
+                            <div class="w-px h-3 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-slate-400 dark:text-slate-500"></iconify-icon>
+                        </div>
+                    </div>
+
             </div><!-- /sticky -->
         </section>
 
@@ -777,29 +793,41 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Founder 1 -->
                     <div class="text-center group">
-                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/ashok.png" alt="Ashok R" class="w-full h-full object-cover">
+                        <div class="relative mb-6 mx-auto w-48 h-48">
+                            <div class="w-full h-full rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/ashok.png" alt="Ashok R" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/rajanashok/" target="_blank" rel="noopener" class="absolute top-2 right-2 w-7 h-7 bg-white rounded-md shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="16"></iconify-icon>
+                            </a>
                         </div>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Ashok R</h3>
-                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">CEO</p>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-1">CEO</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500">San Francisco</p>
                     </div>
                     <!-- Founder 2 -->
                     <div class="text-center group">
-                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/richard.png" alt="Richard HB" class="w-full h-full object-cover">
+                        <div class="relative mb-6 mx-auto w-48 h-48">
+                            <div class="w-full h-full rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/richard.png" alt="Richard HB" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/rhuiebuckius/" target="_blank" rel="noopener" class="absolute top-2 right-2 w-7 h-7 bg-white rounded-md shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="16"></iconify-icon>
+                            </a>
                         </div>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Richard HB</h3>
-                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">SVP</p>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-1">SVP</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500">San Francisco</p>
                     </div>
                     <!-- Founder 3 -->
                     <div class="text-center group">
-                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/ranga.png" alt="Ranga K" class="w-full h-full object-cover">
+                        <div class="relative mb-6 mx-auto w-48 h-48">
+                            <div class="w-full h-full rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/ranga.png" alt="Ranga K" class="w-full h-full object-cover">
+                            </div>
                         </div>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-1">Ranga K</h3>
-                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">India Head</p>
+                        <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-1">India Head</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500">Chennai</p>
                     </div>
                 </div>
@@ -816,48 +844,78 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     <!-- Team Member 1 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/gobi.webp" alt="Gobinath Rajendiran" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/gobi.webp" alt="Gobinath Rajendiran" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/gobinathrajendiran/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Gobinath R</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Head of Engineering</p>
                     </div>
                     <!-- Team Member 2 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/min.webp" alt="Min Ihm" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/min.webp" alt="Min Ihm" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/min-ihm/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Min Ihm</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Data Science</p>
                     </div>
                     <!-- Team Member 3 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/ryan.webp" alt="Ryan Chin" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/ryan.webp" alt="Ryan Chin" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/ryanychin/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Ryan Chin</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Sales and CS</p>
                     </div>
                     <!-- Team Member 4 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/arvind.webp" alt="Arvind Gopalan" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/arvind.webp" alt="Arvind Gopalan" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/arvind-gopalan-671654123/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Arvind Gopalan</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Prompt Engineering</p>
                     </div>
                     <!-- Team Member 5 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/nirupama.webp" alt="Nirupama Gopalan" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/nirupama.webp" alt="Nirupama Gopalan" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/nirupama-gopalan-65986667/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Nirupama Gopalan</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Project Management</p>
                     </div>
                     <!-- Team Member 6 -->
                     <div class="text-center group">
-                        <div class="relative mb-4 mx-auto w-24 h-24 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
-                            <img src="assets/team/angelo.webp" alt="Angelo Mandarano" class="w-full h-full object-cover">
+                        <div class="relative mb-4 mx-auto w-24 h-24">
+                            <div class="w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 group-hover:border-indigo-500 transition-colors">
+                                <img src="assets/team/angelo.webp" alt="Angelo Mandarano" class="w-full h-full object-cover">
+                            </div>
+                            <a href="https://www.linkedin.com/in/angelomandarano/" target="_blank" rel="noopener" class="absolute top-1 right-1 w-5 h-5 bg-white rounded shadow-md flex items-center justify-center opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 hover:scale-110 transition-all duration-300">
+                                <iconify-icon icon="logos:linkedin-icon" width="11"></iconify-icon>
+                            </a>
                         </div>
                         <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-0.5">Angelo Mandarano</h4>
                         <p class="text-[10px] text-slate-500 dark:text-slate-500">Strategic Data</p>
@@ -961,6 +1019,7 @@
         var waveCards = document.querySelectorAll('.wave-card');
         var waveProgressBars = document.querySelectorAll('.wave-progress');
         var waveNavLabels = document.querySelectorAll('.wave-nav-label');
+        var scrollHint = document.getElementById('scroll-hint');
         var activeWave = -1;
 
         if (woundSection && waveCards.length > 0) {
@@ -974,6 +1033,11 @@
                 var waveSize = scrollable / 5;
                 var current = Math.min(4, Math.floor(scrolled / waveSize));
                 var progress = (scrolled % waveSize) / waveSize;
+
+                // Fade out scroll hint once user starts scrolling into wave 2+
+                if (scrollHint) {
+                    scrollHint.style.opacity = current >= 1 ? '0' : '1';
+                }
 
                 // Switch card only when wave changes
                 if (current !== activeWave) {
