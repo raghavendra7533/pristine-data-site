@@ -407,21 +407,51 @@
         <!-- ============================================================
              "SOUND FAMILIAR?" INTERSTITIAL (Dark full-width)
              ============================================================ -->
-        <section class="overflow-hidden text-white bg-slate-900 dark:bg-slate-900/50 py-24 relative border-t border-b border-transparent dark:border-slate-800" id="sound-familiar">
-            <div class="absolute inset-0 grid-bg-dark opacity-20 pointer-events-none"></div>
-            <div class="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
-            <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
+        <section class="overflow-hidden text-white py-28 relative" id="sound-familiar"
+            style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #0f172a 70%, #1a0a20 100%);">
+
+            <!-- Ambient color orbs -->
+            <div class="absolute pointer-events-none" style="top: -60px; left: -80px; width: 520px; height: 520px; background: radial-gradient(circle, rgba(99,102,241,0.35) 0%, transparent 65%); border-radius: 50%;"></div>
+            <div class="absolute pointer-events-none" style="bottom: -80px; right: -60px; width: 460px; height: 460px; background: radial-gradient(circle, rgba(244,63,94,0.28) 0%, transparent 65%); border-radius: 50%;"></div>
+            <div class="absolute pointer-events-none" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(139,92,246,0.2) 0%, transparent 65%); border-radius: 50%;"></div>
+
+            <!-- Colored accent line at top -->
+            <div class="absolute top-0 inset-x-0 h-px" style="background: linear-gradient(90deg, transparent, rgba(99,102,241,0.9), rgba(139,92,246,0.9), rgba(244,63,94,0.9), transparent);"></div>
+            <!-- Colored accent line at bottom -->
+            <div class="absolute bottom-0 inset-x-0 h-px" style="background: linear-gradient(90deg, transparent, rgba(244,63,94,0.6), rgba(139,92,246,0.7), rgba(99,102,241,0.6), transparent);"></div>
+
             <div class="max-w-3xl mx-auto px-6 relative text-center">
+
+                <!-- Eyebrow badge -->
+                <div class="reveal flex justify-center mb-8">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border"
+                        style="background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc;">
+                        <iconify-icon icon="solar:danger-triangle-bold" width="12"></iconify-icon>
+                        The Cycle
+                    </span>
+                </div>
+
                 <h2 class="reveal text-4xl md:text-5xl font-semibold text-white tracking-tight mb-8">
                     Sound familiar?
                 </h2>
-                <div class="reveal space-y-4 text-lg md:text-xl text-slate-400 leading-relaxed">
+
+                <!-- Divider spark -->
+                <div class="reveal flex items-center justify-center gap-3 mb-8">
+                    <div class="h-px w-16" style="background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6));"></div>
+                    <div class="w-1.5 h-1.5 rounded-full" style="background: #818cf8;"></div>
+                    <div class="h-px w-16" style="background: linear-gradient(90deg, rgba(99,102,241,0.6), transparent);"></div>
+                </div>
+
+                <div class="reveal space-y-4 text-lg md:text-xl leading-relaxed" style="color: rgba(148,163,184,1);">
                     <p>You've lived this cycle.</p>
                     <p>Maybe you're living it right now.</p>
                 </div>
-                <div class="reveal mt-10 space-y-3 text-base md:text-lg text-slate-500 leading-relaxed">
-                    <p>The tool changes. The promise changes.</p>
-                    <p class="text-slate-300 font-medium">The outcome doesn't.</p>
+
+                <div class="reveal mt-10 space-y-3 text-base md:text-lg leading-relaxed">
+                    <p style="color: rgba(148,163,184,0.85);">The tool changes. The promise changes.</p>
+                    <p class="font-semibold text-lg md:text-xl">
+                        <span style="background: linear-gradient(90deg, #f87171, #fb7185, #e879f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800;">The outcome doesn't.</span>
+                    </p>
                 </div>
             </div>
         </section>
@@ -540,57 +570,67 @@
                     </div>
                 </div>
 
-                <!-- Part C: Philosophy (compact) -->
+                <!-- Part C: Philosophy -->
                 <div class="reveal">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800">
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Who?</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Who is actually in market right now?</p>
-                        </div>
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800">
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white mb-2">What changed?</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">What signal shifted that makes this moment different?</p>
-                        </div>
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800">
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Why now?</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">What is the narrative that will resonate at this exact moment?</p>
+                    <!-- Three questions: dark editorial band -->
+                    <div class="relative mb-6 rounded-2xl overflow-hidden bg-slate-900 dark:bg-slate-950 border border-slate-800 p-8 md:p-12">
+                        <div class="absolute inset-0 grid-bg-dark opacity-[0.08] pointer-events-none"></div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-8">We answer three questions for every deal</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0 sm:divide-x sm:divide-slate-800">
+                            <div class="sm:pr-8">
+                                <span class="text-[10px] font-bold text-indigo-400 tracking-widest uppercase">01</span>
+                                <p class="text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Who?</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">Who is actually in market right now — not just a title in a spreadsheet?</p>
+                            </div>
+                            <div class="sm:px-8">
+                                <span class="text-[10px] font-bold text-indigo-400 tracking-widest uppercase">02</span>
+                                <p class="text-2xl md:text-3xl font-bold text-white mt-2 mb-3">What changed?</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">What signal shifted that makes this moment different from last quarter?</p>
+                            </div>
+                            <div class="sm:pl-8">
+                                <span class="text-[10px] font-bold text-indigo-400 tracking-widest uppercase">03</span>
+                                <p class="text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Why now?</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">What narrative will resonate with this buyer at this exact moment?</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-900/20 text-rose-500 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:close-circle-bold" width="20"></iconify-icon>
+
+                    <!-- Comparison: two-column bold split -->
+                    <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
+                            <!-- The old way -->
+                            <div class="p-8 md:p-10 bg-slate-50 dark:bg-slate-900/40 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800">
+                                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-8">
+                                    <iconify-icon icon="solar:close-circle-bold" width="12"></iconify-icon>
+                                    The old way
+                                </div>
+                                <div class="space-y-8">
+                                    <div>
+                                        <p class="font-semibold text-slate-700 dark:text-slate-300 mb-2">Generic personalization</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Templated "Hey {{FirstName}}" outreach at scale is not personalization. It is pattern recognition by the buyer.</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-700 dark:text-slate-300 mb-2">Activity metrics</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Emails sent, dials made, sequences enrolled. These are not outcomes. These are symptoms of hoping volume works.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-slate-900 dark:text-white font-semibold mb-1">Not generic personalization</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Templated "Hey {{FirstName}}" outreach at scale is not personalization. It is pattern recognition by the buyer.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon>
-                            </div>
-                            <div>
-                                <p class="text-slate-900 dark:text-white font-semibold mb-1">Contextual precision</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Every outreach should feel like it was written for that one buyer, at that one moment, about that one problem.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-900/20 text-rose-500 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:close-circle-bold" width="20"></iconify-icon>
-                            </div>
-                            <div>
-                                <p class="text-slate-900 dark:text-white font-semibold mb-1">Not activity metrics</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Emails sent, dials made, sequences enrolled. These are not outcomes. These are symptoms of hoping volume works.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white dark:bg-slate-950 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="solar:check-circle-bold" width="20"></iconify-icon>
-                            </div>
-                            <div>
-                                <p class="text-slate-900 dark:text-white font-semibold mb-1">Revenue impact</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Pipeline created, opportunities qualified, revenue closed. That is what we measure. That is what matters.</p>
+                            <!-- The Pristine way -->
+                            <div class="p-8 md:p-10 bg-white dark:bg-slate-900">
+                                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-8">
+                                    <iconify-icon icon="solar:check-circle-bold" width="12"></iconify-icon>
+                                    The Pristine way
+                                </div>
+                                <div class="space-y-8">
+                                    <div>
+                                        <p class="font-bold text-slate-900 dark:text-white mb-2">Contextual precision</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Every outreach should feel like it was written for that one buyer, at that one moment, about that one problem.</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 dark:text-white mb-2">Revenue impact</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Pipeline created, opportunities qualified, revenue closed. That is what we measure. That is what matters.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -603,24 +643,50 @@
         <!-- ============================================================
              ACT 5 — THE INVITATION (Dark closing section)
              ============================================================ -->
-        <section class="overflow-hidden text-white bg-slate-900 dark:bg-slate-900/50 py-24 md:py-32 relative border-t border-b border-transparent dark:border-slate-800" id="act5-invitation">
+        <section class="overflow-hidden text-white relative" id="act5-invitation" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #0f172a 75%, #1a0a20 100%);">
+            <!-- Grid -->
             <div class="absolute inset-0 grid-bg-dark opacity-20 pointer-events-none"></div>
-            <div class="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
-            <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-slate-900 dark:from-slate-950 to-transparent pointer-events-none"></div>
-            <div class="max-w-3xl mx-auto px-6 relative text-center">
-                <div class="space-y-5 mb-12">
+
+            <!-- Strong ambient orbs -->
+            <div class="absolute top-0 -left-24 w-[700px] h-[700px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 65%);"></div>
+            <div class="absolute bottom-0 -right-24 w-[600px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(244,63,94,0.3) 0%, transparent 65%);"></div>
+            <div class="absolute top-1/2 left-2/3 w-[400px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 65%);"></div>
+
+            <!-- Colored accent line at top -->
+            <div class="absolute top-0 inset-x-0 h-px pointer-events-none" style="background: linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.9) 30%, rgba(139,92,246,0.9) 50%, rgba(244,63,94,0.9) 70%, transparent 100%);"></div>
+
+            <div class="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-slate-900 to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none"></div>
+
+            <div class="py-24 md:py-36 max-w-3xl mx-auto px-6 relative text-center">
+
+                <!-- Eyebrow badge -->
+                <div class="reveal inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-10 text-[10px] font-bold uppercase tracking-widest text-indigo-300" style="background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.35);">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400" style="box-shadow: 0 0 6px rgba(99,102,241,0.8);"></span>
+                    The decision point
+                </div>
+
+                <div class="space-y-5 mb-10">
                     <p class="reveal text-xl md:text-2xl text-slate-300 leading-relaxed">
                         You're not evaluating another tool.
                     </p>
                     <p class="reveal text-xl md:text-2xl text-slate-300 leading-relaxed">
-                        You're deciding whether outbound stays a volume game --<br class="hidden md:block"> or becomes a <span class="text-white font-semibold">precision game</span>.
+                        You're deciding whether outbound stays a volume game —<br class="hidden md:block"> or becomes a <span style="background: linear-gradient(90deg, #818cf8, #a78bfa, #fb7185); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800;">precision game</span>.
                     </p>
                 </div>
+
+                <!-- Divider spark -->
+                <div class="reveal flex items-center justify-center gap-3 mb-10">
+                    <div class="h-px w-16" style="background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6));"></div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-violet-400 opacity-80"></div>
+                    <div class="h-px w-16" style="background: linear-gradient(90deg, rgba(99,102,241,0.6), transparent);"></div>
+                </div>
+
                 <div class="reveal mb-12">
                     <p class="text-base md:text-lg text-slate-400 leading-relaxed mb-3">
                         The future of revenue won't be won by the loudest teams.
                     </p>
-                    <p class="text-base md:text-lg text-slate-300 font-medium leading-relaxed mb-3">
+                    <p class="text-lg md:text-xl text-white font-bold leading-relaxed mb-3">
                         It will be won by the sharpest ones.
                     </p>
                     <p class="text-base md:text-lg text-slate-400 leading-relaxed">
@@ -628,13 +694,13 @@
                     </p>
                 </div>
                 <div class="reveal mb-14">
-                    <a href="contact-us.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-100 text-slate-900 text-sm font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl">
+                    <a href="contact-us.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-100 text-slate-900 text-sm font-semibold rounded-xl transition-all hover:scale-[1.02]" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 8px 40px rgba(99,102,241,0.4);">
                         <iconify-icon icon="solar:chat-round-dots-bold" width="18"></iconify-icon>
                         Talk to us
                     </a>
                 </div>
                 <div class="reveal">
-                    <p class="text-sm text-slate-500 italic">
+                    <p class="text-sm italic" style="color: rgba(148,163,184,0.6);">
                         "Because timing isn't everything. It's the only thing."
                     </p>
                 </div>
