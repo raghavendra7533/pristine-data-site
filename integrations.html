@@ -86,6 +86,10 @@ red: '#F43F5E',
                 </div>
             </div>
             <div class="flex items-center gap-3">
+                <button id="mobile-menu-btn" class="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" id="menu-icon-open"></iconify-icon>
+                    <iconify-icon icon="solar:close-linear" width="20" id="menu-icon-close" class="hidden"></iconify-icon>
+                </button>
                 <!-- Theme Toggle Button -->
                 <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
                     <iconify-icon icon="solar:sun-2-linear" class="hidden dark:block" width="16"></iconify-icon>
@@ -98,6 +102,19 @@ red: '#F43F5E',
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-x-0 top-16 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-lg md:hidden">
+        <div class="px-6 py-6 flex flex-col gap-1">
+            <a href="index.html" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">Product</a>
+            <a href="integrations.html" class="text-sm font-medium text-slate-900 dark:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">Integrations</a>
+            <a href="about-us.html" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">About</a>
+            <div class="pt-4 flex flex-col gap-3">
+                <a href="#" class="text-sm font-semibold text-slate-700 dark:text-slate-300 py-2">Log in</a>
+                <a href="contact-us.html" class="w-full text-center py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold rounded-xl transition-all">Book a Demo</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <main class="flex-grow pt-24">
@@ -127,7 +144,7 @@ red: '#F43F5E',
                         <h2 class="text-lg font-semibold text-slate-900 dark:text-white">CRM Integrations</h2>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         <!-- Salesforce -->
                         <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all">
                             <div class="flex items-center gap-4 mb-4">
@@ -193,7 +210,7 @@ red: '#F43F5E',
                         <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Outreach Platforms</h2>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Instantly -->
                         <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 transition-all">
                             <div class="flex items-center gap-4 mb-4">
@@ -234,7 +251,7 @@ red: '#F43F5E',
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">
                         We're constantly adding new integrations. Let us know what you need.
                     </p>
-                    <a href="contact-us.html" class="inline-flex items-center gap-2 px-6 py-2.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-slate-900/10 dark:shadow-none">
+                    <a href="contact-us.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-slate-900/10 dark:shadow-none">
                         Request an Integration
                         <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
                     </a>
@@ -284,6 +301,20 @@ red: '#F43F5E',
                     localStorage.theme = 'dark';
                 }
             });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden', isOpen);
+                    menuIconOpen.classList.toggle('hidden', !isOpen);
+                    menuIconClose.classList.toggle('hidden', isOpen);
+                });
+            }
         });
     </script>
 
