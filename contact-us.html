@@ -92,6 +92,17 @@ boxShadow: {
     }
 })();
 </script>
+<script id="warmly-script-loader" src="https://opps-widget.getwarmly.com/warmly.js?clientId=ff085db792eda57552e92a30070b59cc" defer></script>
+<script>
+    !function(key) {
+        if (window.reb2b) return;
+        window.reb2b = {loaded: true};
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";
+        document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+    }("961Y0HXR7RNG");
+</script>
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-400 overflow-x-hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-indigo-900 dark:selection:text-white flex flex-col min-h-screen">
 
@@ -275,7 +286,7 @@ boxShadow: {
                 <a href="about-us.html" class="hover:text-slate-700 dark:hover:text-slate-200">About</a>
             </div>
             <div class="text-xs text-slate-400 dark:text-slate-500">
-                © 2024 Pristine Inc.
+                © 2026 Pristine Inc.
             </div>
         </div>
     </footer>
@@ -326,16 +337,15 @@ boxShadow: {
                 };
 
                 try {
-                    const response = await fetch('https://hook.eu1.make.com/wai4mc3755boxanlf9cdvjz8gu5hqxxe', {
+                    // no-cors skips the CORS preflight so the body actually reaches Zapier
+                    const response = await fetch('https://hooks.zapier.com/hooks/catch/26697211/u0j978l/', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-make-apikey': 'hello@pristine'
-                        },
+                        mode: 'no-cors',
                         body: JSON.stringify(formData)
                     });
 
-                    if (response.ok) {
+                    // With no-cors the response is opaque (status 0) — that means it was sent
+                    if (response.type === 'opaque' || response.ok) {
                         // Success state
                         submitBtn.innerHTML = `
                             <iconify-icon icon="solar:check-circle-bold" width="16"></iconify-icon>

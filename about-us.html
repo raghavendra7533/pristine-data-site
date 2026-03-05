@@ -63,12 +63,14 @@
         #wave-card-display { position: relative; min-height: 320px; }
         .wave-card { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.45s ease, transform 0.45s ease; transform: translateY(10px); }
         .wave-card.wave-active { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        /* Scroll hint bounce */
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(6px); }
+        /* Nav items are clickable */
+        .wave-nav-item { cursor: pointer; }
+        /* Timer-driven progress fill */
+        @keyframes waveTimerFill {
+            from { width: 0%; }
+            to   { width: 100%; }
         }
-        #scroll-hint { animation: scrollBounce 1.8s ease-in-out infinite; transition: opacity 0.4s ease; }
+        .wave-progress.timer-active { animation: waveTimerFill var(--wave-duration, 4s) linear forwards; }
     </style>
     <script>
         tailwind.config = {
@@ -95,6 +97,17 @@
                 document.documentElement.classList.add('dark');
             }
         })();
+    </script>
+    <script id="warmly-script-loader" src="https://opps-widget.getwarmly.com/warmly.js?clientId=ff085db792eda57552e92a30070b59cc" defer></script>
+    <script>
+        !function(key) {
+            if (window.reb2b) return;
+            window.reb2b = {loaded: true};
+            var s = document.createElement("script");
+            s.async = true;
+            s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";
+            document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+        }("961Y0HXR7RNG");
     </script>
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-400 overflow-x-hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-indigo-900 dark:selection:text-white">
@@ -223,8 +236,8 @@
         <!-- ============================================================
              ACT 2 — THE WOUND (Scroll-pinned: progress top, single card bottom)
              ============================================================ -->
-        <section class="bg-white dark:bg-slate-950 relative" id="act2-wound" style="height:500vh">
-            <div class="sticky top-16 min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12">
+        <section class="bg-white dark:bg-slate-950 relative py-16 md:py-24" id="act2-wound">
+            <div>
 
                     <!-- Section header -->
                     <div class="text-center mb-8 max-w-6xl mx-auto px-6 w-full">
@@ -407,16 +420,7 @@
                     </div><!-- /wave-card-display -->
                     </div><!-- /max-w-3xl card wrapper -->
 
-                    <!-- Scroll affordance hint -->
-                    <div id="scroll-hint" class="flex flex-col items-center gap-2 mt-8 select-none pointer-events-none">
-                        <span class="text-xs font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest">Scroll to explore</span>
-                        <div class="flex flex-col items-center gap-0.5">
-                            <div class="w-px h-3 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
-                            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-slate-400 dark:text-slate-500"></iconify-icon>
-                        </div>
-                    </div>
-
-            </div><!-- /sticky -->
+            </div>
         </section>
 
 
@@ -950,7 +954,7 @@
                 <a href="about-us.html" class="hover:text-slate-700 dark:hover:text-slate-200">About</a>
             </div>
             <div class="text-xs text-slate-400 dark:text-slate-500">
-                © 2024 Pristine Inc.
+                © 2026 Pristine Inc.
             </div>
         </div>
     </footer>
@@ -1014,73 +1018,98 @@
             });
         }
 
-        // ── Wave scroll-pin: progress top, single card bottom ──
-        var woundSection = document.getElementById('act2-wound');
-        var waveCards = document.querySelectorAll('.wave-card');
-        var waveProgressBars = document.querySelectorAll('.wave-progress');
-        var waveNavLabels = document.querySelectorAll('.wave-nav-label');
-        var scrollHint = document.getElementById('scroll-hint');
-        var activeWave = -1;
+        // ── Wave Carousel ──
+        (function () {
+            var waveCards = document.querySelectorAll('.wave-card');
+            var waveProgressBars = document.querySelectorAll('.wave-progress');
+            var waveNavItems = document.querySelectorAll('.wave-nav-item');
+            var waveNavLabels = document.querySelectorAll('.wave-nav-label');
+            var act2Section = document.getElementById('act2-wound');
+            var WAVE_DURATION = 4000;
+            var WAVE_COUNT = 5;
+            var currentWave = 0;
+            var carouselInterval = null;
+            var sectionVisible = false;
 
-        if (woundSection && waveCards.length > 0) {
-            function updateWaves() {
-                var rect = woundSection.getBoundingClientRect();
-                var scrolled = -rect.top;
-                var scrollable = woundSection.offsetHeight - window.innerHeight;
+            if (!act2Section || !waveCards.length) return;
 
-                if (scrolled < 0 || scrolled > woundSection.offsetHeight) return;
-
-                var waveSize = scrollable / 5;
-                var current = Math.min(4, Math.floor(scrolled / waveSize));
-                var progress = (scrolled % waveSize) / waveSize;
-
-                // Fade out scroll hint once user starts scrolling into wave 2+
-                if (scrollHint) {
-                    scrollHint.style.opacity = current >= 1 ? '0' : '1';
-                }
-
-                // Switch card only when wave changes
-                if (current !== activeWave) {
-                    waveCards.forEach(function (c, i) {
-                        c.classList.toggle('wave-active', i === current);
-                    });
-                    waveNavLabels.forEach(function (lbl, i) {
-                        if (i === current) {
-                            lbl.classList.add('text-slate-900', 'dark:text-white', 'font-semibold');
-                            lbl.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-medium');
-                        } else {
-                            lbl.classList.remove('text-slate-900', 'dark:text-white', 'font-semibold');
-                            lbl.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
-                        }
-                    });
-                    activeWave = current;
-                }
-
-                // Update progress bars continuously
+            function startProgressBar(index) {
                 waveProgressBars.forEach(function (bar, i) {
-                    if (i < current) {
+                    bar.classList.remove('timer-active');
+                    bar.style.removeProperty('animation');
+                    if (i < index) {
                         bar.style.width = '100%';
-                    } else if (i === current) {
-                        bar.style.width = (progress * 100) + '%';
+                    } else if (i > index) {
+                        bar.style.width = '0%';
                     } else {
                         bar.style.width = '0%';
+                        bar.style.setProperty('--wave-duration', (WAVE_DURATION / 1000) + 's');
+                        void bar.offsetWidth; // force reflow so animation restarts cleanly
+                        bar.classList.add('timer-active');
                     }
                 });
             }
 
-            var ticking = false;
-            window.addEventListener('scroll', function () {
-                if (!ticking) {
-                    window.requestAnimationFrame(function () {
-                        updateWaves();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
+            function showWave(index) {
+                currentWave = index;
+                waveCards.forEach(function (c, i) {
+                    c.classList.toggle('wave-active', i === index);
+                });
+                waveNavLabels.forEach(function (lbl, i) {
+                    if (i === index) {
+                        lbl.classList.add('text-slate-900', 'dark:text-white', 'font-semibold');
+                        lbl.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-medium');
+                    } else {
+                        lbl.classList.remove('text-slate-900', 'dark:text-white', 'font-semibold');
+                        lbl.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
+                    }
+                });
+                startProgressBar(index);
+            }
 
-            updateWaves();
-        }
+            function startCarousel() {
+                if (carouselInterval) return;
+                carouselInterval = setInterval(function () {
+                    showWave((currentWave + 1) % WAVE_COUNT);
+                }, WAVE_DURATION);
+            }
+
+            function stopCarousel() {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
+
+            function resetCarousel(toWave) {
+                stopCarousel();
+                showWave(toWave !== undefined ? toWave : currentWave);
+                if (sectionVisible) startCarousel();
+            }
+
+            // Nav item clicks jump to that wave and restart the timer
+            waveNavItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    var idx = parseInt(item.getAttribute('data-wave'), 10);
+                    resetCarousel(idx);
+                });
+            });
+
+            // Pause carousel when section leaves viewport, resume when it enters
+            var sectionObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        sectionVisible = true;
+                        startCarousel();
+                    } else {
+                        sectionVisible = false;
+                        stopCarousel();
+                    }
+                });
+            }, { threshold: 0.2 });
+            sectionObserver.observe(act2Section);
+
+            // Show first wave immediately on load
+            showWave(0);
+        }());
     });
     </script>
 

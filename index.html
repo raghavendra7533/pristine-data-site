@@ -132,6 +132,17 @@ animation: {
     }
 })();
 </script>
+<script id="warmly-script-loader" src="https://opps-widget.getwarmly.com/warmly.js?clientId=ff085db792eda57552e92a30070b59cc" defer></script>
+<script>
+    !function(key) {
+        if (window.reb2b) return;
+        window.reb2b = {loaded: true};
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";
+        document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+    }("961Y0HXR7RNG");
+</script>
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-400 overflow-x-hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-indigo-900 dark:selection:text-white">
 
@@ -848,87 +859,100 @@ animation: {
             </div>
 
             <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-slate-950">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="">
-                            <tr class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
-                                <th class="p-6 w-1/3 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Feature</th>
-                                <th class="p-6 w-1/3 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
-                                    <div class="flex items-center gap-2">
-                                        <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-6 w-auto dark:hidden">
-                                        <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-6 w-auto hidden dark:block">
-                                    </div>
-                                </th>
-                                <th class="p-6 w-1/3 text-sm font-semibold text-slate-400 dark:text-slate-500">Traditional Stack</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                            <!-- New Row: Scale -->
-                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
-                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Database Size</td>
-                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
-                                    <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
-                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
-                                        700M+ Contacts
-                                    </div>
-                                </td>
-                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
-                                    <div class="flex gap-2 items-center">
-                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18" height="18"></iconify-icon>
-                                        ~250M Contacts
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 1 -->
-                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
-                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Data Accuracy</td>
-                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
-                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
-                                        90% Verified
-                                    </div>
-                                </td>
-                                <td class="text-sm text-slate-500 dark:text-slate-500 pt-6 pr-6 pb-6 pl-6">
-                                    <div class="flex gap-2 items-center">
-                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
-                                        ~70% Verified
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 3 -->
-                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
-                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Search Engine</td>
-                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
-                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
-                                        Natural Language AI
-                                    </div>
-                                </td>
-                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
-                                    <div class="flex items-center gap-2">
-                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
-                                        Filter Columns
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Row 4 -->
-                            <tr class="group hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
-                                <td class="p-6 text-sm font-medium text-slate-700 dark:text-slate-300">Enrichment Cost</td>
-                                <td class="p-6 bg-slate-50 dark:bg-slate-900 border-x border-slate-200 dark:border-slate-800">
-                                    <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                                        <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
-                                        All-in-one Platform
-                                    </div>
-                                </td>
-                                <td class="p-6 text-sm text-slate-500 dark:text-slate-500">
-                                    <div class="flex items-center gap-2">
-                                        <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600" width="18"></iconify-icon>
-                                        ZoomInfo + Clay + OpenAI + Instantly
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- Header -->
+                <div class="grid grid-cols-2 md:grid-cols-3 bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
+                    <div class="hidden md:flex p-5 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider items-center">Feature</div>
+                    <div class="col-span-1 p-5 bg-slate-50 dark:bg-slate-900 border-r md:border-x border-slate-200 dark:border-slate-800 flex items-center">
+                        <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-6 w-auto dark:hidden">
+                        <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-6 w-auto hidden dark:block">
+                    </div>
+                    <div class="col-span-1 p-5 flex items-center text-sm font-semibold text-slate-400 dark:text-slate-500">Traditional Stack</div>
+                </div>
+
+                <!-- Rows -->
+                <div class="divide-y divide-slate-100 dark:divide-slate-800">
+
+                    <!-- Database Size -->
+                    <div class="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                        <div class="px-5 pt-4 pb-1 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider md:hidden">Database Size</div>
+                        <div class="grid grid-cols-2 md:grid-cols-3">
+                            <div class="hidden md:flex p-5 text-sm font-medium text-slate-700 dark:text-slate-300 items-center">Database Size</div>
+                            <div class="p-4 md:p-5 bg-slate-50 dark:bg-slate-900 border-r md:border-x border-slate-200 dark:border-slate-800">
+                                <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
+                                    <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                    700M+ Contacts
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 text-sm text-slate-500 dark:text-slate-500">
+                                <div class="flex gap-2 items-center">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600 flex-shrink-0" width="18"></iconify-icon>
+                                    ~250M Contacts
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Accuracy -->
+                    <div class="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                        <div class="px-5 pt-4 pb-1 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider md:hidden">Data Accuracy</div>
+                        <div class="grid grid-cols-2 md:grid-cols-3">
+                            <div class="hidden md:flex p-5 text-sm font-medium text-slate-700 dark:text-slate-300 items-center">Data Accuracy</div>
+                            <div class="p-4 md:p-5 bg-slate-50 dark:bg-slate-900 border-r md:border-x border-slate-200 dark:border-slate-800">
+                                <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                    <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                    90% Verified
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 text-sm text-slate-500 dark:text-slate-500">
+                                <div class="flex gap-2 items-center">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600 flex-shrink-0" width="18"></iconify-icon>
+                                    ~70% Verified
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Engine -->
+                    <div class="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                        <div class="px-5 pt-4 pb-1 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider md:hidden">Search Engine</div>
+                        <div class="grid grid-cols-2 md:grid-cols-3">
+                            <div class="hidden md:flex p-5 text-sm font-medium text-slate-700 dark:text-slate-300 items-center">Search Engine</div>
+                            <div class="p-4 md:p-5 bg-slate-50 dark:bg-slate-900 border-r md:border-x border-slate-200 dark:border-slate-800">
+                                <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                    <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                    Natural Language AI
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 text-sm text-slate-500 dark:text-slate-500">
+                                <div class="flex gap-2 items-center">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600 flex-shrink-0" width="18"></iconify-icon>
+                                    Filter Columns
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enrichment Cost -->
+                    <div class="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors">
+                        <div class="px-5 pt-4 pb-1 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider md:hidden">Enrichment Cost</div>
+                        <div class="grid grid-cols-2 md:grid-cols-3">
+                            <div class="hidden md:flex p-5 text-sm font-medium text-slate-700 dark:text-slate-300 items-center">Enrichment Cost</div>
+                            <div class="p-4 md:p-5 bg-slate-50 dark:bg-slate-900 border-r md:border-x border-slate-200 dark:border-slate-800">
+                                <div class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                                    <iconify-icon icon="solar:check-circle-bold" width="18"></iconify-icon>
+                                    All-in-one Platform
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-5 text-sm text-slate-500 dark:text-slate-500">
+                                <div class="flex gap-2 items-center">
+                                    <iconify-icon icon="solar:close-circle-linear" class="text-slate-300 dark:text-slate-600 flex-shrink-0" width="18"></iconify-icon>
+                                    <span>ZoomInfo + Clay + OpenAI + Instantly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             
@@ -956,7 +980,7 @@ animation: {
             </div>
 
             <div class="text-xs text-slate-400 dark:text-slate-500">
-                © 2024 Pristine Inc.
+                © 2026 Pristine Inc.
             </div>
         </div>
     </footer>
