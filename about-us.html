@@ -70,7 +70,7 @@
             from { width: 0%; }
             to   { width: 100%; }
         }
-        .wave-progress.timer-active { animation: waveTimerFill var(--wave-duration, 4s) linear forwards; }
+        .wave-progress.timer-active { animation: waveTimerFill var(--wave-duration, 6s) linear forwards; }
     </style>
     <script>
         tailwind.config = {
@@ -1025,15 +1025,20 @@
             var waveNavItems = document.querySelectorAll('.wave-nav-item');
             var waveNavLabels = document.querySelectorAll('.wave-nav-label');
             var act2Section = document.getElementById('act2-wound');
-            var WAVE_DURATION = 4000;
+            var WAVE_DURATION = 6000;
             var WAVE_COUNT = 5;
             var currentWave = 0;
             var carouselInterval = null;
             var sectionVisible = false;
+            var userPaused = false;
+            var lastClickTime = 0;
+            var pauseResumeTimer = null;
+            var CONTINUOUS_THRESHOLD = 1500; // two clicks within this window = "browsing manually"
+            var PAUSE_RESUME_DELAY = 8000;   // resume automatically after 8s of inactivity
 
             if (!act2Section || !waveCards.length) return;
 
-            function startProgressBar(index) {
+            function startProgressBar(index, animate) {
                 waveProgressBars.forEach(function (bar, i) {
                     bar.classList.remove('timer-active');
                     bar.style.removeProperty('animation');
@@ -1042,15 +1047,20 @@
                     } else if (i > index) {
                         bar.style.width = '0%';
                     } else {
-                        bar.style.width = '0%';
-                        bar.style.setProperty('--wave-duration', (WAVE_DURATION / 1000) + 's');
-                        void bar.offsetWidth; // force reflow so animation restarts cleanly
-                        bar.classList.add('timer-active');
+                        if (animate) {
+                            bar.style.width = '0%';
+                            bar.style.setProperty('--wave-duration', (WAVE_DURATION / 1000) + 's');
+                            void bar.offsetWidth;
+                            bar.classList.add('timer-active');
+                        } else {
+                            // Paused — show a static full bar so the tab looks "selected"
+                            bar.style.width = '100%';
+                        }
                     }
                 });
             }
 
-            function showWave(index) {
+            function showWave(index, animate) {
                 currentWave = index;
                 waveCards.forEach(function (c, i) {
                     c.classList.toggle('wave-active', i === index);
@@ -1064,13 +1074,13 @@
                         lbl.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
                     }
                 });
-                startProgressBar(index);
+                startProgressBar(index, animate !== false);
             }
 
             function startCarousel() {
                 if (carouselInterval) return;
                 carouselInterval = setInterval(function () {
-                    showWave((currentWave + 1) % WAVE_COUNT);
+                    showWave((currentWave + 1) % WAVE_COUNT, true);
                 }, WAVE_DURATION);
             }
 
@@ -1079,36 +1089,58 @@
                 carouselInterval = null;
             }
 
-            function resetCarousel(toWave) {
-                stopCarousel();
-                showWave(toWave !== undefined ? toWave : currentWave);
-                if (sectionVisible) startCarousel();
-            }
-
-            // Nav item clicks jump to that wave and restart the timer
+            // Nav item clicks
             waveNavItems.forEach(function (item) {
                 item.addEventListener('click', function () {
                     var idx = parseInt(item.getAttribute('data-wave'), 10);
-                    resetCarousel(idx);
+                    var now = Date.now();
+                    var isContinuous = (now - lastClickTime) < CONTINUOUS_THRESHOLD;
+                    lastClickTime = now;
+
+                    if (isContinuous) {
+                        // Second click in quick succession — user is browsing manually, pause
+                        userPaused = true;
+                        stopCarousel();
+                        showWave(idx, false); // no animated bar while paused
+
+                        // Schedule auto-resume after 8s; reset the timer on each additional click
+                        clearTimeout(pauseResumeTimer);
+                        pauseResumeTimer = setTimeout(function () {
+                            if (userPaused && sectionVisible) {
+                                userPaused = false;
+                                showWave(currentWave, true);
+                                startCarousel();
+                            }
+                        }, PAUSE_RESUME_DELAY);
+                    } else {
+                        // First click (or after a long gap) — jump to tab, keep carousel running
+                        userPaused = false;
+                        stopCarousel();
+                        showWave(idx, true);
+                        if (sectionVisible) startCarousel();
+                    }
                 });
             });
 
-            // Pause carousel when section leaves viewport, resume when it enters
+            // Pause/resume as section enters/leaves viewport; reset userPaused on re-entry
             var sectionObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         sectionVisible = true;
+                        userPaused = false; // fresh start when scrolled back to
+                        showWave(currentWave, true);
                         startCarousel();
                     } else {
                         sectionVisible = false;
                         stopCarousel();
+                        clearTimeout(pauseResumeTimer);
                     }
                 });
             }, { threshold: 0.2 });
             sectionObserver.observe(act2Section);
 
             // Show first wave immediately on load
-            showWave(0);
+            showWave(0, true);
         }());
     });
     </script>

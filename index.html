@@ -609,10 +609,10 @@ animation: {
 
                         <!-- CENTRAL BRAIN -->
                         <div class="flex-1 text-center relative w-full md:w-auto">
-                            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 rounded-2xl shadow-2xl relative overflow-hidden group-hover:border-indigo-500/50 transition-colors">
-                                <div class="absolute inset-0 bg-indigo-500/5 animate-pulse"></div>
-                                <div class="flex items-center justify-center mb-2">
-                                    <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-10">
+                            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-indigo-500/40 p-8 rounded-2xl shadow-2xl shadow-indigo-900/30 relative overflow-hidden group-hover:border-indigo-500/70 transition-colors min-w-[160px]">
+                                <div class="absolute inset-0 bg-indigo-500/8 animate-pulse"></div>
+                                <div class="flex items-center justify-center mb-3">
+                                    <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-14">
                                 </div>
                                 <p class="text-xs text-slate-400">Zero GTM Engineering Required</p>
                             </div>
@@ -660,6 +660,109 @@ animation: {
             </div>
         </div>
     </section>
+
+    <!-- ── GTM Stack Cost Audit Teaser ── -->
+    <section id="stack-cost-section" class="relative overflow-hidden py-16 bg-slate-900 dark:bg-slate-900/50 border-t border-b border-transparent dark:border-slate-800">
+        <div class="absolute inset-0 grid-bg-dark opacity-10 pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+
+            <!-- Eyebrow -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-6">
+                <iconify-icon icon="solar:calculator-minimalistic-bold" width="13"></iconify-icon>
+                What's Your Stack Costing?
+            </div>
+
+            <!-- Headline — static, PM approved -->
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-[1.15] mb-4">
+                How much overlap is hiding in your GTM stack?
+            </h2>
+
+            <!-- Subheadline — PM approved -->
+            <p class="text-base text-slate-400 max-w-xl mx-auto mb-10">
+                Type your team size. See the estimated waste instantly — no signup, no sales call.
+            </p>
+
+            <!-- Interaction: Input + Live Cost side by side -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                <div class="flex flex-col items-center gap-1.5">
+                    <label for="teaser-team-size" class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Your team size</label>
+                    <input type="number" id="teaser-team-size" min="1" max="999" placeholder="10"
+                           class="w-32 h-13 bg-white/5 border border-slate-700 rounded-xl px-4 py-3 text-center text-2xl font-bold text-white placeholder:text-slate-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors duration-150 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
+                </div>
+                <div class="hidden sm:flex items-center pt-5 text-slate-700 text-xl font-light">→</div>
+                <div class="flex flex-col items-center gap-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">You're burning</label>
+                    <div class="h-13 flex items-center gap-1 py-3">
+                        <span id="live-cost-display" class="text-2xl font-bold text-rose-400 transition-all duration-300">$0</span>
+                        <span class="text-sm text-slate-600">/yr</span>
+                    </div>
+                </div>
+            </div>
+
+            <p id="cost-subtext" class="text-xs text-slate-500 italic mb-6 opacity-0 transition-opacity duration-300">
+                That's a lot of pipeline you could be buying instead.
+            </p>
+
+            <!-- CTA — PM approved -->
+            <a id="teaser-cta" href="stack-audit.html"
+               class="inline-flex items-center gap-2 px-7 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-base transition-all duration-200 shadow-lg shadow-indigo-900/40 hover:-translate-y-px">
+                Show me the full audit
+                <iconify-icon icon="solar:arrow-right-bold" width="16"></iconify-icon>
+            </a>
+
+            <!-- All these tools → one platform -->
+            <div class="mt-10 flex flex-col items-center gap-3">
+                <p class="text-[10px] font-semibold uppercase tracking-widest text-slate-600">All of these tools</p>
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <img src="https://img.logo.dev/apollo.io?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="Apollo" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <img src="https://img.logo.dev/zoominfo.com?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="ZoomInfo" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <img src="https://img.logo.dev/clay.com?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="Clay" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <img src="https://img.logo.dev/gong.io?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="Gong" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <img src="https://img.logo.dev/outreach.io?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="Outreach" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <img src="https://img.logo.dev/salesloft.com?token=pk_R0FhQgSqRMmR86Lw1NOJNg" alt="Salesloft" class="w-5 h-5 object-contain rounded opacity-40 grayscale">
+                    <span class="text-[10px] text-slate-600 font-medium">+9 more</span>
+                    <span class="text-slate-700 mx-1">→</span>
+                    <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-4 opacity-70">
+                </div>
+                <p class="text-xs text-slate-500">Replaced by one platform.</p>
+            </div>
+            <p class="mt-4 text-[10px] text-slate-700">Takes 30 seconds. No email needed.</p>
+        </div>
+    </section>
+
+    <script>
+    (function () {
+        const input = document.getElementById('teaser-team-size');
+        const cta = document.getElementById('teaser-cta');
+        const costDisplay = document.getElementById('live-cost-display');
+        const subtext = document.getElementById('cost-subtext');
+        const PER_SEAT_MONTHLY = 500;
+
+        function formatCost(n) {
+            if (n >= 1000000) return '$' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+            if (n >= 1000) return '$' + Math.round(n).toLocaleString('en-US');
+            return '$' + n;
+        }
+
+        if (input) {
+            input.addEventListener('input', function () {
+                const v = parseInt(this.value, 10);
+                if (v > 0 && v <= 999) {
+                    costDisplay.textContent = formatCost(v * PER_SEAT_MONTHLY * 12);
+                    cta.href = 'stack-audit.html?team_size=' + v;
+                    subtext.classList.remove('opacity-0');
+                    subtext.classList.add('opacity-100');
+                } else {
+                    costDisplay.textContent = '$0';
+                    cta.href = 'stack-audit.html';
+                    subtext.classList.remove('opacity-100');
+                    subtext.classList.add('opacity-0');
+                }
+            });
+        }
+    })();
+    </script>
 
     <!-- Enhanced Features Section -->
     <section class="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">

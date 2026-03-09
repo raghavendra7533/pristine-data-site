@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Stack Cost Audit — Free Tool by Pristine Data AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+
+        /* Smooth theme transitions */
+        html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, footer, header, nav, section, svg, circle {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        .glass-nav { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226,232,240,0.8); }
+        .dark .glass-nav { border-bottom: 1px solid rgba(30, 41, 59, 0.8); }
+
+        .grid-bg {
+            background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                              linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .dark .grid-bg {
+            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+                              linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+        }
+
+        /* ── CSS Variables for JS-rendered content ── */
+        html:not(.dark) {
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --card-text: #0f172a;
+            --card-subtext: #64748b;
+            --card-seat-text: #94a3b8;
+            --card-icon-bg: #f1f5f9;
+            --card-icon-border: rgba(226,232,240,0.8);
+            --card-fallback-text: #64748b;
+            --panel-bg: #ffffff;
+            --panel-border: #e2e8f0;
+            --panel-subtext: #64748b;
+            --bar-track: #e2e8f0;
+            --bar-empty: #e2e8f0;
+            --check-border: #cbd5e1;
+            --select-btn-border: #e2e8f0;
+            --select-btn-text: #64748b;
+            --select-btn-hover-border: #cbd5e1;
+            --select-btn-hover-text: #475569;
+            --cat-header-text: #0f172a;
+            --cat-count-text: #94a3b8;
+        }
+        html.dark {
+            --card-bg: #0f172a;
+            --card-border: #1e293b;
+            --card-text: #f1f5f9;
+            --card-subtext: #64748b;
+            --card-seat-text: #334155;
+            --card-icon-bg: #1e293b;
+            --card-icon-border: rgba(51,65,85,0.6);
+            --card-fallback-text: #94a3b8;
+            --panel-bg: #0f172a;
+            --panel-border: #1e293b;
+            --panel-subtext: #64748b;
+            --bar-track: #1e293b;
+            --bar-empty: #1e293b;
+            --check-border: #334155;
+            --select-btn-border: #1e293b;
+            --select-btn-text: #475569;
+            --select-btn-hover-border: #334155;
+            --select-btn-hover-text: #94a3b8;
+            --cat-header-text: #ffffff;
+            --cat-count-text: #475569;
+        }
+
+        /* Tool cards */
+        .tool-card {
+            transition: border-color 0.15s ease, background-color 0.15s ease,
+                        transform 0.12s ease, box-shadow 0.15s ease;
+            cursor: pointer;
+            background: var(--card-bg);
+            border-color: var(--card-border);
+        }
+        .tool-card:hover { transform: translateY(-1px); }
+        .tool-card.selected {
+            border-color: #6366f1 !important;
+            background-color: rgba(99, 102, 241, 0.07);
+            box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Gauge SVG */
+        .gauge-bg  { fill: none; stroke: #e2e8f0; stroke-width: 10; }
+        .dark .gauge-bg { stroke: #1e293b; }
+        .gauge-arc {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 64px 64px;
+            transition: stroke-dashoffset 0.75s cubic-bezier(0.34, 1.3, 0.64, 1), stroke 0.4s ease;
+        }
+
+        /* Bars */
+        .bar-fill { transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Range slider */
+        input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+        input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: #e2e8f0; }
+        .dark input[type="range"]::-webkit-slider-runnable-track { background: #1e293b; }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px #6366f1;
+            margin-top: -8px;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .dark input[type="range"]::-webkit-slider-thumb {
+            border-color: #0f172a;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 0 0 3px rgba(99,102,241,0.4); }
+        input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: #e2e8f0; }
+        .dark input[type="range"]::-moz-range-track { background: #1e293b; }
+        input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #6366f1; border: 3px solid #ffffff; }
+        .dark input[type="range"]::-moz-range-thumb { border-color: #0f172a; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp 0.3s ease forwards; }
+
+        @keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.12); } }
+        .cost-pulse { animation: pulse-ring 2.5s ease-in-out infinite; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { fontFamily: { sans: ['Manrope', 'sans-serif'] } } }
+        };
+    </script>
+    <script>
+        (function () {
+            const t = localStorage.theme;
+            if (t === 'light') document.documentElement.classList.remove('dark');
+            else document.documentElement.classList.add('dark');
+        })();
+    </script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-300 overflow-x-hidden min-h-screen">
+
+<!-- ── Nav ── -->
+<nav class="fixed w-full z-50 transition-all duration-300 top-0 glass-nav bg-white/80 dark:bg-slate-950/80">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <a href="index.html" class="flex items-center group">
+                <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-8 dark:hidden">
+                <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-8 hidden dark:block">
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-600 dark:text-slate-400">
+                <a href="index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Product</a>
+                <a href="integrations.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Integrations</a>
+                <a href="about-us.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">About</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="mobile-menu-btn" class="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="20" id="menu-icon-open"></iconify-icon>
+                <iconify-icon icon="solar:close-linear" width="20" id="menu-icon-close" class="hidden"></iconify-icon>
+            </button>
+            <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2">
+                <iconify-icon icon="solar:sun-2-linear" class="hidden dark:block" width="16"></iconify-icon>
+                <iconify-icon icon="solar:moon-linear" class="block dark:hidden" width="16"></iconify-icon>
+            </button>
+            <a href="contact-us.html" class="hidden md:block px-3.5 py-1.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-semibold rounded-lg transition-all shadow-sm">
+                Book a Demo
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden fixed inset-x-0 top-16 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-lg md:hidden">
+    <div class="px-6 py-6 flex flex-col gap-1">
+        <a href="index.html" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">Product</a>
+        <a href="integrations.html" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">Integrations</a>
+        <a href="about-us.html" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800 transition-colors">About</a>
+        <div class="pt-4">
+            <a href="contact-us.html" class="w-full block text-center py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold rounded-xl transition-all">Book a Demo</a>
+        </div>
+    </div>
+</div>
+
+<!-- ── Hero ── -->
+<section class="pt-28 pb-10 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-25 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-white/0 via-white/60 to-white dark:from-transparent dark:via-slate-950/60 dark:to-slate-950 pointer-events-none"></div>
+    <!-- Ambient glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+         style="background: radial-gradient(ellipse, rgba(239,68,68,0.12) 0%, transparent 70%);"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-100 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800/40 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-6">
+            <iconify-icon icon="solar:calculator-minimalistic-bold" width="13"></iconify-icon>
+            GTM Stack Cost Audit
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white tracking-tight mb-5 leading-[1.1]">
+            Your GTM stack is costing<br class="hidden md:block"> you more than you think.
+        </h1>
+        <p class="text-base md:text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-3 leading-relaxed">
+            Check every tool your team uses. Get the real annual number, see where functions overlap, and get a stack health score — in 60 seconds.
+        </p>
+        <p class="text-sm text-slate-400 dark:text-slate-600">No sign-up. No email. No sales call required.</p>
+    </div>
+</section>
+
+<!-- ── Main Audit ── -->
+<section class="pb-28 overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+            <!-- ── LEFT: Tool Grid + Team Size ── -->
+            <div class="flex-1 min-w-0 space-y-10">
+
+                <!-- Step 1 -->
+                <div>
+                    <div class="flex items-center gap-3 mb-7">
+                        <span class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-sm font-bold shrink-0">1</span>
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900 dark:text-white">Which tools does your team currently use?</h2>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Click to select all that apply</p>
+                        </div>
+                    </div>
+                    <div id="tool-grid" class="space-y-8"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-sm font-bold shrink-0">2</span>
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900 dark:text-white">How many reps on your team?</h2>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Per-seat costs are multiplied by this number</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="flex-1">
+                            <input type="range" id="team-slider" min="1" max="500" value="10">
+                            <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-600 mt-2 px-1">
+                                <span>1</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-5 py-3 flex items-baseline gap-1.5 min-w-[90px] justify-center shrink-0">
+                            <span id="team-count" class="text-3xl font-bold text-slate-900 dark:text-white leading-none">10</span>
+                            <span class="text-xs text-slate-400 dark:text-slate-400">reps</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── RIGHT: Sticky Results Panel ── -->
+            <div class="w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xl dark:shadow-2xl shadow-slate-200/50 dark:shadow-black/30">
+
+                    <!-- Header -->
+                    <div class="px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-400">Audit Results</span>
+                        <span id="tools-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 transition-all">0 tools</span>
+                    </div>
+
+                    <!-- Health Score -->
+                    <div class="px-5 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                        <!-- Gauge -->
+                        <div class="relative shrink-0">
+                            <svg width="80" height="80" viewBox="0 0 128 128">
+                                <circle class="gauge-bg" cx="64" cy="64" r="54"></circle>
+                                <circle id="gauge-arc" class="gauge-arc" cx="64" cy="64" r="54"
+                                    stroke="#cbd5e1"
+                                    stroke-dasharray="339.3"
+                                    stroke-dashoffset="339.3">
+                                </circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="score-num" class="text-xl font-bold text-slate-900 dark:text-white leading-none">--</span>
+                                <span class="text-[8px] text-slate-400 dark:text-slate-600 uppercase tracking-wide">/100</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Stack Health</p>
+                            <p id="score-label" class="text-sm font-bold text-slate-400">Select tools</p>
+                            <p id="score-desc" class="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed mt-0.5 max-w-[140px]"></p>
+                        </div>
+                    </div>
+
+                    <!-- Annual Cost -->
+                    <div class="px-5 py-5 border-b border-slate-200 dark:border-slate-800">
+                        <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Annual Spend</p>
+                        <div id="annual-cost-wrap" class="rounded-xl transition-all duration-300">
+                            <span id="annual-cost" class="text-4xl font-bold text-slate-300 dark:text-slate-600 leading-none transition-all duration-300">$0</span>
+                            <span class="text-sm text-slate-400 dark:text-slate-600 ml-1">/yr</span>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-[10px] text-slate-400 dark:text-slate-600">Monthly</span>
+                            <span id="monthly-cost" class="text-xs font-semibold text-slate-500 dark:text-slate-400">$0 / mo</span>
+                        </div>
+                    </div>
+
+                    <!-- Overlaps + Category Bars -->
+                    <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-3">
+                            <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">Function Overlap</p>
+                            <span id="overlap-count" class="text-xs font-bold text-slate-500 dark:text-slate-400">—</span>
+                        </div>
+                        <div id="category-bars" class="space-y-2.5"></div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="px-5 py-4">
+                        <div id="cta-empty" class="text-center py-3">
+                            <iconify-icon icon="solar:cursor-bold" width="20" class="text-slate-300 dark:text-slate-700 mb-2 block mx-auto"></iconify-icon>
+                            <p class="text-xs text-slate-400 dark:text-slate-600">Select tools above to see your full audit</p>
+                        </div>
+                        <div id="cta-filled" class="hidden space-y-3 fade-up">
+                            <p id="cta-text" class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed"></p>
+                            <a href="index.html"
+                               class="flex items-center justify-center gap-2 w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition-all hover:-translate-y-px shadow-lg shadow-indigo-900/40">
+                                See What One Platform Looks Like
+                                <iconify-icon icon="solar:arrow-right-bold" width="14"></iconify-icon>
+                            </a>
+                            <p class="text-center text-[10px] text-slate-400 dark:text-slate-600">No commitment · 30-min demo</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Disclaimer -->
+                <p class="text-[10px] text-slate-400 dark:text-slate-700 mt-3 px-1 leading-relaxed">
+                    Estimates based on publicly listed pricing. Actual costs may vary by contract and tier.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="border-t border-slate-200 dark:border-slate-800/60 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <img src="assets/Pristine Data Footer Logo.svg" alt="Pristine Data AI" class="h-5 w-auto opacity-40 dark:hidden">
+        <img src="assets/Pristine Data AI Logo.svg" alt="Pristine Data AI" class="h-5 w-auto opacity-40 hidden dark:block">
+        <p class="text-xs text-slate-400 dark:text-slate-700">&copy; 2024&ndash;2026 Pristine Inc. Pricing estimates for illustrative purposes.</p>
+    </div>
+</footer>
+
+<!-- ── JS ── -->
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const LOGO_TOKEN = 'pk_R0FhQgSqRMmR86Lw1NOJNg';
+
+const CATEGORIES = [
+    { id: 'prospecting',  label: 'Prospecting',            icon: 'solar:target-bold',          color: 'indigo' },
+    { id: 'enrichment',   label: 'Enrichment',             icon: 'solar:database-bold',        color: 'teal'   },
+    { id: 'outreach',     label: 'Outreach & Sequencing',  icon: 'solar:letter-bold',          color: 'violet' },
+    { id: 'intelligence', label: 'Intelligence & Intent',  icon: 'solar:eye-bold',             color: 'amber'  },
+];
+
+// Dark-mode color palettes (used for category icon tints + tags)
+const COLORS_DARK = {
+    indigo: { bg: 'rgba(99,102,241,0.08)',  border: 'rgba(99,102,241,0.25)',  text: '#818cf8', tag: '#3730a3', bar: '#6366f1' },
+    teal:   { bg: 'rgba(20,184,166,0.08)',  border: 'rgba(20,184,166,0.25)',  text: '#2dd4bf', tag: '#134e4a', bar: '#14b8a6' },
+    violet: { bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.25)', text: '#a78bfa', tag: '#4c1d95', bar: '#8b5cf6' },
+    amber:  { bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', text: '#fbbf24', tag: '#78350f', bar: '#f59e0b' },
+};
+
+const COLORS_LIGHT = {
+    indigo: { bg: 'rgba(99,102,241,0.08)',  border: 'rgba(99,102,241,0.20)',  text: '#6366f1', tag: '#e0e7ff', bar: '#6366f1' },
+    teal:   { bg: 'rgba(20,184,166,0.08)',  border: 'rgba(20,184,166,0.20)',  text: '#0d9488', tag: '#ccfbf1', bar: '#14b8a6' },
+    violet: { bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.20)', text: '#7c3aed', tag: '#ede9fe', bar: '#8b5cf6' },
+    amber:  { bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.20)', text: '#d97706', tag: '#fef3c7', bar: '#f59e0b' },
+};
+
+function isDark() {
+    return document.documentElement.classList.contains('dark');
+}
+
+function getColors(colorName) {
+    return isDark() ? COLORS_DARK[colorName] : COLORS_LIGHT[colorName];
+}
+
+const TOOLS = [
+    { id: 'apollo',      name: 'Apollo.io',        domain: 'apollo.io',      cats: ['prospecting','outreach'],          cost: 99  },
+    { id: 'zoominfo',    name: 'ZoomInfo',          domain: 'zoominfo.com',   cats: ['prospecting','enrichment'],        cost: 250 },
+    { id: 'linkedin-sn', name: 'Sales Navigator',  domain: 'linkedin.com',   cats: ['prospecting'],                     cost: 99  },
+    { id: 'seamless',    name: 'Seamless.ai',       domain: 'seamless.ai',    cats: ['prospecting'],                     cost: 147 },
+    { id: 'hunter',      name: 'Hunter.io',         domain: 'hunter.io',      cats: ['prospecting'],                     cost: 49  },
+    { id: 'clay',        name: 'Clay',              domain: 'clay.com',       cats: ['enrichment'],                      cost: 149 },
+    { id: 'clearbit',    name: 'Clearbit',          domain: 'clearbit.com',   cats: ['enrichment'],                      cost: 99  },
+    { id: 'lusha',       name: 'Lusha',             domain: 'lusha.com',      cats: ['enrichment'],                      cost: 79  },
+    { id: 'outreach-io', name: 'Outreach',          domain: 'outreach.io',    cats: ['outreach'],                        cost: 130 },
+    { id: 'salesloft',   name: 'Salesloft',         domain: 'salesloft.com',  cats: ['outreach'],                        cost: 125 },
+    { id: 'lemlist',     name: 'Lemlist',           domain: 'lemlist.com',    cats: ['outreach'],                        cost: 59  },
+    { id: 'instantly',   name: 'Instantly',         domain: 'instantly.ai',   cats: ['outreach'],                        cost: 37  },
+    { id: 'smartlead',   name: 'Smartlead',         domain: 'smartlead.ai',   cats: ['outreach'],                        cost: 94  },
+    { id: 'gong',        name: 'Gong',              domain: 'gong.io',        cats: ['intelligence'],                    cost: 200 },
+    { id: 'bombora',     name: 'Bombora',           domain: 'bombora.com',    cats: ['intelligence'],                    cost: 200 },
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let selected = new Set();
+let teamSize  = 10;
+
+// ─────────────────────────────────────────────
+// RENDER TOOL GRID
+// ─────────────────────────────────────────────
+function renderGrid() {
+    const container = document.getElementById('tool-grid');
+    container.innerHTML = '';
+
+    CATEGORIES.forEach(cat => {
+        const catTools = TOOLS.filter(t => t.cats.includes(cat.id));
+        const c = getColors(cat.color);
+
+        const section = document.createElement('div');
+
+        // Category header
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between mb-3 min-w-0';
+        header.innerHTML = `
+            <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-lg flex items-center justify-center border"
+                     style="background:${c.bg}; border-color:${c.border}">
+                    <iconify-icon icon="${cat.icon}" width="14" style="color:${c.text}"></iconify-icon>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--cat-header-text)">${cat.label}</span>
+                <span class="text-[10px]" style="color: var(--cat-count-text)">${catTools.length} tools</span>
+            </div>
+            <button class="sel-all-btn text-[10px] transition-colors px-2 py-0.5 rounded border"
+                    style="color: var(--select-btn-text); border-color: var(--select-btn-border)"
+                    onmouseover="this.style.color='var(--select-btn-hover-text)'; this.style.borderColor='var(--select-btn-hover-border)'"
+                    onmouseout="this.style.color='var(--select-btn-text)'; this.style.borderColor='var(--select-btn-border)'"
+                    data-cat="${cat.id}">
+                Select all
+            </button>
+        `;
+        section.appendChild(header);
+
+        // Tool card grid
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2';
+        grid.id = 'cat-' + cat.id;
+
+        catTools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'tool-card border rounded-xl p-3 select-none';
+            card.dataset.id = tool.id;
+
+            const tagHTML = tool.cats.map(cid => {
+                const parentCat = CATEGORIES.find(x => x.id === cid);
+                const tc = getColors(parentCat ? parentCat.color : 'indigo');
+                return `<span class="text-[8px] font-bold uppercase tracking-wider rounded px-1.5 py-0.5"
+                              style="color:${tc.text}; background:${tc.bg}">${cid === 'intelligence' ? 'Intel' : cid.charAt(0).toUpperCase() + cid.slice(1,5)}</span>`;
+            }).join('');
+
+            card.innerHTML = `
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden shrink-0 border"
+                         style="background: var(--card-icon-bg); border-color: var(--card-icon-border)">
+                        <img src="https://img.logo.dev/${tool.domain}?token=${LOGO_TOKEN}"
+                             alt="${tool.name}" class="w-6 h-6 object-contain rounded"
+                             onerror="this.parentElement.innerHTML='<span style=\\'color: var(--card-fallback-text)\\' class=\\'text-xs font-bold\\'>${tool.name[0]}</span>'">
+                    </div>
+                    <div class="min-w-0">
+                        <div class="text-xs font-semibold leading-tight truncate" style="color: var(--card-text)">${tool.name}</div>
+                        <div class="text-[10px]" style="color: var(--card-subtext)">$${tool.cost}<span style="color: var(--card-seat-text)">/seat</span></div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between gap-1">
+                    <div class="flex flex-wrap gap-1">${tagHTML}</div>
+                    <div class="check-box w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-all duration-150"
+                         style="border-color: var(--check-border)">
+                        <svg class="check-icon w-2.5 h-2.5 opacity-0 transition-opacity duration-150" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            `;
+
+            // Restore selected state if applicable
+            if (selected.has(tool.id)) {
+                syncCard(card, true);
+            }
+
+            card.addEventListener('click', () => {
+                toggleTool(tool.id);
+                syncCard(card, selected.has(tool.id));
+                updateResults();
+                updateSelectAllBtn(section.querySelector('.sel-all-btn'), cat.id);
+            });
+
+            grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        container.appendChild(section);
+
+        // Select-all button
+        const btn = header.querySelector('.sel-all-btn');
+        updateSelectAllBtn(btn, cat.id);
+        btn.addEventListener('click', () => {
+            const allOn = catTools.every(t => selected.has(t.id));
+            catTools.forEach(t => allOn ? selected.delete(t.id) : selected.add(t.id));
+            syncAllCards();
+            updateResults();
+            updateSelectAllBtn(btn, cat.id);
+        });
+    });
+}
+
+function updateSelectAllBtn(btn, catId) {
+    const catTools = TOOLS.filter(t => t.cats.includes(catId));
+    const allOn = catTools.every(t => selected.has(t.id));
+    btn.textContent = allOn ? 'Clear all' : 'Select all';
+}
+
+function toggleTool(id) {
+    selected.has(id) ? selected.delete(id) : selected.add(id);
+}
+
+function syncCard(card, on) {
+    const box  = card.querySelector('.check-box');
+    const icon = card.querySelector('.check-icon');
+    if (on) {
+        card.classList.add('selected');
+        box.style.background = '#6366f1';
+        box.style.borderColor = '#6366f1';
+        icon.classList.remove('opacity-0');
+    } else {
+        card.classList.remove('selected');
+        box.style.background = '';
+        box.style.borderColor = 'var(--check-border)';
+        icon.classList.add('opacity-0');
+    }
+}
+
+function syncAllCards() {
+    document.querySelectorAll('.tool-card').forEach(card => {
+        syncCard(card, selected.has(card.dataset.id));
+    });
+}
+
+// ─────────────────────────────────────────────
+// CALCULATIONS
+// ─────────────────────────────────────────────
+function calc() {
+    const sel = TOOLS.filter(t => selected.has(t.id));
+    const monthly = sel.reduce((s, t) => s + t.cost, 0) * teamSize;
+    const annual  = monthly * 12;
+
+    // Per-category tool counts
+    const catCounts = {};
+    CATEGORIES.forEach(c => { catCounts[c.id] = 0; });
+    sel.forEach(t => t.cats.forEach(c => { catCounts[c]++; }));
+
+    const overlappingCats = Object.values(catCounts).filter(v => v >= 2).length;
+
+    // Health score
+    let score = 100;
+    CATEGORIES.forEach(c => { if (catCounts[c.id] >= 2) score -= 10; });
+    const over1k = Math.max(0, monthly - 1000);
+    score -= Math.floor(over1k / 500) * 5;
+    if (sel.length > 0 && catCounts['intelligence'] === 0) score -= 10;
+    const hasOutreach = catCounts['outreach'] > 0;
+    const hasProspect = catCounts['prospecting'] > 0;
+    if (hasOutreach && hasProspect) {
+        const combined = sel.some(t => t.cats.includes('outreach') && t.cats.includes('prospecting'));
+        if (!combined) score -= 5;
+    }
+    score = Math.max(0, Math.min(100, score));
+
+    // Per-category monthly cost
+    const categoryCost = {};
+    CATEGORIES.forEach(c => {
+        const catSel = sel.filter(t => t.cats.includes(c.id));
+        categoryCost[c.id] = catSel.reduce((s, t) => s + t.cost, 0) * teamSize;
+    });
+
+    // Potential savings per overlap category (cost of all but cheapest tool)
+    const categorySavings = {};
+    CATEGORIES.forEach(c => {
+        const catSel = sel.filter(t => t.cats.includes(c.id));
+        if (catSel.length >= 2) {
+            const cheapest = Math.min(...catSel.map(t => t.cost));
+            categorySavings[c.id] = (catSel.reduce((s, t) => s + t.cost, 0) - cheapest) * teamSize;
+        } else {
+            categorySavings[c.id] = 0;
+        }
+    });
+
+    return { monthly, annual, overlappingCats, score, catCounts, sel, categoryCost, categorySavings };
+}
+
+function scoreStyle(score) {
+    if (score >= 80) return { stroke: '#10b981', cls: 'text-emerald-400', label: 'Lean',     desc: 'Your stack is relatively tight. Watch for creep.' };
+    if (score >= 50) return { stroke: '#f59e0b', cls: 'text-amber-400',   label: 'Bloated',  desc: 'You\'re paying for overlap. Time to audit.' };
+    return              { stroke: '#ef4444', cls: 'text-rose-400',    label: 'Critical', desc: 'Significant waste. Multiple tools doing the same job.' };
+}
+
+function fmt(n) {
+    if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(1) + 'M';
+    if (n >= 10_000)    return '$' + Math.round(n / 1_000) + 'K';
+    if (n >= 1_000)     return '$' + (n / 1_000).toFixed(1) + 'K';
+    return '$' + n.toLocaleString();
+}
+
+// ─────────────────────────────────────────────
+// UPDATE RESULTS PANEL
+// ─────────────────────────────────────────────
+function updateResults() {
+    const { monthly, annual, overlappingCats, score, catCounts, sel, categoryCost, categorySavings } = calc();
+    const count = selected.size;
+    const dark = isDark();
+
+    // Badge
+    const badge = document.getElementById('tools-badge');
+    badge.textContent = count + ' tool' + (count !== 1 ? 's' : '');
+    badge.style.color = count > 0 ? '#a5b4fc' : '';
+    badge.style.borderColor = count > 0 ? 'rgba(99,102,241,0.3)' : '';
+
+    // Monthly cost
+    document.getElementById('monthly-cost').textContent = fmt(monthly) + ' / mo';
+
+    // Annual cost -- the big number
+    const annualEl = document.getElementById('annual-cost');
+    if (count === 0) {
+        annualEl.textContent = '$0';
+        annualEl.style.color = dark ? '#475569' : '#cbd5e1';
+        document.getElementById('annual-cost-wrap').classList.remove('cost-pulse');
+    } else {
+        annualEl.textContent = fmt(annual);
+        annualEl.style.color = annual > 50000 ? '#f87171' : annual > 20000 ? '#fb923c' : '#fbbf24';
+        document.getElementById('annual-cost-wrap').classList.add('cost-pulse');
+    }
+
+    // Gauge + Score
+    const gaugeEl   = document.getElementById('gauge-arc');
+    const scoreEl   = document.getElementById('score-num');
+    const labelEl   = document.getElementById('score-label');
+    const descEl    = document.getElementById('score-desc');
+    const CIRC      = 339.3; // 2pi x 54
+
+    if (count === 0) {
+        gaugeEl.style.strokeDashoffset = CIRC;
+        gaugeEl.style.stroke = dark ? '#334155' : '#cbd5e1';
+        scoreEl.textContent  = '--';
+        scoreEl.style.color  = dark ? '#94a3b8' : '#94a3b8';
+        labelEl.textContent  = 'Select tools';
+        labelEl.style.color  = '#64748b';
+        descEl.textContent   = '';
+    } else {
+        const ss = scoreStyle(score);
+        gaugeEl.style.strokeDashoffset = CIRC * (1 - score / 100);
+        gaugeEl.style.stroke = ss.stroke;
+        scoreEl.textContent  = score;
+        scoreEl.style.color  = dark ? '#ffffff' : '#0f172a';
+        labelEl.textContent  = ss.label;
+        labelEl.style.color  = ss.stroke;
+        descEl.textContent   = ss.desc;
+    }
+
+    // Overlap count
+    document.getElementById('overlap-count').textContent =
+        count === 0 ? '---' : overlappingCats + ' categor' + (overlappingCats !== 1 ? 'ies' : 'y');
+
+    // Category bars
+    const barsEl = document.getElementById('category-bars');
+    barsEl.innerHTML = '';
+
+    CATEGORIES.forEach((cat, idx) => {
+        const n = catCounts[cat.id] || 0;
+        const c = getColors(cat.color);
+        const isOverlap = n >= 2;
+        const catSel = sel.filter(t => t.cats.includes(cat.id));
+        const toolNames = catSel.length > 0 ? catSel.map(t => t.name).join(', ') : 'No tools selected';
+        const costVal = categoryCost[cat.id] || 0;
+        const savingsVal = categorySavings[cat.id] || 0;
+        const isLast = idx === CATEGORIES.length - 1;
+
+        const row = document.createElement('div');
+        row.style.paddingBottom = !isLast ? '10px' : '0';
+        if (!isLast) {
+            row.style.borderBottom = '1px solid var(--panel-border)';
+        }
+        if (isOverlap) {
+            row.style.borderLeft = '2px solid #fb7185';
+            row.style.paddingLeft = '12px';
+        }
+
+        // Line 1: Icon + Category Name + Monthly Cost
+        const line1 = `
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center justify-center shrink-0" style="width:20px; height:20px; border-radius:6px; background:${c.bg}">
+                        <iconify-icon icon="${cat.icon}" width="12" style="color:${c.text}"></iconify-icon>
+                    </div>
+                    <span style="font-size:11px; font-weight:600; color:var(--panel-subtext)">${cat.label}</span>
+                </div>
+                <span style="font-size:13px; font-weight:700; color:${costVal > 0 ? c.text : (dark ? '#475569' : '#cbd5e1')}; transition: color 0.3s ease">${fmt(costVal)}/mo</span>
+            </div>`;
+
+        // Line 2: Tool names + Warning tag
+        const warningHTML = isOverlap
+            ? `<span class="fade-up" style="font-size:9px; color:#fb7185; white-space:nowrap; display:inline-flex; align-items:center; gap:3px"><iconify-icon icon="solar:danger-triangle-bold" width="9"></iconify-icon>Overlap – paying twice</span>`
+            : '';
+        const line2 = `
+            <div class="flex items-center justify-between gap-2 mt-1">
+                <span style="font-size:10px; color:var(--panel-subtext); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0">${toolNames}</span>
+                ${warningHTML}
+            </div>`;
+
+        // Line 3: Potential savings (only for overlap)
+        const line3 = isOverlap
+            ? `<div class="fade-up" style="margin-top:3px"><span style="font-size:9px; color:rgba(251,113,133,0.7)">Potential savings: </span><span style="font-size:9px; font-weight:700; color:#fb7185">${fmt(savingsVal)}/mo</span></div>`
+            : '';
+
+        row.innerHTML = line1 + line2 + line3;
+        barsEl.appendChild(row);
+    });
+
+    // CTA
+    const ctaEmpty  = document.getElementById('cta-empty');
+    const ctaFilled = document.getElementById('cta-filled');
+    if (count === 0) {
+        ctaEmpty.classList.remove('hidden');
+        ctaFilled.classList.add('hidden');
+    } else {
+        ctaEmpty.classList.add('hidden');
+        ctaFilled.classList.remove('hidden');
+        document.getElementById('cta-text').textContent =
+            `Your stack has ${overlappingCats} overlapping function${overlappingCats !== 1 ? 's' : ''} and costs ${fmt(annual)}/year. See what one platform looks like.`;
+    }
+}
+
+// ─────────────────────────────────────────────
+// TEAM SIZE SLIDER
+// ─────────────────────────────────────────────
+
+// Pre-fill team size from homepage teaser query param
+(function () {
+    const params = new URLSearchParams(window.location.search);
+    const ts = parseInt(params.get('team_size'), 10);
+    if (ts > 0 && ts <= 500) {
+        teamSize = ts;
+        const slider = document.getElementById('team-slider');
+        if (slider) slider.value = ts;
+        document.getElementById('team-count').textContent = ts;
+    }
+})();
+
+document.getElementById('team-slider').addEventListener('input', function () {
+    teamSize = parseInt(this.value);
+    document.getElementById('team-count').textContent = teamSize;
+    updateResults();
+});
+
+// ─────────────────────────────────────────────
+// MOBILE MENU
+// ─────────────────────────────────────────────
+(function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    if (btn && menu) {
+        btn.addEventListener('click', () => {
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            iconOpen.classList.toggle('hidden', !isOpen);
+            iconClose.classList.toggle('hidden', isOpen);
+        });
+    }
+})();
+
+// ─────────────────────────────────────────────
+// THEME TOGGLE
+// ─────────────────────────────────────────────
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.theme = 'light';
+    } else {
+        html.classList.add('dark');
+        localStorage.theme = 'dark';
+    }
+    // Re-render grid so JS-generated cards pick up new theme colors
+    renderGrid();
+    updateResults();
+});
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderGrid();
+updateResults();
+</script>
+</body>
+</html>
