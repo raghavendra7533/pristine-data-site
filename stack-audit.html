@@ -137,8 +137,80 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .fade-up { animation: fadeUp 0.3s ease forwards; }
 
+        @keyframes penalty-flash { 0% { background: transparent; } 40% { background: rgba(217,119,6,0.15); } 100% { background: transparent; } }
+        .penalty-flash { animation: penalty-flash 0.6s ease forwards; }
+
         @keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.12); } }
         .cost-pulse { animation: pulse-ring 2.5s ease-in-out infinite; }
+
+        /* ── Receipt ── */
+        @keyframes receipt-print {
+            from { clip-path: inset(0 0 100% 0); }
+            to   { clip-path: inset(0 0 0%   0); }
+        }
+        .receipt-wrap { display: none; }
+        .receipt-wrap.visible {
+            display: block;
+            animation: receipt-print 0.9s steps(30, end) forwards;
+        }
+        .receipt-wrap.instant { display: block; }
+        .receipt-wrap.visible, .receipt-wrap.instant {
+            filter: drop-shadow(0 10px 32px rgba(0,0,0,0.28)) drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+        }
+        .receipt {
+            position: relative;
+            background: #fafaf3;
+            color: #0a0a00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 16px;
+            margin: 10px 0;
+        }
+        /* Zigzag torn-paper top edge */
+        .receipt::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: 0; right: 0; height: 10px;
+            background:
+                linear-gradient(135deg, transparent 33.33%, #fafaf3 33.33%) 0 0,
+                linear-gradient(225deg, transparent 33.33%, #fafaf3 33.33%) 0 0;
+            background-size: 10px 10px;
+            background-repeat: repeat-x;
+        }
+        /* Zigzag torn-paper bottom edge */
+        .receipt::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0; right: 0; height: 10px;
+            background:
+                linear-gradient(315deg, transparent 33.33%, #fafaf3 33.33%) 0 0,
+                linear-gradient(45deg,  transparent 33.33%, #fafaf3 33.33%) 0 0;
+            background-size: 10px 10px;
+            background-repeat: repeat-x;
+        }
+        .receipt hr { border: none; border-top: 1px dashed rgba(0,0,0,0.2); margin: 7px 0; }
+        .r-row  { display:flex; justify-content:space-between; align-items:baseline; gap:4px; line-height:1.75; }
+        .r-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .r-price{ font-weight:700; white-space:nowrap; min-width:72px; text-align:right; }
+        .r-sub  { font-size:10px; color:#555544; padding-left:8px; margin-top:-2px; margin-bottom:4px; }
+        .r-hdr  { text-align:center; font-weight:900; font-size:10px; letter-spacing:0.16em; margin:5px 0; }
+        .r-total{ display:flex; justify-content:space-between; font-weight:900; letter-spacing:0.04em; line-height:1.9; }
+        /* Volume tier buttons */
+        .tier-btn {
+            padding: 8px 0;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            text-align: center;
+        }
+        .tier-btn.active { background:#6366f1; color:#fff; border-color:#6366f1; }
+        .tier-btn:not(.active) { background:transparent; color:#94a3b8; border-color:#e2e8f0; }
+        .dark .tier-btn:not(.active) { color:#475569; border-color:#1e293b; }
+        .tier-btn:hover:not(.active) { border-color: #6366f1 !important; color: #6366f1 !important; }
     </style>
     <script>
         tailwind.config = {
@@ -264,85 +336,82 @@
                     </div>
                 </div>
 
-            </div>
-
-            <!-- ── RIGHT: Sticky Results Panel ── -->
-            <div class="w-full lg:w-72 xl:w-80 shrink-0 lg:sticky lg:top-24">
-                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xl dark:shadow-2xl shadow-slate-200/50 dark:shadow-black/30">
-
-                    <!-- Header -->
-                    <div class="px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-400">Audit Results</span>
-                        <span id="tools-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-slate-700 transition-all">0 tools</span>
+                <!-- Step 3: Volume X-Factor -->
+                <div class="bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-8 h-8 rounded-full bg-rose-600 flex items-center justify-center text-white text-sm font-bold shrink-0">3</span>
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900 dark:text-white">What's your volume?</h2>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">This is where costs get <span class="text-rose-400 font-semibold">exponential</span></p>
+                        </div>
                     </div>
-
-                    <!-- Health Score -->
-                    <div class="px-5 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center gap-4">
-                        <!-- Gauge -->
-                        <div class="relative shrink-0">
-                            <svg width="80" height="80" viewBox="0 0 128 128">
-                                <circle class="gauge-bg" cx="64" cy="64" r="54"></circle>
-                                <circle id="gauge-arc" class="gauge-arc" cx="64" cy="64" r="54"
-                                    stroke="#cbd5e1"
-                                    stroke-dasharray="339.3"
-                                    stroke-dashoffset="339.3">
-                                </circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span id="score-num" class="text-xl font-bold text-slate-900 dark:text-white leading-none">--</span>
-                                <span class="text-[8px] text-slate-400 dark:text-slate-600 uppercase tracking-wide">/100</span>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex items-center justify-between mb-2.5">
+                                <label class="text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:database-bold" width="12" class="text-teal-500"></iconify-icon>
+                                    Prospect database
+                                </label>
+                                <span id="prospect-label" class="text-[10px] font-bold text-indigo-400">&lt;5k contacts</span>
                             </div>
+                            <div id="prospect-tiers" class="grid grid-cols-5 gap-1"></div>
                         </div>
                         <div>
-                            <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Stack Health</p>
-                            <p id="score-label" class="text-sm font-bold text-slate-400">Select tools</p>
-                            <p id="score-desc" class="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed mt-0.5 max-w-[140px]"></p>
+                            <div class="flex items-center justify-between mb-2.5">
+                                <label class="text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:letter-bold" width="12" class="text-violet-500"></iconify-icon>
+                                    Emails / month
+                                </label>
+                                <span id="email-label" class="text-[10px] font-bold text-indigo-400">&lt;25k/mo</span>
+                            </div>
+                            <div id="email-tiers" class="grid grid-cols-5 gap-1"></div>
                         </div>
                     </div>
-
-                    <!-- Annual Cost -->
-                    <div class="px-5 py-5 border-b border-slate-200 dark:border-slate-800">
-                        <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Annual Spend</p>
-                        <div id="annual-cost-wrap" class="rounded-xl transition-all duration-300">
-                            <span id="annual-cost" class="text-4xl font-bold text-slate-300 dark:text-slate-600 leading-none transition-all duration-300">$0</span>
-                            <span class="text-sm text-slate-400 dark:text-slate-600 ml-1">/yr</span>
-                        </div>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-[10px] text-slate-400 dark:text-slate-600">Monthly</span>
-                            <span id="monthly-cost" class="text-xs font-semibold text-slate-500 dark:text-slate-400">$0 / mo</span>
-                        </div>
-                    </div>
-
-                    <!-- Overlaps + Category Bars -->
-                    <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800">
-                        <div class="flex items-center justify-between mb-3">
-                            <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">Function Overlap</p>
-                            <span id="overlap-count" class="text-xs font-bold text-slate-500 dark:text-slate-400">—</span>
-                        </div>
-                        <div id="category-bars" class="space-y-2.5"></div>
-                    </div>
-
-                    <!-- CTA -->
-                    <div class="px-5 py-4">
-                        <div id="cta-empty" class="text-center py-3">
-                            <iconify-icon icon="solar:cursor-bold" width="20" class="text-slate-300 dark:text-slate-700 mb-2 block mx-auto"></iconify-icon>
-                            <p class="text-xs text-slate-400 dark:text-slate-600">Select tools above to see your full audit</p>
-                        </div>
-                        <div id="cta-filled" class="hidden space-y-3 fade-up">
-                            <p id="cta-text" class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed"></p>
-                            <a href="/"
-                               class="flex items-center justify-center gap-2 w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition-all hover:-translate-y-px shadow-lg shadow-indigo-900/40">
-                                See What One Platform Looks Like
-                                <iconify-icon icon="solar:arrow-right-bold" width="14"></iconify-icon>
-                            </a>
-                            <p class="text-center text-[10px] text-slate-400 dark:text-slate-600">No commitment · 30-min demo</p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <!-- Disclaimer -->
-                <p class="text-[10px] text-slate-400 dark:text-slate-700 mt-3 px-1 leading-relaxed">
+            </div>
+
+            <!-- ── RIGHT: Receipt Panel ── -->
+            <div class="w-full lg:w-[340px] shrink-0 lg:sticky lg:top-24 space-y-4">
+
+                <!-- Stack Health Gauge -->
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl px-5 py-4 shadow-xl dark:shadow-2xl shadow-slate-200/50 dark:shadow-black/30 flex items-center gap-4">
+                    <div class="relative shrink-0">
+                        <svg width="80" height="80" viewBox="0 0 128 128">
+                            <circle class="gauge-bg" cx="64" cy="64" r="54"></circle>
+                            <circle id="gauge-arc" class="gauge-arc" cx="64" cy="64" r="54"
+                                stroke="#cbd5e1"
+                                stroke-dasharray="339.3"
+                                stroke-dashoffset="339.3">
+                            </circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="score-num" class="text-xl font-bold text-slate-900 dark:text-white leading-none">--</span>
+                            <span class="text-[8px] text-slate-400 dark:text-slate-600 uppercase tracking-wide">/100</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Stack Health</p>
+                        <p id="score-label" class="text-sm font-bold text-slate-400">Select tools</p>
+                        <p id="score-desc" class="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed mt-0.5 max-w-[140px]"></p>
+                    </div>
+                </div>
+
+                <!-- Empty state -->
+                <div id="receipt-empty" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center shadow-xl dark:shadow-2xl shadow-slate-200/50 dark:shadow-black/30">
+                    <iconify-icon icon="solar:receipt-bold" width="36" class="text-slate-200 dark:text-slate-800 mb-3 block mx-auto"></iconify-icon>
+                    <p class="text-sm font-bold text-slate-300 dark:text-slate-600">Your cost receipt</p>
+                    <p class="text-xs text-slate-400 dark:text-slate-700 mt-1 leading-relaxed">Select tools above —<br>your audit bill prints here.</p>
+                </div>
+
+                <!-- Receipt -->
+                <div id="receipt-wrap" class="receipt-wrap">
+                    <div class="receipt">
+                        <div id="receipt-content"></div>
+                    </div>
+                </div>
+
+                <p id="receipt-disclaimer" class="hidden text-[10px] text-slate-400 dark:text-slate-700 px-1 leading-relaxed">
                     Estimates based on publicly listed pricing. Actual costs may vary by contract and tier.
                 </p>
             </div>
@@ -389,6 +458,31 @@ const COLORS_LIGHT = {
     amber:  { bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.20)', text: '#d97706', tag: '#fef3c7', bar: '#f59e0b' },
 };
 
+// Volume tier definitions
+const PROSPECT_TIERS = [
+    { label: '<5k',      display: '<5k contacts'      },
+    { label: '5-25k',   display: '5-25k contacts'    },
+    { label: '25-100k', display: '25-100k contacts'  },
+    { label: '100-250k',display: '100-250k contacts' },
+    { label: '250k+',   display: '250k+ contacts'    },
+];
+const EMAIL_TIERS = [
+    { label: '<25k',    display: '<25k/mo'    },
+    { label: '25-100k', display: '25-100k/mo' },
+    { label: '100-250k',display: '100-250k/mo'},
+    { label: '250-500k',display: '250-500k/mo'},
+    { label: '500k+',   display: '500k+/mo'   },
+];
+
+// Tools that charge by contact/database volume
+const DATA_TOOLS  = new Set(['apollo','zoominfo','seamless','hunter','clay','clearbit','lusha']);
+// Tools that charge by email send volume
+const EMAIL_TOOLS = new Set(['outreach-io','salesloft','lemlist','instantly','smartlead','apollo']);
+
+// Monthly overage per selected tool at each tier (index = tier level 0–4)
+const PROSPECT_TAX = [0,  100,  400,  900, 2200]; // per data tool/mo
+const EMAIL_TAX    = [0,   60,  180,  380,  750]; // per email tool/mo
+
 function isDark() {
     return document.documentElement.classList.contains('dark');
 }
@@ -418,8 +512,11 @@ const TOOLS = [
 // ─────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────
-let selected = new Set();
-let teamSize  = 10;
+let selected     = new Set();
+let teamSize     = 10;
+let prospectTier = 0;
+let emailTier    = 0;
+let prevCount    = 0;
 
 // ─────────────────────────────────────────────
 // RENDER TOOL GRID
@@ -503,10 +600,20 @@ function renderGrid() {
             }
 
             card.addEventListener('click', () => {
-                toggleTool(tool.id);
-                syncCard(card, selected.has(tool.id));
+                // Use card's visual state, not set membership, to decide action.
+                // Fixes duplicate-card bug for multi-category tools like Apollo.
+                if (card.classList.contains('selected')) {
+                    selected.delete(tool.id);
+                } else {
+                    selected.add(tool.id);
+                }
+                syncAllCards();
                 updateResults();
-                updateSelectAllBtn(section.querySelector('.sel-all-btn'), cat.id);
+                // Update select-all for every category this tool belongs to
+                tool.cats.forEach(cid => {
+                    const btn = document.querySelector(`.sel-all-btn[data-cat="${cid}"]`);
+                    if (btn) updateSelectAllBtn(btn, cid);
+                });
             });
 
             grid.appendChild(card);
@@ -575,11 +682,25 @@ function calc() {
 
     const overlappingCats = Object.values(catCounts).filter(v => v >= 2).length;
 
-    // Health score
+    // Volume tax (calculated first so score can factor it in)
+    const selDataTools     = sel.filter(t => DATA_TOOLS.has(t.id));
+    const selEmailTools    = sel.filter(t => EMAIL_TOOLS.has(t.id));
+    // Data tools each charge separately per contact (ZoomInfo + Apollo + Clay all bill you independently)
+    // Email tools: you send through ONE tool — volume overage is flat, not multiplied per tool
+    const prospectTaxTotal = selDataTools.length      * PROSPECT_TAX[prospectTier];
+    const emailTaxTotal    = selEmailTools.length > 0 ? EMAIL_TAX[emailTier] : 0;
+    const volumeTax        = prospectTaxTotal + emailTaxTotal;
+    const totalMonthly     = monthly + volumeTax;
+    const totalAnnual      = totalMonthly * 12;
+
+    // Health score — uses totalMonthly so volume changes affect score
+    // Cap: 2 tools→max 70, 3+→max 50
     let score = 100;
+    const maxScore = sel.length >= 3 ? 50 : sel.length === 2 ? 70 : 100;
     CATEGORIES.forEach(c => { if (catCounts[c.id] >= 2) score -= 10; });
-    const over1k = Math.max(0, monthly - 1000);
+    const over1k = Math.max(0, totalMonthly - 1000);
     score -= Math.floor(over1k / 500) * 5;
+    if (volumeTax > 0) score -= Math.min(15, Math.floor(volumeTax / 500) * 3); // volume penalty
     if (sel.length > 0 && catCounts['intelligence'] === 0) score -= 10;
     const hasOutreach = catCounts['outreach'] > 0;
     const hasProspect = catCounts['prospecting'] > 0;
@@ -587,7 +708,7 @@ function calc() {
         const combined = sel.some(t => t.cats.includes('outreach') && t.cats.includes('prospecting'));
         if (!combined) score -= 5;
     }
-    score = Math.max(0, Math.min(100, score));
+    score = Math.max(0, Math.min(maxScore, score));
 
     // Per-category monthly cost
     const categoryCost = {};
@@ -608,7 +729,11 @@ function calc() {
         }
     });
 
-    return { monthly, annual, overlappingCats, score, catCounts, sel, categoryCost, categorySavings };
+    return { monthly, annual, overlappingCats, score, catCounts, sel,
+             categoryCost, categorySavings,
+             prospectTaxTotal, emailTaxTotal, volumeTax,
+             totalMonthly, totalAnnual,
+             selDataTools, selEmailTools };
 }
 
 function scoreStyle(score) {
@@ -625,46 +750,116 @@ function fmt(n) {
 }
 
 // ─────────────────────────────────────────────
-// UPDATE RESULTS PANEL
+// RECEIPT RENDERER
 // ─────────────────────────────────────────────
-function updateResults() {
-    const { monthly, annual, overlappingCats, score, catCounts, sel, categoryCost, categorySavings } = calc();
-    const count = selected.size;
-    const dark = isDark();
+function renderReceipt({ sel, monthly, totalMonthly, totalAnnual, score, overlappingCats,
+                         prospectTaxTotal, emailTaxTotal, volumeTax,
+                         selDataTools, selEmailTools }) {
+    const date = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    const totalColor = totalAnnual > 100000 ? '#dc2626' : totalAnnual > 50000 ? '#d97706' : '#1a1a0a';
 
-    // Badge
-    const badge = document.getElementById('tools-badge');
-    badge.textContent = count + ' tool' + (count !== 1 ? 's' : '');
-    badge.style.color = count > 0 ? '#a5b4fc' : '';
-    badge.style.borderColor = count > 0 ? 'rgba(99,102,241,0.3)' : '';
+    let h = '';
 
-    // Monthly cost
-    document.getElementById('monthly-cost').textContent = fmt(monthly) + ' / mo';
+    // ── Header ──
+    h += `<div style="text-align:center;margin-bottom:8px">
+        <div style="font-size:13px;font-weight:900;letter-spacing:0.12em">* PRISTINE DATA AI *</div>
+        <div style="font-size:8px;color:#888877;letter-spacing:0.1em;margin-top:1px">GTM STACK COST AUDIT</div>
+        <div style="font-size:8px;color:#aaa999;margin-top:2px">${date}</div>
+    </div><hr>`;
 
-    // Annual cost -- the big number
-    const annualEl = document.getElementById('annual-cost');
-    if (count === 0) {
-        annualEl.textContent = '$0';
-        annualEl.style.color = dark ? '#475569' : '#cbd5e1';
-        document.getElementById('annual-cost-wrap').classList.remove('cost-pulse');
-    } else {
-        annualEl.textContent = fmt(annual);
-        annualEl.style.color = annual > 50000 ? '#f87171' : annual > 20000 ? '#fb923c' : '#fbbf24';
-        document.getElementById('annual-cost-wrap').classList.add('cost-pulse');
+    // ── Column headers ──
+    h += `<div class="r-row" style="font-size:8px;color:#888877;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px">
+        <span>ITEM</span><span style="min-width:72px;text-align:right">SEAT COST</span>
+    </div><hr>`;
+
+    // ── Tool line items ──
+    sel.forEach(t => {
+        const cost = t.cost * teamSize;
+        h += `<div class="r-row"><span class="r-name">${t.name}</span><span class="r-price">${fmt(cost)}/mo</span></div>
+              <div class="r-sub">${teamSize} seats &times; $${t.cost}/seat</div>`;
+    });
+
+    h += `<hr>
+    <div class="r-row" style="font-size:12px;font-weight:700"><span>SUBTOTAL</span><span>${fmt(monthly)}/mo</span></div>`;
+
+    // ── SCALE PENALTY (volume) ──
+    if (volumeTax > 0) {
+        h += `<hr><div class="r-hdr scale-penalty-block" style="color:#d97706">*** SCALE PENALTY ***</div>`;
+        h += `<div style="text-align:center;font-size:8px;color:#888877;margin:-2px 0 6px;letter-spacing:0.03em">Each tool bills you separately at this volume.</div>`;
+
+        if (prospectTaxTotal > 0 && selDataTools.length > 0) {
+            const tl = PROSPECT_TIERS[prospectTier].label;
+            const pc = PROSPECT_TAX[prospectTier];
+            h += `<div style="font-size:8px;color:#666655;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:4px 0 2px">DB: ${tl} contacts</div>`;
+            selDataTools.forEach(t => {
+                h += `<div class="r-row" style="color:#b45309"><span class="r-name">${t.name} overage</span><span class="r-price">+${fmt(pc)}/mo</span></div>`;
+            });
+        }
+
+        if (emailTaxTotal > 0 && selEmailTools.length > 0) {
+            const tl = EMAIL_TIERS[emailTier].label;
+            const ec = EMAIL_TAX[emailTier];
+            h += `<div style="font-size:8px;color:#666655;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:4px 0 2px">EMAIL: ${tl}/mo sends</div>`;
+            h += `<div class="r-row" style="color:#b45309"><span class="r-name">Send volume upgrade</span><span class="r-price">+${fmt(ec)}/mo</span></div>`;
+            h += `<div class="r-sub">(via whichever of ${selEmailTools.length} tools you send through)</div>`;
+        }
+
+        h += `<hr><div class="r-row" style="font-size:12px;font-weight:700;color:#b45309">
+            <span>SCALE PENALTY</span><span>+${fmt(volumeTax)}/mo</span>
+        </div>`;
     }
 
-    // Gauge + Score
-    const gaugeEl   = document.getElementById('gauge-arc');
-    const scoreEl   = document.getElementById('score-num');
-    const labelEl   = document.getElementById('score-label');
-    const descEl    = document.getElementById('score-desc');
-    const CIRC      = 339.3; // 2pi x 54
+    // ── Grand total ──
+    h += `<hr style="border-color:rgba(0,0,0,0.35)">
+    <div class="r-total" style="font-size:12px"><span>TOTAL/MO</span><span>${fmt(totalMonthly)}</span></div>
+    <div class="r-total" style="font-size:16px;color:${totalColor}"><span>TOTAL/YR</span><span>${fmt(totalAnnual)}</span></div>
+    <hr>`;
 
+    // ── Overlap note ──
+    if (overlappingCats > 0) {
+        h += `<div style="text-align:center;font-size:8px;color:#b45309;padding:4px 0">${overlappingCats} overlapping function${overlappingCats !== 1 ? 's' : ''} detected</div><hr>`;
+    }
+
+    // ── Shareable total callout (screenshot moment) ──
+    const repLabel = teamSize === 1 ? '1 rep' : `${teamSize} reps`;
+    const volLabel = PROSPECT_TIERS[prospectTier].display;
+    h += `<div style="text-align:center;margin:8px 0 6px;padding:10px 8px;background:rgba(0,0,0,0.06);border-radius:6px">
+        <div style="font-size:${totalAnnual >= 100000 ? '20px' : '17px'};font-weight:900;color:${totalColor};letter-spacing:0.02em">${fmt(totalAnnual)}/YR</div>
+        <div style="font-size:8px;color:#888877;margin-top:3px;letter-spacing:0.04em">${repLabel} &middot; ${volLabel}</div>
+    </div><hr>`;
+
+    // ── CTA ──
+    h += `<div style="margin:8px 0 4px;text-align:center">
+        <a href="contact-us.html" style="display:block;background:#6366f1;color:#fff;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:11px 16px;border-radius:10px;text-decoration:none;text-align:center">
+            See what this costs on one platform &rarr;
+        </a>
+        <div style="font-size:8px;color:#888877;margin-top:6px;letter-spacing:0.05em">No commitment &middot; 30-min demo</div>
+    </div><hr>
+    <div style="text-align:center;font-size:8px;color:#aaa999;letter-spacing:0.1em;padding:2px 0">THANK YOU FOR AUDITING</div>`;
+
+    return h;
+}
+
+// ─────────────────────────────────────────────
+// UPDATE RESULTS
+// ─────────────────────────────────────────────
+function updateResults() {
+    const r = calc();
+    const { score } = r;
+    const count = selected.size;
+    const dark  = isDark();
+
+    // ── Gauge ──
+    const gaugeEl  = document.getElementById('gauge-arc');
+    const scoreEl  = document.getElementById('score-num');
+    const labelEl  = document.getElementById('score-label');
+    const descEl   = document.getElementById('score-desc');
+    const CIRC     = 339.3;
     if (count === 0) {
         gaugeEl.style.strokeDashoffset = CIRC;
         gaugeEl.style.stroke = dark ? '#334155' : '#cbd5e1';
         scoreEl.textContent  = '--';
-        scoreEl.style.color  = dark ? '#94a3b8' : '#94a3b8';
+        scoreEl.style.color  = '#94a3b8';
         labelEl.textContent  = 'Select tools';
         labelEl.style.color  = '#64748b';
         descEl.textContent   = '';
@@ -679,77 +874,66 @@ function updateResults() {
         descEl.textContent   = ss.desc;
     }
 
-    // Overlap count
-    document.getElementById('overlap-count').textContent =
-        count === 0 ? '---' : overlappingCats + ' categor' + (overlappingCats !== 1 ? 'ies' : 'y');
+    const receiptEmpty   = document.getElementById('receipt-empty');
+    const receiptWrap    = document.getElementById('receipt-wrap');
+    const receiptContent = document.getElementById('receipt-content');
+    const disclaimer     = document.getElementById('receipt-disclaimer');
 
-    // Category bars
-    const barsEl = document.getElementById('category-bars');
-    barsEl.innerHTML = '';
-
-    CATEGORIES.forEach((cat, idx) => {
-        const n = catCounts[cat.id] || 0;
-        const c = getColors(cat.color);
-        const isOverlap = n >= 2;
-        const catSel = sel.filter(t => t.cats.includes(cat.id));
-        const toolNames = catSel.length > 0 ? catSel.map(t => t.name).join(', ') : 'No tools selected';
-        const costVal = categoryCost[cat.id] || 0;
-        const savingsVal = categorySavings[cat.id] || 0;
-        const isLast = idx === CATEGORIES.length - 1;
-
-        const row = document.createElement('div');
-        row.style.paddingBottom = !isLast ? '10px' : '0';
-        if (!isLast) {
-            row.style.borderBottom = '1px solid var(--panel-border)';
-        }
-        if (isOverlap) {
-            row.style.borderLeft = '2px solid #fb7185';
-            row.style.paddingLeft = '12px';
-        }
-
-        // Line 1: Icon + Category Name + Monthly Cost
-        const line1 = `
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center justify-center shrink-0" style="width:20px; height:20px; border-radius:6px; background:${c.bg}">
-                        <iconify-icon icon="${cat.icon}" width="12" style="color:${c.text}"></iconify-icon>
-                    </div>
-                    <span style="font-size:11px; font-weight:600; color:var(--panel-subtext)">${cat.label}</span>
-                </div>
-                <span style="font-size:13px; font-weight:700; color:${costVal > 0 ? c.text : (dark ? '#475569' : '#cbd5e1')}; transition: color 0.3s ease">${fmt(costVal)}/mo</span>
-            </div>`;
-
-        // Line 2: Tool names + Warning tag
-        const warningHTML = isOverlap
-            ? `<span class="fade-up" style="font-size:9px; color:#fb7185; white-space:nowrap; display:inline-flex; align-items:center; gap:3px"><iconify-icon icon="solar:danger-triangle-bold" width="9"></iconify-icon>Overlap – paying twice</span>`
-            : '';
-        const line2 = `
-            <div class="flex items-center justify-between gap-2 mt-1">
-                <span style="font-size:10px; color:var(--panel-subtext); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0">${toolNames}</span>
-                ${warningHTML}
-            </div>`;
-
-        // Line 3: Potential savings (only for overlap)
-        const line3 = isOverlap
-            ? `<div class="fade-up" style="margin-top:3px"><span style="font-size:9px; color:rgba(251,113,133,0.7)">Potential savings: </span><span style="font-size:9px; font-weight:700; color:#fb7185">${fmt(savingsVal)}/mo</span></div>`
-            : '';
-
-        row.innerHTML = line1 + line2 + line3;
-        barsEl.appendChild(row);
-    });
-
-    // CTA
-    const ctaEmpty  = document.getElementById('cta-empty');
-    const ctaFilled = document.getElementById('cta-filled');
     if (count === 0) {
-        ctaEmpty.classList.remove('hidden');
-        ctaFilled.classList.add('hidden');
+        receiptEmpty.style.display  = '';
+        receiptWrap.classList.remove('visible', 'instant');
+        disclaimer.classList.add('hidden');
+        prevCount = 0;
     } else {
-        ctaEmpty.classList.add('hidden');
-        ctaFilled.classList.remove('hidden');
-        document.getElementById('cta-text').textContent =
-            `Your stack has ${overlappingCats} overlapping function${overlappingCats !== 1 ? 's' : ''} and costs ${fmt(annual)}/year. See what one platform looks like.`;
+        const justAppeared = prevCount === 0;
+        prevCount = count;
+
+        receiptEmpty.style.display = 'none';
+        disclaimer.classList.remove('hidden');
+        receiptContent.innerHTML = renderReceipt(r);
+
+        if (justAppeared) {
+            receiptWrap.classList.remove('visible', 'instant');
+            void receiptWrap.offsetWidth; // force reflow for animation
+            receiptWrap.classList.add('visible');
+            setTimeout(() => {
+                receiptWrap.classList.remove('visible');
+                receiptWrap.classList.add('instant');
+            }, 950);
+        } else if (!receiptWrap.classList.contains('instant')) {
+            receiptWrap.classList.add('instant');
+        }
     }
+}
+
+// ─────────────────────────────────────────────
+// VOLUME TIER BUTTONS
+// ─────────────────────────────────────────────
+function renderTierButtons(containerId, tiers, currentTier, labelId, onSelect) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    tiers.forEach((tier, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'tier-btn' + (i === currentTier ? ' active' : '');
+        btn.textContent = tier.label;
+        btn.addEventListener('click', () => {
+            onSelect(i);
+            document.getElementById(labelId).textContent = tier.display;
+            renderTierButtons(containerId, tiers, i, labelId, onSelect);
+            updateResults();
+            // Flash the scale penalty block in the receipt
+            setTimeout(() => {
+                const penaltyEl = document.querySelector('.scale-penalty-block');
+                if (penaltyEl) {
+                    penaltyEl.classList.remove('penalty-flash');
+                    void penaltyEl.offsetWidth;
+                    penaltyEl.classList.add('penalty-flash');
+                }
+            }, 50);
+        });
+        container.appendChild(btn);
+    });
 }
 
 // ─────────────────────────────────────────────
@@ -813,6 +997,8 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 // INIT
 // ─────────────────────────────────────────────
 renderGrid();
+renderTierButtons('prospect-tiers', PROSPECT_TIERS, prospectTier, 'prospect-label', (i) => { prospectTier = i; });
+renderTierButtons('email-tiers',    EMAIL_TIERS,    emailTier,    'email-label',    (i) => { emailTier = i; });
 updateResults();
 </script>
 </body>
