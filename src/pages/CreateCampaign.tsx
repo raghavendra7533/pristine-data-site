@@ -8,12 +8,30 @@ import CampaignReview from "@/components/campaign/CampaignReview";
 
 type CampaignStep = 1 | 2 | 3;
 
-interface CampaignData {
+export type PersonalizationMode = "full_ai" | "selective" | "static";
+
+export interface DynamicVariable {
+  id: string;
+  type: "merge" | "conditional" | "ai_paragraph";
+  token: string;
+  label: string;
+  // conditional-specific
+  attribute?: string;
+  rows?: { condition: string; content: string }[];
+  fallback?: string;
+  // ai_paragraph-specific
+  aiInstruction?: string;
+}
+
+export interface CampaignData {
   name: string;
   theme: string;
   stages: number;
   contactList: string;
   instructions: string;
+  personalizationMode: PersonalizationMode;
+  emailBody: string;
+  dynamicVariables: DynamicVariable[];
 }
 
 const CreateCampaign = () => {
@@ -24,7 +42,10 @@ const CreateCampaign = () => {
     theme: "",
     stages: 3,
     contactList: "",
-    instructions: ""
+    instructions: "",
+    personalizationMode: "full_ai",
+    emailBody: "",
+    dynamicVariables: []
   });
 
   const steps = [
