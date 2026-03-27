@@ -8,14 +8,18 @@ import type { ConditionalBlock } from "./ConditionalBlockModal";
 
 /* ─── Slash-menu item definitions ─── */
 
+type EditorScope = "body" | "subject" | "merge_only";
+
 interface SlashMenuItem {
   id: string;
   icon: string;
   label: string;
   description: string;
   category: "personalization" | "dynamic";
-  type: "merge" | "conditional" | "ai_paragraph";
+  type: "merge" | "conditional" | "ai_paragraph" | "ai_subject_line";
   token?: string;
+  /** Which scopes this item appears in. Defaults to all. */
+  scopes?: EditorScope[];
 }
 
 const SLASH_MENU_ITEMS: SlashMenuItem[] = [
@@ -24,8 +28,9 @@ const SLASH_MENU_ITEMS: SlashMenuItem[] = [
   { id: "company_name", icon: "solar:buildings-2-linear", label: "Company Name", description: "Contact's company", category: "personalization", type: "merge", token: "companyName" },
   { id: "job_title", icon: "solar:case-round-linear", label: "Job Title", description: "Contact's role", category: "personalization", type: "merge", token: "jobTitle" },
   { id: "industry", icon: "solar:chart-square-linear", label: "Industry", description: "Contact's industry", category: "personalization", type: "merge", token: "industry" },
-  { id: "ai_paragraph", icon: "solar:magic-stick-3-linear", label: "AI Paragraph", description: "AI writes a paragraph per contact", category: "dynamic", type: "ai_paragraph" },
-  { id: "conditional", icon: "solar:routing-2-linear", label: "Conditional Block", description: "Different content by attribute", category: "dynamic", type: "conditional" },
+  { id: "ai_subject_line", icon: "solar:magic-stick-3-linear", label: "AI Subject Line", description: "AI writes a subject line per contact", category: "dynamic", type: "ai_subject_line", scopes: ["subject"] },
+  { id: "ai_paragraph", icon: "solar:magic-stick-3-linear", label: "AI Paragraph", description: "AI writes a paragraph per contact", category: "dynamic", type: "ai_paragraph", scopes: ["body"] },
+  { id: "conditional", icon: "solar:routing-2-linear", label: "Conditional Block", description: "Different content by attribute", category: "dynamic", type: "conditional", scopes: ["body"] },
 ];
 
 /* ─── Icon SVGs (inlined so they work inside contenteditable spans) ─── */
@@ -33,6 +38,7 @@ const SLASH_MENU_ITEMS: SlashMenuItem[] = [
 const CHIP_ICON_SVG: Record<string, string> = {
   merge: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px;flex-shrink:0"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
   ai_paragraph: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px;flex-shrink:0"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></svg>`,
+  ai_subject_line: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px;flex-shrink:0"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></svg>`,
   conditional: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px;margin-right:3px;flex-shrink:0"><path d="M6 3v12"/><path d="M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M15 6a9 9 0 0 0-9 9"/></svg>`,
 };
 
@@ -116,7 +122,7 @@ function buildInitialHTML(emailBody: string, dynamicVariables: DynamicVariable[]
 }
 
 function buildChipHTML(v: DynamicVariable): string {
-  const displayLabel = v.type === "ai_paragraph" && v.aiInstruction
+  const displayLabel = (v.type === "ai_paragraph" || v.type === "ai_subject_line") && v.aiInstruction
     ? `AI: ${v.aiInstruction.length > 30 ? v.aiInstruction.slice(0, 30) + "..." : v.aiInstruction}`
     : v.label;
   const iconSvg = CHIP_ICON_SVG[v.type] ?? CHIP_ICON_SVG.merge;
@@ -134,6 +140,10 @@ interface SelectiveEmailEditorProps {
   onEmailBodyChange: (body: string) => void;
   onVariablesChange: (vars: DynamicVariable[]) => void;
   mergeOnly?: boolean;
+  /** Controls which slash-menu items appear. Defaults to "body". "merge_only" is equivalent to mergeOnly=true. */
+  scope?: EditorScope;
+  /** Hide formatting toolbar and hint — used for compact fields like subject lines */
+  compact?: boolean;
 }
 
 const SelectiveEmailEditor = ({
@@ -142,7 +152,11 @@ const SelectiveEmailEditor = ({
   onEmailBodyChange,
   onVariablesChange,
   mergeOnly = false,
+  scope: scopeProp,
+  compact = false,
 }: SelectiveEmailEditorProps) => {
+  // Derive effective scope: explicit scope prop takes priority, then mergeOnly fallback
+  const scope: EditorScope = scopeProp ?? (mergeOnly ? "merge_only" : "body");
   const editorRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const aiInputRef = useRef<HTMLInputElement>(null);
@@ -192,8 +206,11 @@ const SelectiveEmailEditor = ({
 
   /* ─── Filtered menu items ─── */
   const baseItems = useMemo(
-    () => mergeOnly ? SLASH_MENU_ITEMS.filter((i) => i.type === "merge") : SLASH_MENU_ITEMS,
-    [mergeOnly]
+    () => {
+      if (scope === "merge_only") return SLASH_MENU_ITEMS.filter((i) => i.type === "merge");
+      return SLASH_MENU_ITEMS.filter((i) => !i.scopes || i.scopes.includes(scope));
+    },
+    [scope]
   );
   const filteredItems = useMemo(() => {
     if (!menuFilter) return baseItems;
@@ -343,7 +360,7 @@ const SelectiveEmailEditor = ({
     if (v.attribute) chip.dataset.varAttribute = v.attribute;
     chip.className = `variable-chip variable-chip--${v.type}`;
 
-    const displayLabel = v.type === "ai_paragraph" && v.aiInstruction
+    const displayLabel = (v.type === "ai_paragraph" || v.type === "ai_subject_line") && v.aiInstruction
       ? `AI: ${v.aiInstruction.length > 30 ? v.aiInstruction.slice(0, 30) + "..." : v.aiInstruction}`
       : v.label;
 
@@ -390,7 +407,7 @@ const SelectiveEmailEditor = ({
         token: `{{${item.token}}}`,
         label: item.label,
       });
-    } else if (item.type === "ai_paragraph") {
+    } else if (item.type === "ai_paragraph" || item.type === "ai_subject_line") {
       saveEditorRange();
       const rect = getCaretRect();
       const editorRect = editorRef.current?.getBoundingClientRect();
@@ -415,10 +432,17 @@ const SelectiveEmailEditor = ({
     const prompt = aiPromptValue.trim();
     if (!prompt) { setAiPromptActive(false); editorRef.current?.focus(); return; }
     const id = `ai_${Date.now()}`;
+    const isSubjectAi = scope === "subject";
     setAiPromptActive(false);
     setAiPromptValue("");
-    insertChip({ id, type: "ai_paragraph", token: `{{ai:${id}}}`, label: "AI Paragraph", aiInstruction: prompt });
-  }, [aiPromptValue, insertChip]);
+    insertChip({
+      id,
+      type: isSubjectAi ? "ai_subject_line" as DynamicVariable["type"] : "ai_paragraph",
+      token: `{{ai:${id}}}`,
+      label: isSubjectAi ? "AI Subject Line" : "AI Paragraph",
+      aiInstruction: prompt,
+    });
+  }, [aiPromptValue, insertChip, scope]);
 
   /* ─── Conditional save ─── */
   const handleConditionalSave = useCallback((block: ConditionalBlock) => {
@@ -478,7 +502,8 @@ const SelectiveEmailEditor = ({
     // Update the DOM element in place
     chipPopover.el.dataset.varAiInstruction = prompt;
     const displayLabel = `AI: ${prompt.length > 30 ? prompt.slice(0, 30) + "..." : prompt}`;
-    chipPopover.el.innerHTML = CHIP_ICON_SVG.ai_paragraph + escapeHTML(displayLabel);
+    const iconKey = chipPopover.varData.type === "ai_subject_line" ? "ai_subject_line" : "ai_paragraph";
+    chipPopover.el.innerHTML = CHIP_ICON_SVG[iconKey] + escapeHTML(displayLabel);
     setChipPopover(null);
     syncToParent();
   }, [chipPopover, chipEditPrompt, syncToParent]);
@@ -591,17 +616,19 @@ const SelectiveEmailEditor = ({
   return (
     <div className="space-y-3">
       {/* Hint bar */}
-      <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-        Type{" "}
-        <kbd className="px-1.5 py-0.5 rounded-md bg-muted border border-border text-[10px] font-mono font-semibold">/</kbd>
-        {" "}{mergeOnly ? "to insert personalization tokens" : "to insert variables, AI paragraphs, or conditional blocks"}
-      </div>
+      {!compact && (
+        <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+          Type{" "}
+          <kbd className="px-1.5 py-0.5 rounded-md bg-muted border border-border text-[10px] font-mono font-semibold">/</kbd>
+          {" "}{scope === "merge_only" ? "to insert personalization tokens" : scope === "subject" ? "to insert tokens or AI subject line" : "to insert variables, AI paragraphs, or conditional blocks"}
+        </div>
+      )}
 
       {/* ─── Editor with Toolbar ─── */}
       <div className="relative">
         <div className="rounded-lg border border-input overflow-hidden focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1">
           {/* Formatting Toolbar */}
-          <div className="flex items-center gap-0.5 px-1.5 py-1 bg-muted/30 border-b border-border flex-wrap">
+          {!compact && <div className="flex items-center gap-0.5 px-1.5 py-1 bg-muted/30 border-b border-border flex-wrap">
             {([
               { cmd: "bold", icon: "solar:text-bold-linear", label: "Bold (Ctrl+B)", key: "bold" as const },
               { cmd: "italic", icon: "solar:text-italic-linear", label: "Italic (Ctrl+I)", key: "italic" as const },
@@ -702,7 +729,7 @@ const SelectiveEmailEditor = ({
             >
               <Icon icon="solar:list-1-minimalistic-linear" className="h-3.5 w-3.5" />
             </button>
-          </div>
+          </div>}
 
           {/* Editor */}
           <div
@@ -712,11 +739,14 @@ const SelectiveEmailEditor = ({
             onInput={() => syncToParent()}
             onKeyDown={handleEditorKeyDown}
             onClick={handleEditorClick}
-            data-placeholder={mergeOnly
+            data-placeholder={compact
+              ? (scope === "subject" ? "Type / to insert tokens or AI subject line..." : "Type / to insert tokens...")
+              : scope === "merge_only"
               ? "Start writing your email here...\n\nType / to insert personalization tokens like First Name or Company Name."
               : "Start writing your email here...\n\nType / anywhere to insert a personalization variable, an AI-generated paragraph, or a conditional content block."}
             className={cn(
-              "min-h-[320px] w-full bg-background px-4 py-3",
+              "w-full bg-background px-4 py-3",
+              compact ? "min-h-[36px] py-2 text-sm" : "min-h-[320px]",
               "text-sm leading-relaxed text-foreground",
               "focus:outline-none",
               "overflow-y-auto",
@@ -765,7 +795,7 @@ const SelectiveEmailEditor = ({
                     <p className="px-3 pt-1.5 pb-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Dynamic Content</p>
                     {dynamicItems.map((item) => {
                       const idx = filteredItems.indexOf(item);
-                      const iconBg = item.type === "ai_paragraph"
+                      const iconBg = item.type === "ai_paragraph" || item.type === "ai_subject_line"
                         ? "bg-blue-100 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400"
                         : "bg-amber-100 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400";
                       return (
@@ -844,12 +874,12 @@ const SelectiveEmailEditor = ({
               </div>
             )}
 
-            {/* ── AI paragraph popover ── */}
-            {chipPopover.varData.type === "ai_paragraph" && (
+            {/* ── AI paragraph / AI subject line popover ── */}
+            {(chipPopover.varData.type === "ai_paragraph" || chipPopover.varData.type === "ai_subject_line") && (
               <div className="p-2 space-y-2">
                 <p className="text-xs font-semibold text-foreground px-1 flex items-center gap-1.5">
                   <Icon icon="solar:magic-stick-3-linear" className="h-3.5 w-3.5 text-blue-500" />
-                  AI Paragraph
+                  {chipPopover.varData.type === "ai_subject_line" ? "AI Subject Line" : "AI Paragraph"}
                 </p>
                 <div className="px-1">
                   <label className="text-[10px] font-medium text-muted-foreground">Prompt</label>

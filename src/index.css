@@ -261,6 +261,18 @@ All colors MUST be HSL.
   border-color: hsl(217 40% 40% / 0.4);
 }
 
+/* AI subject line — blue (same as ai_paragraph) */
+.variable-chip--ai_subject_line {
+  background: hsl(217 92% 92%);
+  color: hsl(217 75% 42%);
+  border-color: hsl(217 70% 82%);
+}
+.dark .variable-chip--ai_subject_line {
+  background: hsl(217 50% 25% / 0.35);
+  color: hsl(217 80% 75%);
+  border-color: hsl(217 40% 40% / 0.4);
+}
+
 /* Conditional — amber */
 .variable-chip--conditional {
   background: hsl(38 95% 90%);

@@ -12,7 +12,7 @@ export type PersonalizationMode = "full_ai" | "selective" | "static";
 
 export interface DynamicVariable {
   id: string;
-  type: "merge" | "conditional" | "ai_paragraph";
+  type: "merge" | "conditional" | "ai_paragraph" | "ai_subject_line";
   token: string;
   label: string;
   // conditional-specific
@@ -30,6 +30,8 @@ export interface CampaignData {
   contactList: string;
   instructions: string;
   personalizationMode: PersonalizationMode;
+  subjectLine: string;
+  subjectVariables: DynamicVariable[];
   emailBody: string;
   dynamicVariables: DynamicVariable[];
 }
@@ -44,6 +46,8 @@ const CreateCampaign = () => {
     contactList: "",
     instructions: "",
     personalizationMode: "full_ai",
+    subjectLine: "",
+    subjectVariables: [],
     emailBody: "",
     dynamicVariables: []
   });
@@ -193,6 +197,7 @@ const CreateCampaign = () => {
         {currentStep === 2 && (
           <CampaignPreview
             data={campaignData}
+            onUpdate={setCampaignData}
             onNext={handleNext}
             onBack={handleBack}
           />

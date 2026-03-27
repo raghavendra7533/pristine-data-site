@@ -26,6 +26,7 @@ const campaignOptions = [
   { id: "healthcare", name: "Healthcare Lead Nurture" },
   { id: "event", name: "Event Follow-up" },
   { id: "product", name: "Product Launch" },
+  { id: "new-campaign", name: "Enterprise ABM Pilot" },
 ];
 
 // Campaign-specific performance data
@@ -75,6 +76,7 @@ const campaignPerformanceData: Record<string, { date: string; sent: number; open
     { date: "Feb 5", sent: 28, opened: 18, clicked: 6, replied: 2 },
     { date: "Feb 12", sent: 32, opened: 22, clicked: 8, replied: 2 },
   ],
+  "new-campaign": [],
 };
 
 // Campaign-specific stats
@@ -84,6 +86,7 @@ const campaignStats: Record<string, { totalSent: string; openRate: string; click
   "healthcare": { totalSent: "3,498", openRate: "45.8%", clickRate: "19.2%", meetings: "42", sentChange: "+8.4%", openChange: "+2.1%", clickChange: "+0.8%", meetingChange: "+5" },
   "event": { totalSent: "2,872", openRate: "56.2%", clickRate: "24.8%", meetings: "32", sentChange: "+15.6%", openChange: "+4.8%", clickChange: "+2.2%", meetingChange: "+6" },
   "product": { totalSent: "2,222", openRate: "38.4%", clickRate: "15.6%", meetings: "14", sentChange: "+5.2%", openChange: "-1.2%", clickChange: "-0.4%", meetingChange: "+2" },
+  "new-campaign": { totalSent: "0", openRate: "0%", clickRate: "0%", meetings: "0", sentChange: "—", openChange: "—", clickChange: "—", meetingChange: "—" },
 };
 
 const aiInsights = [
@@ -160,6 +163,7 @@ const campaignWeeklyActivityData: Record<string, { day: string; emails: number; 
     { day: "Sat", emails: 4, meetings: 0 },
     { day: "Sun", emails: 3, meetings: 0 },
   ],
+  "new-campaign": [],
 };
 
 const recentSearches = [
@@ -203,6 +207,7 @@ export default function Dashboard() {
   const currentChartData = campaignPerformanceData[selectedCampaign] || campaignPerformanceData.all;
   const currentWeeklyActivityData = campaignWeeklyActivityData[selectedCampaign] || campaignWeeklyActivityData.all;
   const selectedCampaignName = campaignOptions.find(c => c.id === selectedCampaign)?.name || "All Campaigns";
+  const hasNoData = currentChartData.length === 0;
 
   // Helper to determine if change is positive
   const isPositive = (change: string) => change.startsWith("+");
@@ -236,7 +241,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+          <Card className={`bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20`}>
             <CardContent className="pt-5">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -245,6 +250,11 @@ export default function Dashboard() {
                     <>
                       <SkeletonLoader className="h-8 w-24 mt-1" />
                       <SkeletonLoader className="h-4 w-32 mt-2" />
+                    </>
+                  ) : hasNoData ? (
+                    <>
+                      <p className="text-2xl font-bold text-muted-foreground/40">—</p>
+                      <p className="text-xs text-muted-foreground/40 mt-1">No data yet</p>
                     </>
                   ) : (
                     <>
@@ -256,14 +266,14 @@ export default function Dashboard() {
                     </>
                   )}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
-                  <Icon icon="solar:letter-linear" className="h-6 w-6 text-primary" />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${hasNoData ? "bg-muted/30" : "bg-primary/20"}`}>
+                  <Icon icon="solar:letter-linear" className={`h-6 w-6 ${hasNoData ? "text-muted-foreground/30" : "text-primary"}`} />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border-emerald-500/20">
+          <Card className={`bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border-emerald-500/20`}>
             <CardContent className="pt-5">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -272,6 +282,11 @@ export default function Dashboard() {
                     <>
                       <SkeletonLoader className="h-8 w-20 mt-1" />
                       <SkeletonLoader className="h-4 w-32 mt-2" />
+                    </>
+                  ) : hasNoData ? (
+                    <>
+                      <p className="text-2xl font-bold text-muted-foreground/40">—</p>
+                      <p className="text-xs text-muted-foreground/40 mt-1">No data yet</p>
                     </>
                   ) : (
                     <>
@@ -283,14 +298,14 @@ export default function Dashboard() {
                     </>
                   )}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                  <Icon icon="solar:eye-linear" className="h-6 w-6 text-emerald-600" />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${hasNoData ? "bg-muted/30" : "bg-emerald-500/20"}`}>
+                  <Icon icon="solar:eye-linear" className={`h-6 w-6 ${hasNoData ? "text-muted-foreground/30" : "text-emerald-600"}`} />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-violet-500/10 to-violet-500/5 border-violet-500/20">
+          <Card className={`bg-gradient-to-br from-violet-500/10 to-violet-500/5 border-violet-500/20`}>
             <CardContent className="pt-5">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -299,6 +314,11 @@ export default function Dashboard() {
                     <>
                       <SkeletonLoader className="h-8 w-20 mt-1" />
                       <SkeletonLoader className="h-4 w-32 mt-2" />
+                    </>
+                  ) : hasNoData ? (
+                    <>
+                      <p className="text-2xl font-bold text-muted-foreground/40">—</p>
+                      <p className="text-xs text-muted-foreground/40 mt-1">No data yet</p>
                     </>
                   ) : (
                     <>
@@ -310,14 +330,14 @@ export default function Dashboard() {
                     </>
                   )}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
-                  <Icon icon="solar:cursor-linear" className="h-6 w-6 text-violet-600" />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${hasNoData ? "bg-muted/30" : "bg-violet-500/20"}`}>
+                  <Icon icon="solar:cursor-linear" className={`h-6 w-6 ${hasNoData ? "text-muted-foreground/30" : "text-violet-600"}`} />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
+          <Card className={`bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20`}>
             <CardContent className="pt-5">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -326,6 +346,11 @@ export default function Dashboard() {
                     <>
                       <SkeletonLoader className="h-8 w-16 mt-1" />
                       <SkeletonLoader className="h-4 w-28 mt-2" />
+                    </>
+                  ) : hasNoData ? (
+                    <>
+                      <p className="text-2xl font-bold text-muted-foreground/40">—</p>
+                      <p className="text-xs text-muted-foreground/40 mt-1">No data yet</p>
                     </>
                   ) : (
                     <>
@@ -337,8 +362,8 @@ export default function Dashboard() {
                     </>
                   )}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-                  <Icon icon="solar:calendar-linear" className="h-6 w-6 text-amber-600" />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${hasNoData ? "bg-muted/30" : "bg-amber-500/20"}`}>
+                  <Icon icon="solar:calendar-linear" className={`h-6 w-6 ${hasNoData ? "text-muted-foreground/30" : "text-amber-600"}`} />
                 </div>
               </div>
             </CardContent>
@@ -350,22 +375,22 @@ export default function Dashboard() {
       <section className="px-6 py-4 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Email Performance Over Time */}
-          <Card className="h-[320px]">
+          <Card className={"h-[320px]"}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <CardTitle className="text-base font-semibold">Email Performance</CardTitle>
+                  <CardTitle className={`text-base font-semibold ${hasNoData ? "text-muted-foreground" : ""}`}>Email Performance</CardTitle>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-primary" />
+                      <div className={`w-2.5 h-2.5 rounded-full ${hasNoData ? "bg-muted-foreground/20" : "bg-primary"}`} />
                       <span className="text-[10px] text-muted-foreground">Sent</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                      <div className={`w-2.5 h-2.5 rounded-full ${hasNoData ? "bg-muted-foreground/20" : "bg-emerald-500"}`} />
                       <span className="text-[10px] text-muted-foreground">Opened</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-violet-500" />
+                      <div className={`w-2.5 h-2.5 rounded-full ${hasNoData ? "bg-muted-foreground/20" : "bg-violet-500"}`} />
                       <span className="text-[10px] text-muted-foreground">Clicked</span>
                     </div>
                   </div>
@@ -385,6 +410,29 @@ export default function Dashboard() {
                   <div className="flex justify-between px-2">
                     {["Jan 1", "Jan 8", "Jan 15", "Jan 22", "Jan 29", "Feb 5", "Feb 12"].map((d, i) => (
                       <span key={i} className="text-[10px] text-muted-foreground/50">{d}</span>
+                    ))}
+                  </div>
+                </div>
+              ) : hasNoData ? (
+                <div className="h-[250px] flex flex-col relative overflow-hidden">
+                  {/* Ghost grid lines */}
+                  <div className="absolute inset-x-6 inset-y-4 flex flex-col justify-between pointer-events-none">
+                    {[0, 1, 2, 3].map((i) => (
+                      <div key={i} className="h-px w-full border-t border-dashed border-muted-foreground/[0.07]" />
+                    ))}
+                  </div>
+                  {/* Center content */}
+                  <div className="flex-1 flex flex-col items-center justify-center relative z-10">
+                    <div className="w-11 h-11 rounded-full bg-muted flex items-center justify-center mb-2">
+                      <Icon icon="solar:chart-2-linear" className="h-5 w-5 text-muted-foreground/50" />
+                    </div>
+                    <p className="text-sm font-medium text-muted-foreground">No performance data</p>
+                    <p className="text-xs text-muted-foreground/60 mt-0.5">Data will appear once the campaign starts sending</p>
+                  </div>
+                  {/* Ghost x-axis labels */}
+                  <div className="flex justify-between px-6 pb-3">
+                    {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"].map((label, i) => (
+                      <span key={i} className="text-[10px] text-muted-foreground/20">{label}</span>
                     ))}
                   </div>
                 </div>
@@ -481,17 +529,17 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Weekly Activity */}
-          <Card className="h-[260px]">
+          <Card className={"h-[260px]"}>
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base font-semibold">Weekly Activity</CardTitle>
+                <CardTitle className={`text-base font-semibold ${hasNoData ? "text-muted-foreground" : ""}`}>Weekly Activity</CardTitle>
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <div className={`w-2 h-2 rounded-full ${hasNoData ? "bg-muted-foreground/20" : "bg-primary"}`} />
                     <span className="text-[10px] text-muted-foreground">Emails</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-amber-500" />
+                    <div className={`w-2 h-2 rounded-full ${hasNoData ? "bg-muted-foreground/20" : "bg-amber-500"}`} />
                     <span className="text-[10px] text-muted-foreground">Meetings</span>
                   </div>
                 </div>
@@ -526,6 +574,28 @@ export default function Dashboard() {
                   <div className="flex justify-between px-1 mt-2">
                     {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d, i) => (
                       <span key={i} className="text-[10px] text-muted-foreground/50">{d}</span>
+                    ))}
+                  </div>
+                </div>
+              ) : hasNoData ? (
+                <div className="h-[185px] flex flex-col relative overflow-hidden">
+                  {/* Ghost grid lines */}
+                  <div className="absolute inset-x-4 inset-y-3 flex flex-col justify-between pointer-events-none">
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} className="h-px w-full border-t border-dashed border-muted-foreground/[0.07]" />
+                    ))}
+                  </div>
+                  {/* Center content */}
+                  <div className="flex-1 flex flex-col items-center justify-center relative z-10">
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-1.5">
+                      <Icon icon="solar:calendar-mark-linear" className="h-5 w-5 text-muted-foreground/50" />
+                    </div>
+                    <p className="text-xs font-medium text-muted-foreground">No activity yet</p>
+                  </div>
+                  {/* Ghost x-axis labels */}
+                  <div className="flex justify-between px-4 pb-2">
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label, i) => (
+                      <span key={i} className="text-[10px] text-muted-foreground/20">{label}</span>
                     ))}
                   </div>
                 </div>
