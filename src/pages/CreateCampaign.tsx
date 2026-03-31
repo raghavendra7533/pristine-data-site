@@ -30,6 +30,7 @@ export interface CampaignData {
   contactList: string;
   instructions: string;
   personalizationMode: PersonalizationMode;
+  buildMode?: "saved_theme" | "custom";
   subjectLine: string;
   subjectVariables: DynamicVariable[];
   emailBody: string;

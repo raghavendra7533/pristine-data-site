@@ -33,6 +33,7 @@ import Lists from "./pages/Lists";
 import ListDetail from "./pages/ListDetail";
 import EnrichLeads from "./pages/EnrichLeads";
 import CampaignCalendar from "./pages/CampaignCalendar";
+import AdminCampaignCalendar from "./pages/AdminCampaignCalendar";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +77,8 @@ const App = () => (
             <Route path="/sales-openers-mockup" element={<SalesOpenersMockup />} />
             <Route path="/admin" element={<Dashboard />} />
           </Route>
+          {/* Standalone admin routes — no AppLayout wrapper */}
+          <Route path="/admin/campaign-calendar" element={<AdminCampaignCalendar />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
