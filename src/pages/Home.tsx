@@ -50,7 +50,7 @@ const capabilities = [
     color: "from-violet-500 to-violet-600",
     actions: [
       { title: "Message Generator", route: "/messaging", icon: Sparkles },
-      { title: "Sequence Builder", route: "/sequences", icon: Workflow },
+      { title: "Sequence Builder", route: "/campaigns/create", icon: Workflow },
     ]
   },
   {

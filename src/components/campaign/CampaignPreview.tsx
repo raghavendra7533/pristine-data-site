@@ -8,7 +8,6 @@ import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
 import type { CampaignData, DynamicVariable } from "@/pages/CreateCampaign";
 import SelectiveEmailEditor from "./SelectiveEmailEditor";
-import ThemeRulesPanel from "./ThemeRulesPanel";
 import { prebuiltStageDescriptions, savedThemesStore } from "./CampaignSetup";
 import type { SavedTheme } from "./CampaignSetup";
 import { useToast } from "@/hooks/use-toast";
@@ -564,20 +563,9 @@ const CampaignPreview = ({ data, onUpdate }: CampaignPreviewProps) => {
   if (isPrebuiltTheme && themeStages) {
     const visibleStages = themeStages.slice(0, data.stages);
     return (
-      <div className="animate-fade-in flex gap-5 items-start">
-        {/* Left: theme rules panel */}
-        <div className="w-[35%] shrink-0">
-          <ThemeRulesPanel
-            buildMode={data.buildMode}
-            themeId={data.theme}
-            stageCount={data.stages}
-            activeStage={activeStage}
-            onStageClick={setActiveStage}
-            instructions={data.instructions}
-          />
-        </div>
-        {/* Right: email preview content */}
-        <div className="flex-1 min-w-0">
+      <div className="animate-fade-in">
+        {/* email preview content */}
+        <div className="min-w-0">
         {/* Top bar */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -649,20 +637,9 @@ const CampaignPreview = ({ data, onUpdate }: CampaignPreviewProps) => {
 
   /* ─── Custom / Build Your Own: editable editor ─── */
   return (
-    <div className="animate-fade-in flex gap-5 items-start">
-      {/* Left: theme rules panel */}
-      <div className="w-[35%] shrink-0">
-        <ThemeRulesPanel
-          buildMode={data.buildMode}
-          themeId={data.theme}
-          stageCount={data.stages}
-          activeStage={activeStage}
-          onStageClick={setActiveStage}
-          instructions={data.instructions}
-        />
-      </div>
-      {/* Right: email preview content */}
-      <div className="flex-1 min-w-0">
+    <div className="animate-fade-in">
+      {/* email preview content */}
+      <div className="min-w-0">
       {/* Top bar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
