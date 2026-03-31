@@ -55,15 +55,6 @@ const categories: CategoryCard[] = [
     iconColor: "text-blue-600 dark:text-blue-400",
   },
   {
-    id: "custom-theme",
-    icon: "solar:document-text-linear",
-    title: "Custom Theme",
-    description: "Use a theme you've already built and saved. Fully editable per stage.",
-    mode: "static",
-    iconBg: "bg-slate-100 dark:bg-slate-500/15",
-    iconColor: "text-slate-500 dark:text-slate-400",
-  },
-  {
     id: "prebuilt",
     icon: "solar:widget-5-linear",
     title: "Prebuilt Theme",
@@ -263,7 +254,7 @@ const CampaignSetup = ({ data, onUpdate }: CampaignSetupProps) => {
             <Label className="text-sm font-medium">
               Campaign Theme <span className="text-destructive">*</span>
             </Label>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {categories.map((cat) => {
                 const isSelected = selectedCategory === cat.id;
                 return (

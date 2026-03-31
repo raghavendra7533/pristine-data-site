@@ -30,7 +30,9 @@ import SCWorkspace from "./pages/SCWorkspace";
 import ContentIQ from "./pages/ContentIQ";
 import SalesOpenersMockup from "./pages/SalesOpenersMockup";
 import Lists from "./pages/Lists";
+import ListDetail from "./pages/ListDetail";
 import EnrichLeads from "./pages/EnrichLeads";
+import CampaignCalendar from "./pages/CampaignCalendar";
 
 const queryClient = new QueryClient();
 
@@ -56,10 +58,12 @@ const App = () => (
             <Route path="/contact/profile" element={<ContactProfile />} />
             {/* Placeholder routes for menu items */}
             <Route path="/lists" element={<Lists />} />
+            <Route path="/lists/:id" element={<ListDetail />} />
             <Route path="/enrich-leads" element={<EnrichLeads />} />
             <Route path="/campaigns" element={<CampaignDashboard />} />
             <Route path="/campaigns/create" element={<CreateCampaign />} />
             <Route path="/campaigns/:id/analytics" element={<CampaignAnalytics />} />
+            <Route path="/campaigns/calendar" element={<CampaignCalendar />} />
             <Route path="/personalization" element={<PersonalizationAssets />} />
             <Route path="/integrations" element={<Integrations />} />
             <Route path="/integrations/add" element={<AddIntegration />} />

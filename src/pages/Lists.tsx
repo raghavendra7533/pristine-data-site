@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -171,6 +172,7 @@ interface ListTableProps {
 }
 
 const ListTable = ({ data, searchQuery, type }: ListTableProps) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -225,8 +227,9 @@ const ListTable = ({ data, searchQuery, type }: ListTableProps) => {
               paginatedData.map((item, index) => (
                 <TableRow
                   key={item.id}
+                  onClick={() => navigate(`/lists/${item.id}`)}
                   className={cn(
-                    "group hover:bg-muted/30 transition-colors",
+                    "group hover:bg-muted/30 transition-colors cursor-pointer",
                     index % 2 === 0 ? "bg-background" : "bg-muted/20"
                   )}
                 >

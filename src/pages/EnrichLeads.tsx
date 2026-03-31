@@ -293,11 +293,10 @@ export default function EnrichLeads() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Left Column - CSV Upload */}
-          <div className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
+          <Card className="h-full">
+            <CardContent className="p-6 h-full flex flex-col">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                   <Icon icon="solar:upload-minimalistic-bold" className="w-5 h-5 text-primary" />
                   Upload CSV to Enrich
@@ -406,95 +405,53 @@ export default function EnrichLeads() {
                 </div>
               </CardContent>
             </Card>
-          </div>
 
-          {/* Right Column - Connected Integrations */}
-          <div className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Icon icon="solar:link-round-bold" className="w-5 h-5 text-primary" />
-                  Enrich from Connected Apps
-                </h3>
+          {/* Right Column - Connected Integrations (tile grid) */}
+          <Card className="h-full">
+            <CardContent className="p-6 h-full flex flex-col">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Icon icon="solar:link-round-bold" className="w-5 h-5 text-primary" />
+                Enrich from Connected Apps
+              </h3>
 
-                <div className="space-y-3">
-                  {integrationApps.map((app) => (
-                    <div
-                      key={app.id}
-                      className={cn(
-                        "group flex items-center gap-4 p-4 rounded-xl border transition-all",
-                        app.connected
-                          ? "hover:border-primary/50 hover:bg-muted/30 cursor-pointer"
-                          : "opacity-50 bg-muted/20"
-                      )}
-                      onClick={() => app.connected && handleIntegrationEnrich(app.name)}
-                    >
-                      <div className={cn(
-                        "w-11 h-11 rounded-xl flex items-center justify-center border",
-                        app.color
-                      )}>
-                        <Icon icon={app.icon} className="w-6 h-6" />
-                      </div>
+              <div className="grid grid-cols-3 grid-rows-2 gap-3 flex-1">
+                {integrationApps.map((app) => (
+                  <div
+                    key={app.id}
+                    onClick={() => app.connected ? handleIntegrationEnrich(app.name) : navigate("/integrations")}
+                    className={cn(
+                      "group relative flex flex-col items-center justify-center gap-2.5 rounded-xl border transition-all cursor-pointer p-4",
+                      app.connected
+                        ? "hover:border-primary/50 hover:bg-primary/5 hover:shadow-sm"
+                        : "opacity-60 hover:opacity-80 bg-muted/20"
+                    )}
+                  >
+                    {/* Status dot */}
+                    <div className={cn(
+                      "absolute top-2.5 right-2.5 w-2 h-2 rounded-full",
+                      app.connected ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-600"
+                    )} />
 
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-0.5">
-                          <h4 className="font-semibold text-sm">{app.name}</h4>
-                          {app.connected ? (
-                            <Badge
-                              variant="secondary"
-                              className="text-[9px] uppercase font-bold tracking-wide border bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20"
-                            >
-                              Connected
-                            </Badge>
-                          ) : (
-                            <Badge
-                              variant="secondary"
-                              className="text-[9px] uppercase font-bold tracking-wide border bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/20"
-                            >
-                              Not Connected
-                            </Badge>
-                          )}
-                        </div>
-                        {app.connected ? (
-                          <p className="text-xs text-muted-foreground">
-                            {app.totalRecords.toLocaleString()} records • Last sync {app.lastSync}
-                          </p>
-                        ) : (
-                          <p className="text-xs text-muted-foreground">{app.description}</p>
-                        )}
-                      </div>
-
-                      {app.connected ? (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleIntegrationEnrich(app.name);
-                          }}
-                        >
-                          <Icon icon="solar:magic-stick-3-linear" className="w-4 h-4 mr-1" />
-                          Enrich
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate("/integrations");
-                          }}
-                        >
-                          Connect
-                        </Button>
-                      )}
+                    <div className={cn(
+                      "w-12 h-12 rounded-xl flex items-center justify-center border",
+                      app.color
+                    )}>
+                      <Icon icon={app.icon} className="w-7 h-7" />
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+
+                    <span className="text-xs font-medium text-foreground text-center leading-tight">{app.name}</span>
+
+                    {app.connected && (
+                      <span className="text-[10px] text-muted-foreground">{app.totalRecords.toLocaleString()} records</span>
+                    )}
+                    {!app.connected && (
+                      <span className="text-[10px] text-muted-foreground">Connect</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Recent Enrichment History */}
