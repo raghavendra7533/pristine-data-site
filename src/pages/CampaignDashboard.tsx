@@ -39,9 +39,9 @@ const performanceMetricsByPeriod = {
 };
 
 const activeCampaigns = [
-  { id: 1, name: "Q1 SaaS Outreach", type: "Sales Outreach", totalLeads: 1200, contacted: 600, openRate: 45.2, clickRate: 24.1, createdDate: "2025-01-15" },
-  { id: 2, name: "Healthcare Lead Nurture", type: "Lead Nurture", totalLeads: 850, contacted: 420, openRate: 38.7, clickRate: 18.5, createdDate: "2025-01-10" },
-  { id: 3, name: "Event Follow-up", type: "Event Outreach", totalLeads: 650, contacted: 380, openRate: 52.1, clickRate: 28.3, createdDate: "2025-01-08" }
+  { id: 1, clientId: "2", name: "Q1 SaaS Outreach", type: "Sales Outreach", totalLeads: 1200, contacted: 600, openRate: 45.2, clickRate: 24.1, createdDate: "2025-01-15" },
+  { id: 2, clientId: "3", name: "Healthcare Lead Nurture", type: "Lead Nurture", totalLeads: 850, contacted: 420, openRate: 38.7, clickRate: 18.5, createdDate: "2025-01-10" },
+  { id: 3, clientId: "1", name: "Event Follow-up", type: "Event Outreach", totalLeads: 650, contacted: 380, openRate: 52.1, clickRate: 28.3, createdDate: "2025-01-08" }
 ];
 
 const draftCampaigns = [
@@ -220,6 +220,15 @@ export default function CampaignDashboard() {
                         <p className="text-lg font-bold text-violet-600 dark:text-violet-400">{campaign.clickRate}%</p>
                         <p className="text-[10px] text-muted-foreground">Click</p>
                       </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="gap-1.5 text-xs flex-shrink-0"
+                        onClick={(e) => { e.stopPropagation(); navigate(`/admin-capacity/${campaign.clientId}`); }}
+                      >
+                        <Icon icon="solar:calendar-mark-linear" className="h-3.5 w-3.5" />
+                        Calendar
+                      </Button>
                       <Icon icon="solar:arrow-right-linear" className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     </div>
                   </div>

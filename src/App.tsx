@@ -34,6 +34,9 @@ import ListDetail from "./pages/ListDetail";
 import EnrichLeads from "./pages/EnrichLeads";
 import CampaignCalendar from "./pages/CampaignCalendar";
 import AdminCampaignCalendar from "./pages/AdminCampaignCalendar";
+import AdminCapacityPlanner from "./pages/AdminCapacityPlanner";
+import ClientCapacityPlanner from "./pages/ClientCapacityPlanner";
+import AccountPlaybook from "./pages/AccountPlaybook";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +57,7 @@ const App = () => (
             <Route path="/account-search" element={<AccountSearch />} />
             <Route path="/icp-funnel" element={<ICPFunnel />} />
             <Route path="/opportunities" element={<Opportunities />} />
+            <Route path="/opportunities/:id" element={<AccountPlaybook />} />
             <Route path="/results/accounts" element={<Results />} />
             <Route path="/results/contacts" element={<Results />} />
             <Route path="/contact/profile" element={<ContactProfile />} />
@@ -64,6 +68,7 @@ const App = () => (
             <Route path="/campaigns" element={<CampaignDashboard />} />
             <Route path="/campaigns/create" element={<CreateCampaign />} />
             <Route path="/campaigns/:id/analytics" element={<CampaignAnalytics />} />
+            <Route path="/campaigns/:id/calendar" element={<ClientCapacityPlanner />} />
             <Route path="/campaigns/calendar" element={<CampaignCalendar />} />
             <Route path="/personalization" element={<PersonalizationAssets />} />
             <Route path="/integrations" element={<Integrations />} />
@@ -76,6 +81,8 @@ const App = () => (
             <Route path="/content-iq" element={<ContentIQ />} />
             <Route path="/sales-openers-mockup" element={<SalesOpenersMockup />} />
             <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin-capacity" element={<AdminCapacityPlanner />} />
+            <Route path="/admin-capacity/:clientId" element={<ClientCapacityPlanner />} />
           </Route>
           {/* Standalone admin routes — no AppLayout wrapper */}
           <Route path="/admin/campaign-calendar" element={<AdminCampaignCalendar />} />

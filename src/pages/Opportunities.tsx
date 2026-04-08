@@ -222,7 +222,7 @@ export default function Opportunities() {
             <Card
               key={opp.id}
               className="group hover:border-border/80 transition-all cursor-pointer"
-              onClick={() => navigate(`/contact/profile?email=${opp.email}&tab=opportunity`)}
+              onClick={() => navigate(`/opportunities/${opp.id}`)}
             >
               <CardContent className="p-4">
                 <div className="flex items-start gap-4">
