@@ -296,7 +296,7 @@
         <p class="text-base md:text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-3 leading-relaxed">
             Check every tool your team uses. Get the real annual number, see where functions overlap, and get a stack health score — in 60 seconds.
         </p>
-        <p class="text-sm text-slate-400 dark:text-slate-600">No sign-up. No email. No sales call required.</p>
+        <p class="text-sm text-slate-400 dark:text-slate-600">Free. No sales call.</p>
     </div>
 </section>
 
@@ -435,6 +435,40 @@
         <p class="text-xs text-slate-400 dark:text-slate-700">&copy; 2024&ndash;2026 Pristine Inc. Pricing estimates for illustrative purposes.</p>
     </div>
 </footer>
+
+<!-- ── Audit Gate Modal — blocks page on load, no escape ── -->
+<div id="audit-modal-overlay" style="display:flex;position:fixed;inset:0;z-index:9999;background:rgba(2,6,23,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px">
+    <div style="position:relative;background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:36px 32px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,0.6)">
+        <div style="margin-bottom:24px;text-align:center">
+            <div style="display:inline-flex;align-items:center;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:999px;padding:4px 12px;margin-bottom:16px">
+                <span style="width:6px;height:6px;border-radius:50%;background:#6366f1;display:inline-block"></span>
+                <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:#94a3b8;text-transform:uppercase;font-family:'Manrope',sans-serif">Free GTM Audit Tool</span>
+            </div>
+            <h2 style="font-size:22px;font-weight:800;color:#f1f5f9;margin:0 0 8px;font-family:'Manrope',sans-serif;line-height:1.25">See your GTM stack's true cost</h2>
+            <p style="font-size:13px;color:#64748b;margin:0;font-family:'Manrope',sans-serif">Free. Takes 60 seconds. No sales call.</p>
+        </div>
+        <form id="audit-modal-form" novalidate>
+            <div style="margin-bottom:14px">
+                <label style="display:block;font-size:12px;font-weight:600;color:#94a3b8;margin-bottom:6px;font-family:'Manrope',sans-serif">First Name</label>
+                <input id="audit-first-name" type="text" autocomplete="given-name" placeholder="Alex"
+                    style="width:100%;box-sizing:border-box;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:11px 14px;font-size:14px;color:#f1f5f9;font-family:'Manrope',sans-serif;outline:none"
+                    onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#334155'">
+            </div>
+            <div style="margin-bottom:20px">
+                <label style="display:block;font-size:12px;font-weight:600;color:#94a3b8;margin-bottom:6px;font-family:'Manrope',sans-serif">Work Email</label>
+                <input id="audit-email" type="email" autocomplete="email" placeholder="alex@company.com"
+                    style="width:100%;box-sizing:border-box;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:11px 14px;font-size:14px;color:#f1f5f9;font-family:'Manrope',sans-serif;outline:none"
+                    onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#334155'">
+            </div>
+            <div id="audit-modal-error" style="font-size:12px;color:#f87171;margin-bottom:10px;min-height:16px;font-family:'Manrope',sans-serif"></div>
+            <button type="submit"
+                style="width:100%;background:#6366f1;color:#fff;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:13px 16px;border-radius:10px;border:none;cursor:pointer;letter-spacing:0.01em"
+                onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='#6366f1'">
+                Run My Free Audit &rarr;
+            </button>
+        </form>
+    </div>
+</div>
 
 <!-- ── JS ── -->
 <script>
@@ -837,7 +871,7 @@ function renderReceipt({ sel, monthly, totalMonthly, totalAnnual, score, overlap
 
     // ── CTA ──
     h += `<div style="margin:8px 0 4px;text-align:center">
-        <a href="contact-us.html" style="display:block;background:#6366f1;color:#fff;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:11px 16px;border-radius:10px;text-decoration:none;text-align:center">
+        <a href="contact-us.html" data-audit-cta="1" style="display:block;background:#6366f1;color:#fff;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;padding:11px 16px;border-radius:10px;text-decoration:none;text-align:center">
             See what this costs on one platform &rarr;
         </a>
         <div style="font-size:8px;color:#888877;margin-top:6px;letter-spacing:0.05em">No commitment &middot; 30-min demo</div>
@@ -1007,6 +1041,45 @@ renderGrid();
 renderTierButtons('prospect-tiers', PROSPECT_TIERS, prospectTier, 'prospect-label', (i) => { prospectTier = i; });
 renderTierButtons('email-tiers',    EMAIL_TIERS,    emailTier,    'email-label',    (i) => { emailTier = i; });
 updateResults();
+
+// ─────────────────────────────────────────────
+// AUDIT GATE MODAL  — shown on page load, no bypass
+// ─────────────────────────────────────────────
+
+// ↓ Replace YOUR_FORM_ID after signing up at https://formspree.io/register
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mzdkvzgk';
+
+let auditEmail = '';
+
+setTimeout(() => document.getElementById('audit-first-name').focus(), 50);
+
+document.getElementById('audit-modal-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const fn  = document.getElementById('audit-first-name').value.trim();
+    const em  = document.getElementById('audit-email').value.trim();
+    const err = document.getElementById('audit-modal-error');
+    const btn = this.querySelector('button[type=submit]');
+
+    if (!fn) { err.textContent = 'First name is required.'; return; }
+    if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { err.textContent = 'Please enter a valid work email.'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 'First Name': fn, 'Work Email': em })
+        });
+        if (!res.ok) throw new Error('submit failed');
+    } catch (_) {
+        // Silently continue — don't block the user if Formspree is unreachable
+    }
+
+    auditEmail = em;
+    document.getElementById('audit-modal-overlay').style.display = 'none';
+});
 </script>
 </body>
 </html>
