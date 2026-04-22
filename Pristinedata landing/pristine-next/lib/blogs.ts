@@ -288,6 +288,76 @@ export const blogs: BlogPost[] = [
     ],
   },
   {
+    slug: 'b2b-buying-committee-challenge-part-2',
+    title: 'Why B2B Companies Are Failing Their Buyers: The Buying Committee Challenge (Part 2)',
+    description: 'Five more reasons B2B companies struggle to align with buyers — from buying group blind spots to change resistance and the technology gap.',
+    date: '2025-06-09',
+    image: '/images/blog-8.webp',
+    sections: [
+      {
+        body: [
+          'The way B2B buying works has changed fundamentally. In-person sales meetings are becoming rare. A striking 58% of sellers say virtual selling is harder than in-person selling — yet 70% of B2B decision-makers are open to making purchases over $50,000 remotely, and 27% will spend more than $500,000 without ever meeting in person.',
+          'In Part 1, we looked at data silos, the real-time gap, decision complexity, shallow personalization, and the sales-marketing divide. Here are five more challenges getting in the way.',
+        ],
+      },
+      {
+        heading: 'The Buying Group Blind Spot',
+        body: [
+          'Single decision-makers are a thing of the past. Most B2B purchases now involve 5 to 11 stakeholders, each with different priorities. Yet many sales teams still treat the process as a one-on-one conversation.',
+          "While your rep may be focused on the IT director, is anyone helping that IT director sell the solution internally? Companies that provide role-specific materials — ROI calculators for CFOs, technical specs for engineers — see a 30% increase in decision confidence. This is no longer a nice touch. It's a competitive requirement.",
+        ],
+      },
+      {
+        heading: 'Content That Misses the Mark',
+        body: [
+          "71% of buyers expect content to help them build a business case internally. Most B2B companies still produce product-focused content that doesn't address that need.",
+          "The problem isn't volume — companies produce more content than ever. The problem is relevance. When was the last time your content strategy started with what your buyer needs to hear, rather than what you want to say?",
+          "Without face-to-face meetings, buyers take longer to process information. They need content that simplifies their decision, not content that adds to the noise.",
+        ],
+      },
+      {
+        heading: 'The Manual Process Trap',
+        body: [
+          'Many B2B organizations still run lead scoring, follow-ups, and content distribution by hand. Research shows that automation increases sales productivity by 14.5% while cutting marketing costs by 12.2%.',
+          "The bigger cost is missed timing. In fast-moving buying cycles, catching a prospect at the right moment can be the difference between winning and losing a deal. Manual processes simply can't keep pace.",
+        ],
+      },
+      {
+        heading: 'Resistance to Change',
+        body: [
+          "McKinsey's research is sobering: 70% of change initiatives fail, primarily due to employee resistance and lack of management support.",
+          "Becoming buyer-aligned isn't just about adopting new tools. It requires changes to organizational structure, incentive systems, and culture — breaking down long-standing silos and reimagining how success is measured. That's a hard sell internally, and most organizations underestimate it.",
+        ],
+      },
+      {
+        heading: 'The Technology Gap',
+        body: [
+          "Most organizations recognize the value of predictive analytics but struggle with implementation. Companies that use integrated digital tools see sales cycles 30% faster than those that don't. Organizations using digital sales rooms report a 40% reduction in sales cycle times.",
+          "But buying technology isn't the finish line. The organizations that benefit most are the ones that actually use their tools — not the ones with the most expensive stack.",
+        ],
+      },
+      {
+        heading: 'The Path Forward',
+        body: [
+          "Looking across both parts of this series, a clear pattern emerges: B2B companies are struggling to adapt to fundamental shifts in how their buyers behave. The fix isn't purely technological — it requires a different mindset.",
+        ],
+        list: [
+          'Think of buying groups as ecosystems, not chains of command. Each stakeholder needs different information at different times.',
+          "Rebuild your content strategy around what buyers need to hear, not what you want to say.",
+          'Automate the repetitive work so your team can focus on high-value conversations.',
+          'Build change management into your transformation plan from day one.',
+          'Invest in technology with a clear purpose — solve a real buyer problem, not a trend.',
+        ],
+      },
+      {
+        heading: 'Ready to close the gap?',
+        body: [
+          'Pristine Data AI helps GTM teams understand their buyers, align sales and marketing, and show up to every conversation prepared.',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'b2b-buyer-expectations-sales-challenge-part-1',
     title: 'Why B2B Companies Are Failing Their Buyers (Part 1)',
     description: "74% of sellers say their role is becoming more consultative. Only 27% of B2B companies are actually pulling it off. Here are five reasons the gap keeps widening.",
@@ -402,76 +472,6 @@ export const blogs: BlogPost[] = [
         heading: 'Start enabling your buyers',
         body: [
           'Pristine Data AI gives your GTM team the buyer intelligence they need to show up prepared — and the tools to make every conversation count.',
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'b2b-buying-committee-challenge-part-2',
-    title: 'Why B2B Companies Are Failing Their Buyers: The Buying Committee Challenge (Part 2)',
-    description: 'Five more reasons B2B companies struggle to align with buyers — from buying group blind spots to change resistance and the technology gap.',
-    date: '2025-06-09',
-    image: '/images/blog-8.webp',
-    sections: [
-      {
-        body: [
-          'The way B2B buying works has changed fundamentally. In-person sales meetings are becoming rare. A striking 58% of sellers say virtual selling is harder than in-person selling — yet 70% of B2B decision-makers are open to making purchases over $50,000 remotely, and 27% will spend more than $500,000 without ever meeting in person.',
-          'In Part 1, we looked at data silos, the real-time gap, decision complexity, shallow personalization, and the sales-marketing divide. Here are five more challenges getting in the way.',
-        ],
-      },
-      {
-        heading: 'The Buying Group Blind Spot',
-        body: [
-          'Single decision-makers are a thing of the past. Most B2B purchases now involve 5 to 11 stakeholders, each with different priorities. Yet many sales teams still treat the process as a one-on-one conversation.',
-          "While your rep may be focused on the IT director, is anyone helping that IT director sell the solution internally? Companies that provide role-specific materials — ROI calculators for CFOs, technical specs for engineers — see a 30% increase in decision confidence. This is no longer a nice touch. It's a competitive requirement.",
-        ],
-      },
-      {
-        heading: 'Content That Misses the Mark',
-        body: [
-          "71% of buyers expect content to help them build a business case internally. Most B2B companies still produce product-focused content that doesn't address that need.",
-          "The problem isn't volume — companies produce more content than ever. The problem is relevance. When was the last time your content strategy started with what your buyer needs to hear, rather than what you want to say?",
-          "Without face-to-face meetings, buyers take longer to process information. They need content that simplifies their decision, not content that adds to the noise.",
-        ],
-      },
-      {
-        heading: 'The Manual Process Trap',
-        body: [
-          'Many B2B organizations still run lead scoring, follow-ups, and content distribution by hand. Research shows that automation increases sales productivity by 14.5% while cutting marketing costs by 12.2%.',
-          "The bigger cost is missed timing. In fast-moving buying cycles, catching a prospect at the right moment can be the difference between winning and losing a deal. Manual processes simply can't keep pace.",
-        ],
-      },
-      {
-        heading: 'Resistance to Change',
-        body: [
-          "McKinsey's research is sobering: 70% of change initiatives fail, primarily due to employee resistance and lack of management support.",
-          "Becoming buyer-aligned isn't just about adopting new tools. It requires changes to organizational structure, incentive systems, and culture — breaking down long-standing silos and reimagining how success is measured. That's a hard sell internally, and most organizations underestimate it.",
-        ],
-      },
-      {
-        heading: 'The Technology Gap',
-        body: [
-          "Most organizations recognize the value of predictive analytics but struggle with implementation. Companies that use integrated digital tools see sales cycles 30% faster than those that don't. Organizations using digital sales rooms report a 40% reduction in sales cycle times.",
-          "But buying technology isn't the finish line. The organizations that benefit most are the ones that actually use their tools — not the ones with the most expensive stack.",
-        ],
-      },
-      {
-        heading: 'The Path Forward',
-        body: [
-          "Looking across both parts of this series, a clear pattern emerges: B2B companies are struggling to adapt to fundamental shifts in how their buyers behave. The fix isn't purely technological — it requires a different mindset.",
-        ],
-        list: [
-          'Think of buying groups as ecosystems, not chains of command. Each stakeholder needs different information at different times.',
-          "Rebuild your content strategy around what buyers need to hear, not what you want to say.",
-          'Automate the repetitive work so your team can focus on high-value conversations.',
-          'Build change management into your transformation plan from day one.',
-          'Invest in technology with a clear purpose — solve a real buyer problem, not a trend.',
-        ],
-      },
-      {
-        heading: 'Ready to close the gap?',
-        body: [
-          'Pristine Data AI helps GTM teams understand their buyers, align sales and marketing, and show up to every conversation prepared.',
         ],
       },
     ],
