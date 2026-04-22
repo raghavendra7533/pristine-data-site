@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {}
 
   const url = `https://pristinedata.ai/blog/${post.slug}`
+  const absoluteImage = `https://pristinedata.ai${post.image}`
   return {
     title: post.title,
     description: post.description,
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url,
       siteName: 'Pristine Data AI',
-      images: [{ url: post.image, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: absoluteImage, width: 1200, height: 630, alt: post.title }],
       type: 'article',
       publishedTime: post.date,
     },
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [post.image],
+      images: [absoluteImage],
     },
   }
 }
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogArticlePage({ params }: Props) {
   const { slug } = await params
   const post = getBlogBySlug(slug)
-  if (!post) notFound()
+  if (!post) return notFound()
 
   const related = getRelatedPosts(slug, 3)
 
