@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-red: #F43F5E;
+  --color-slate-850: #152033;
+  --color-slate-950: #020617;
+  --font-sans: var(--font-manrope), sans-serif;
+  --shadow-glow: 0 0 40px -10px rgba(37, 99, 235, 0.1);
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: #334155; }
+
+.glass-nav {
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+.dark .glass-nav {
+  border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+}
+
+.grid-bg {
+  background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+    linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .grid-bg {
+  background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+    linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+}
+
+.grid-bg-dark {
+  background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+    linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+textarea { min-height: 1.5lh; }
+textarea:focus, input:focus { outline: none; }
+
+.playbook-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+@media (min-width: 640px) {
+  .playbook-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.dark .playbook-grid { background: #334155; }
+.playbook-cell { background: white; padding: 1rem; }
+.dark .playbook-cell { background: #0f172a; }
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img,
+ul, li, section, article, aside, footer, header, nav {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.rotate-x-5 {
+  --tw-rotate-x: 5deg;
+  transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), 0)
+    rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) !important;
+}
+.rotate-y-5 {
+  --tw-rotate-y: 5deg;
+  transform: translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), 0)
+    rotateX(var(--tw-rotate-x, 0)) rotateY(var(--tw-rotate-y, 0)) !important;
+}
+.perspective-midrange { perspective: 800px !important; }
+.transform-style-preserve-3d { transform-style: preserve-3d !important; }
