@@ -6,11 +6,6 @@ type Props = {
   post: BlogPost
 }
 
-function excerpt(post: BlogPost): string {
-  const firstBody = post.sections.find((s) => s.body && s.body.length > 0)?.body?.[0] ?? ''
-  return firstBody.length > 140 ? firstBody.slice(0, 137) + '…' : firstBody
-}
-
 export function BlogCard({ post }: Props) {
   const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -40,7 +35,7 @@ export function BlogCard({ post }: Props) {
           {post.title}
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
-          {excerpt(post)}
+          {post.description}
         </p>
       </div>
     </Link>
