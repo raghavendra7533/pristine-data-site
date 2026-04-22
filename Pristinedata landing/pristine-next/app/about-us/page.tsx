@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Icon } from '@iconify/react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
+import { WaveCarousel } from '@/components/WaveCarousel'
 
 export const metadata: Metadata = {
   title: 'About Us - Pristine Data AI',
@@ -128,145 +129,7 @@ export default function AboutPage() {
               </h2>
             </div>
 
-            {/* Top: Horizontal wave progress nav */}
-            <div className="max-w-6xl mx-auto px-6 w-full mb-6">
-              <div className="bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 md:p-6">
-                <div className="grid grid-cols-5 gap-2 md:gap-6">
-                  {[
-                    { num: '01', label: 'Spray & pray' },
-                    { num: '02', label: 'Sequencing' },
-                    { num: '03', label: 'Personalization' },
-                    { num: '04', label: 'Intent data' },
-                    { num: '05', label: 'Account-based' },
-                  ].map(({ num, label }, i) => (
-                    <div key={i}>
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">{num}</span>
-                        <span className="text-[10px] md:text-sm font-medium text-slate-900 dark:text-white truncate">{label}</span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                        <div className="h-full rounded-full bg-indigo-500 dark:bg-indigo-400 w-0"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom: Wave cards (all visible statically) */}
-            <div className="max-w-6xl mx-auto px-6 w-full space-y-6">
-
-              {/* Wave 1 */}
-              <div className="bg-white dark:bg-slate-950 rounded-2xl p-5 md:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">1</span>
-                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Spray-and-pray email</h3>
-                </div>
-                <div className="space-y-5">
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Promise</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">More emails meant more pipeline. Volume was the strategy. Blast your list, hit your number.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Reality</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Open rates collapsed. Domains got blacklisted. Buyers stopped reading after the first sentence.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Aftermath</span>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">&quot;You told yourself the next approach would be different.&quot;</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wave 2 */}
-              <div className="bg-white dark:bg-slate-950 rounded-2xl p-5 md:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">2</span>
-                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Sequencing at scale</h3>
-                </div>
-                <div className="space-y-5">
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Promise</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Multi-touch cadences would nurture prospects through the funnel. Automate the follow-up, free the reps.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Reality</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Every team ran the same 7-step playbook. Prospects started recognizing the pattern before step two.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Aftermath</span>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">&quot;Everyone automated the same cadence. Inboxes became a graveyard of 7-step sequences.&quot;</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wave 3 */}
-              <div className="bg-white dark:bg-slate-950 rounded-2xl p-5 md:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">3</span>
-                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Personalization at volume</h3>
-                </div>
-                <div className="space-y-5">
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Promise</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">If you personalize each message, buyers will engage. Merge fields, custom snippets, dynamic content.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Reality</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Buyers saw through it instantly. The same &quot;personal&quot; template from a hundred different vendors.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Aftermath</span>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">&quot;&apos;Hey {'{'}{'{'} FirstName {'}'} {'}'}, loved your recent post about {'{'}{'{'} Topic {'}'}{'}'}&apos; became the new spam.&quot;</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wave 4 */}
-              <div className="bg-white dark:bg-slate-950 rounded-2xl p-5 md:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">4</span>
-                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Intent data</h3>
-                </div>
-                <div className="space-y-5">
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Promise</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Know who is researching your category. Target accounts showing buying signals. Right message, right time.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Reality</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Everyone had the same intent data. The same accounts got flooded by the same vendors at the same time.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Aftermath</span>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">&quot;You had better data and somehow worse conversion rates.&quot;</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wave 5 */}
-              <div className="bg-white dark:bg-slate-950 rounded-2xl p-5 md:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">5</span>
-                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Account-based everything</h3>
-                </div>
-                <div className="space-y-5">
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Promise</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Align sales, marketing, and CS around target accounts. Orchestrate multi-threaded engagement across the buying committee.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Reality</span>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Massive operational overhead. Teams spent more time building account plans than actually engaging accounts. Pipeline reviews felt the same.</p>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-2">The Aftermath</span>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">&quot;You&apos;re sitting in the same pipeline review, asking the same questions.&quot;</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            <WaveCarousel />
 
           </div>
         </section>
