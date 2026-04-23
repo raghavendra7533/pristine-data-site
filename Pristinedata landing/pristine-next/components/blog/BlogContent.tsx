@@ -6,18 +6,30 @@ type Props = {
 
 export function BlogContent({ sections }: Props) {
   return (
-    <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-semibold prose-h2:text-2xl prose-h3:text-lg prose-p:leading-relaxed prose-li:leading-relaxed">
+    <div className="max-w-none text-slate-700 dark:text-slate-300">
       {sections.map((section, i) => (
-        <div key={section.heading ?? section.subheading ?? i} className="mb-8">
-          {section.heading && <h2>{section.heading}</h2>}
-          {section.subheading && <h3>{section.subheading}</h3>}
+        <div key={section.heading ?? section.subheading ?? i} className="mb-10">
+          {section.heading && (
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mt-10 mb-3 leading-snug">
+              {section.heading}
+            </h2>
+          )}
+          {section.subheading && (
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mt-6 mb-2 leading-snug">
+              {section.subheading}
+            </h3>
+          )}
           {section.body?.map((para, j) => (
-            <p key={j}>{para}</p>
+            <p key={j} className="text-base leading-relaxed mb-4">
+              {para}
+            </p>
           ))}
           {section.list && (
-            <ul>
+            <ul className="mt-3 space-y-2 pl-5 list-disc marker:text-rose-500">
               {section.list.map((item, k) => (
-                <li key={k}>{item}</li>
+                <li key={k} className="text-base leading-relaxed">
+                  {item}
+                </li>
               ))}
             </ul>
           )}

@@ -43,6 +43,13 @@ export function Navbar() {
                 : <Icon icon="solar:moon-linear" width={16} />}
             </button>
             <Link
+              href="/stack-audit"
+              className="hidden md:block px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all relative"
+              style={{ background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #F43F5E, #6366f1) border-box', border: '1.5px solid transparent', color: '#0f172a' }}
+            >
+              Free GTM Stack Audit
+            </Link>
+            <Link
               href="/contact-us"
               className="hidden md:block px-3.5 py-1.5 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 text-xs font-semibold rounded-lg transition-all shadow-sm"
             >
@@ -58,7 +65,8 @@ export function Navbar() {
             <Link href="/" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-slate-900 dark:text-white py-3 border-b border-slate-100 dark:border-slate-800">Product</Link>
             <Link href="/integrations" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800">Integrations</Link>
             <Link href="/about-us" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white py-3 border-b border-slate-100 dark:border-slate-800">About</Link>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col gap-3">
+              <Link href="/stack-audit" onClick={() => setMobileOpen(false)} className="w-full text-center block py-3 text-sm font-semibold rounded-xl" style={{ background: 'linear-gradient(white, white) padding-box, linear-gradient(135deg, #F43F5E, #6366f1) border-box', border: '1.5px solid transparent', color: '#0f172a' }}>Free GTM Stack Audit</Link>
               <Link href="/contact-us" className="w-full text-center block py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold rounded-xl">Book a Demo</Link>
             </div>
           </div>
